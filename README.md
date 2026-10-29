@@ -91,7 +91,7 @@ Semua halaman tersedia di folder [`screenshots/`](screenshots):
 **Infrastruktur**
 
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Caddy](https://img.shields.io/badge/Caddy-1F8ACB?style=for-the-badge&logo=caddy&logoColor=white)
+![Caddy](https://img.shields.io/badge/Caddy-1F8ACB?style=for-the-badge)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 
