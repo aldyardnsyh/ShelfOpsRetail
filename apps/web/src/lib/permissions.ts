@@ -20,6 +20,7 @@ export type Capability =
   | "camera.manage"
   | "member.manage"
   | "integration.manage"
+  | "report.write"
   | "lab.run"
   | "audit.view"
   | "workspace.manage";
@@ -39,7 +40,8 @@ const MATRIX: Record<Capability, readonly AppRole[]> = {
   "price.update": ["owner", "admin"],
   "camera.manage": ["owner", "admin"],
   "member.manage": ["owner", "admin"],
-  "integration.manage": ["owner", "admin"],
+  "integration.manage": ["owner", "admin", "analyst"],
+  "report.write": ["owner", "admin", "analyst"],
   // Lab & trace = owner, admin, analyst. Viewer dan auditor tidak.
   "lab.run": ["owner", "admin", "analyst"],
   "audit.view": ["owner", "admin"],

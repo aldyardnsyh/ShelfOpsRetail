@@ -228,6 +228,63 @@ Step "resource milik workspace lain -> 404 (IDOR guard)" {
     Write-Host "      404 sesuai harapan"
 }
 
+Step "laporan: buat -> jadwal" {
+    $rep = Req -Method POST -Path "/api/v1/reports" -Body '{"title":"Smoke mingguan","kind":"weekly","period_from":"2026-10-01","period_to":"2026-10-07","format":"pdf"}'
+    Assert ($rep.code -eq 201) "buat laporan harusnya 201, dapat $($rep.code)"
+    $sched = Req -Method POST -Path "/api/v1/report-schedules" -Body '{"name":"Smoke jadwal","cadence":"weekly","format":"pdf","recipients":["ops@example.com"]}'
+    Assert ($sched.code -eq 201) "buat jadwal harusnya 201, dapat $($sched.code)"
+    Write-Host "      report + schedule OK"
+}
+
+Step "konektor: buat -> uji -> connected" {
+    $integ = Req -Method POST -Path "/api/v1/integrations" -Body '{"name":"Smoke POS","kind":"pos"}'
+    Assert ($integ.code -eq 201) "buat konektor harusnya 201, dapat $($integ.code)"
+    $integJson = Json $integ
+    Assert ($integJson.status -eq "pending") "status awal harus pending"
+    $test = Req -Method POST -Path "/api/v1/integrations/$($integJson.id)/test"
+    Assert ($test.code -eq 200) "uji konektor harusnya 200, dapat $($test.code)"
+    $testJson = Json $test
+    Assert ($testJson.status -eq "success") "sync run harus success"
+    Write-Host "      integration + test OK"
+}
+
+Step "rotasi API key: secret tampil sekali" {
+    $keys = Json (Req -Path "/api/v1/integrations")
+    Assert ($keys.api_keys.Count -gt 0) "seed harus punya minimal 1 API key"
+    $keyId = $keys.api_keys[0].id
+    $rot = Req -Method POST -Path "/api/v1/api-keys/$keyId/rotate"
+    Assert ($rot.code -eq 200) "rotasi harusnya 200, dapat $($rot.code)"
+    $rotJson = Json $rot
+    Assert ($rotJson.secret.Length -gt 20) "secret baru harus tampil sekali"
+    Assert ($rotJson.id -ne $keyId) "id key baru harus berbeda"
+    Write-Host "      rotasi OK"
+}
+
+Step "undang anggota baru - 201 lalu 409, skip bila bukan admin" {
+    $meNow = Json (Req -Path "/api/v1/me")
+    if ($meNow.role -ne "admin") {
+        Write-Host "      role=$($meNow.role) bukan admin - endpoint benar menolak 403 (tercakup E2E admin)"
+    } else {
+        $email = "smoke-invite@example.com"
+        $inv = Req -Method POST -Path "/api/v1/workspace/members/invite" -Body ('{"email":"' + $email + '","role":"viewer"}')
+        if ($inv.code -eq 409) {
+            Write-Host "      email sudah pernah diundang di run sebelumnya - OK (jalur 409 terbukti)"
+        } else {
+            Assert ($inv.code -eq 201) "undang harusnya 201, dapat $($inv.code)"
+            $invJson = Json $inv
+            $dup = Req -Method POST -Path "/api/v1/workspace/members/invite" -Body ('{"email":"' + $email + '","role":"viewer"}')
+            Assert ($dup.code -eq 409) "undang ganda harusnya 409, dapat $($dup.code)"
+            Write-Host "      invite 201 + 409 OK ($($invJson.user_id))"
+        }
+    }
+}
+
+Step "ganti sandi: akun demo tanpa sandi -> 401" {
+    $wrong = Req -Method POST -Path "/api/v1/me/password" -Body '{"current_password":"salah","new_password":"SmokeBaru123!"}'
+    Assert ($wrong.code -eq 401) "harusnya 401, dapat $($wrong.code)"
+    Write-Host "      401 sesuai harapan (rotasi penuh butuh sesi password, diuji via E2E)"
+}
+
 Write-Host ""
 Write-Host "=== Ringkasan ===" -ForegroundColor Cyan
 $script:results | ForEach-Object { Write-Host $_ }

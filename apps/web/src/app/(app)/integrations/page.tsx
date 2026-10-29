@@ -127,6 +127,7 @@ export default async function IntegrationsPage() {
           keyLastUsed: t.integrations.keyLastUsed,
           keyStatus: t.integrations.keyStatus,
           copyKey: t.integrations.copyKey,
+          rotateKey: t.integrations.rotateKey,
           keyCopied: t.integrations.keyCopied,
           keyCopyFailed: t.integrations.keyCopyFailed,
           keyStatuses: t.integrations.keyStatuses,

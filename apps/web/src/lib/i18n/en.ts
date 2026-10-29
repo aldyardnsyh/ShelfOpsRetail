@@ -931,7 +931,7 @@ export const en = {
     latency: "Latency",
     test: "Test connection",
     testing: "Testing",
-    testSuccess: "Connection test simulated (demo).",
+    testSuccess: "Connection test recorded as sync run.",
     statuses: {
       connected: "Connected",
       syncing: "Syncing",
@@ -960,6 +960,7 @@ export const en = {
     keyLastUsed: "Last used",
     keyStatus: "Status",
     copyKey: "Copy key",
+    rotateKey: "Rotate",
     keyCopied: "Sample key copied.",
     keyCopyFailed: "The key could not be copied automatically. Copy it manually from the table.",
     keyStatuses: {
@@ -988,7 +989,7 @@ export const en = {
     addKind: "Connector type",
     addName: "Connector name",
     addSubmit: "Add",
-    addSuccess: "Demo connector added.",
+    addSuccess: "Connector created.",
     note:
       "Integrations run with workspace credentials. Expired keys and failed endpoints appear in the audit log.",
   },

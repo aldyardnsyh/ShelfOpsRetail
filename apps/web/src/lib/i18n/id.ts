@@ -929,7 +929,7 @@ export const id = {
     latency: "Latensi",
     test: "Uji koneksi",
     testing: "Menguji",
-    testSuccess: "Uji koneksi disimulasikan (mode demo).",
+    testSuccess: "Uji koneksi dicatat sebagai sync run.",
     statuses: {
       connected: "Terhubung",
       syncing: "Menyinkronkan",
@@ -958,6 +958,7 @@ export const id = {
     keyLastUsed: "Terakhir dipakai",
     keyStatus: "Status",
     copyKey: "Salin kunci",
+    rotateKey: "Rotasi",
     keyCopied: "Kunci contoh tersalin.",
     keyCopyFailed: "Kunci tidak dapat disalin otomatis. Salin secara manual dari tabel.",
     keyStatuses: {
@@ -981,12 +982,11 @@ export const id = {
       "Tambahkan konektor pertama untuk mengalirkan data POS, ERP, atau kamera.",
     addConnector: "Tambah konektor",
     addTitle: "Tambah konektor",
-    addBody:
-      "Konektor demo ditambahkan ke layar ini tanpa memanggil sistem eksternal.",
+    addBody: "Konektor disimpan ke server (pending); uji koneksi menandai connected.",
     addKind: "Jenis konektor",
     addName: "Nama konektor",
     addSubmit: "Tambahkan",
-    addSuccess: "Konektor demo ditambahkan.",
+    addSuccess: "Konektor dibuat.",
     note:
       "Integrasi berjalan dengan kredensial workspace. Kunci kedaluwarsa dan endpoint gagal muncul di log audit.",
   },

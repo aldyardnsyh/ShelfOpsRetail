@@ -550,6 +550,116 @@ paths:
         "404": { $ref: "#/components/responses/NotFound" }
         "409": { $ref: "#/components/responses/Conflict" }
 
+  /api/v1/reports:
+    post:
+      tags: [reports]
+      operationId: createReport
+      summary: Buat laporan baru (status "ready", metrik dari audit final periode)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReportCreate" }
+      responses:
+        "201":
+          description: laporan dibuat
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Report" }
+        "422": { $ref: "#/components/responses/ValidationError" }
+  /api/v1/report-schedules:
+    post:
+      tags: [reports]
+      operationId: createReportSchedule
+      summary: Buat jadwal laporan otomatis (aktif)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReportScheduleCreate" }
+      responses:
+        "201":
+          description: jadwal dibuat
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReportSchedule" }
+        "422": { $ref: "#/components/responses/ValidationError" }
+  /api/v1/integrations:
+    post:
+      tags: [integrations]
+      operationId: createIntegration
+      summary: Buat konektor integrasi baru (status "pending")
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/IntegrationCreate" }
+      responses:
+        "201":
+          description: konektor dibuat
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Integration" }
+        "422": { $ref: "#/components/responses/ValidationError" }
+  /api/v1/integrations/{integrationId}/test:
+    post:
+      tags: [integrations]
+      operationId: testIntegration
+      summary: Uji koneksi konektor (mencatat sync run + menandai connected)
+      parameters:
+        - { name: integrationId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: hasil uji koneksi
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SyncRun" }
+        "404": { $ref: "#/components/responses/NotFound" }
+  /api/v1/api-keys/{keyId}/rotate:
+    post:
+      tags: [integrations]
+      operationId: rotateApiKey
+      summary: Rotasi API key (cabut lama, terbitkan baru; secret tampil sekali)
+      parameters:
+        - { name: keyId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: key baru diterbitkan
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiKeyRotated" }
+        "404": { $ref: "#/components/responses/NotFound" }
+  /api/v1/me/password:
+    post:
+      tags: [auth]
+      operationId: changePassword
+      summary: Ganti sandi sendiri (verifikasi sandi lama, cabut sesi lain)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PasswordChange" }
+      responses:
+        "200": { description: sandi diganti }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+  /api/v1/workspace/members/invite:
+    post:
+      tags: [workspace]
+      operationId: inviteMember
+      summary: Undang email baru (membuat user + keanggotaan workspace)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MemberInvite" }
+      responses:
+        "201":
+          description: undangan dibuat
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/InvitedMember" }
+        "409": { $ref: "#/components/responses/Conflict" }
+
   /api/v1/insights/kpis:
     get:
       tags: [insights]
@@ -915,6 +1025,25 @@ components:
       properties:
         role: { $ref: "#/components/schemas/Role" }
       required: [role]
+    MemberInvite:
+      type: object
+      properties:
+        email: { type: string, format: email }
+        role: { $ref: "#/components/schemas/Role" }
+      required: [email, role]
+    InvitedMember:
+      type: object
+      properties:
+        user_id: { type: string, format: uuid }
+        email: { type: string, format: email }
+        role: { type: string }
+      required: [user_id, email, role]
+    PasswordChange:
+      type: object
+      properties:
+        current_password: { type: string, minLength: 1 }
+        new_password: { type: string, minLength: 8 }
+      required: [current_password, new_password]
 
     Store:
       type: object
@@ -1249,6 +1378,92 @@ components:
         score: { type: [integer, "null"] }
         alerts_created: { type: integer }
         tasks_created: { type: integer }
+    ReportCreate:
+      type: object
+      properties:
+        title: { type: string, maxLength: 200 }
+        kind: { type: string, enum: [weekly, monthly, incident, custom], default: custom }
+        period_from: { type: string, format: date }
+        period_to: { type: string, format: date }
+        scope: { type: string, default: all }
+        format: { type: string, enum: [pdf, csv, xlsx], default: pdf }
+      required: [title, period_from, period_to]
+    Report:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        title: { type: string }
+        kind: { type: string }
+        period_from: { type: string, format: date }
+        period_to: { type: string, format: date }
+        scope: { type: string }
+        stores_count: { type: integer }
+        status: { type: string }
+        generated_at: { type: string, format: date-time }
+        format: { type: string }
+        metrics: { type: object, additionalProperties: true }
+    ReportScheduleCreate:
+      type: object
+      properties:
+        name: { type: string, maxLength: 200 }
+        cadence: { type: string, enum: [weekly, monthly] }
+        scope: { type: string, default: all }
+        format: { type: string, enum: [pdf, csv, xlsx], default: pdf }
+        recipients: { type: array, items: { type: string } }
+      required: [name, cadence]
+    ReportSchedule:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        cadence: { type: string }
+        scope: { type: string }
+        format: { type: string }
+        recipients: { type: array, items: { type: string } }
+        active: { type: boolean }
+    IntegrationCreate:
+      type: object
+      properties:
+        name: { type: string, maxLength: 200 }
+        kind: { type: string, enum: [pos, supplier, ecommerce, logistics, cv] }
+        store_scope: { type: string, default: all }
+        note: { type: string }
+      required: [name, kind]
+    Integration:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        kind: { type: string }
+        status: { type: string }
+        store_scope: { type: string }
+        last_sync: { type: [string, "null"], format: date-time }
+        records: { type: integer }
+        latency_ms: { type: integer }
+        note: { type: string }
+    SyncRun:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        connector: { type: string }
+        kind: { type: string }
+        started_at: { type: string, format: date-time }
+        duration_s: { type: integer }
+        status: { type: string }
+        records: { type: integer }
+        message: { type: string }
+    ApiKeyRotated:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        prefix: { type: string }
+        masked: { type: string }
+        scope: { type: string }
+        created_at: { type: string, format: date-time }
+        last_used: { type: [string, "null"], format: date-time }
+        status: { type: string }
+        secret: { type: string, description: "secret penuh, hanya tampil sekali saat rotasi" }
     AuditImagesUploadRequest:
       type: object
       properties:

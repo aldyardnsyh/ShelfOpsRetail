@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useActionState, useMemo, useState } from "react";
+
+import {
+  createIntegrationAction,
+  rotateApiKeyAction,
+  testIntegrationAction,
+  type WriteActionResult,
+} from "@/actions/reports-integrations";
 
 import {
   Camera,
@@ -147,6 +154,7 @@ export function IntegrationsView({
     keyLastUsed: string;
     keyStatus: string;
     copyKey: string;
+    rotateKey: string;
     keyCopied: string;
     keyCopyFailed: string;
     keyStatuses: Record<string, string>;
@@ -170,22 +178,24 @@ export function IntegrationsView({
 }) {
   const { t, locale } = useI18n();
   const { toast } = useToast();
-  const [connectors, setConnectors] = useState(initialConnectors);
+  const [connectors] = useState(initialConnectors);
   const [tab, setTab] = useState<"connectors" | "runs" | "api">("connectors");
   const [query, setQuery] = useState("");
-  const [testing, setTesting] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [newKind, setNewKind] = useState("pos");
   const [newName, setNewName] = useState("");
-  const testTimerRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (testTimerRef.current !== null) {
-        window.clearTimeout(testTimerRef.current);
-      }
-    };
-  }, []);
+  const [createState, createAction, createPending] = useActionState(createIntegrationAction, {
+    ok: false,
+    demo: false,
+  } as WriteActionResult);
+  const [testState, testAction, testPending] = useActionState(testIntegrationAction, {
+    ok: false,
+    demo: false,
+  } as WriteActionResult);
+  const [rotateState, rotateAction, rotatePending] = useActionState(rotateApiKeyAction, {
+    ok: false,
+    demo: false,
+  } as WriteActionResult);
 
   const needle = query.trim().toLowerCase();
   const filteredConnectors = useMemo(
@@ -208,41 +218,6 @@ export function IntegrationsView({
     webhook: "Webhook",
     auth: "SSO",
   };
-
-  function testConnector(id: string) {
-    setTesting(id);
-    if (testTimerRef.current !== null) {
-      window.clearTimeout(testTimerRef.current);
-    }
-    testTimerRef.current = window.setTimeout(() => {
-      testTimerRef.current = null;
-      setTesting(null);
-      toast({ title: labels.testSuccess, variant: "success" });
-    }, 700);
-  }
-
-  function addConnector() {
-    const name = newName.trim();
-    if (!name) return;
-    setConnectors((current) => [
-      ...current,
-      {
-        id: `INT-${Date.now()}`,
-        name,
-        kind: newKind,
-        status: "not_connected",
-        store_scope: "Belum diatur",
-        last_sync: null,
-        records: 0,
-        latency_ms: 0,
-        note: labels.addBody,
-      },
-    ]);
-    setNewName("");
-    setOpen(false);
-    setTab("connectors");
-    toast({ title: labels.addSuccess, variant: "success" });
-  }
 
   async function copyKey(value: string) {
     try {
@@ -374,15 +349,26 @@ export function IntegrationsView({
                     </div>
                   </dl>
                   <div className="mt-3">
-                    <Button
-                      type="button"
-                      variant="secondary"
-                      size="sm"
-                      disabled={testing === connector.id}
-                      onClick={() => testConnector(connector.id)}
-                    >
-                      {testing === connector.id ? labels.testing : labels.test}
-                    </Button>
+                    <form id={`test-form-${connector.id}`} action={testAction}>
+                      <input type="hidden" name="integration_id" value={connector.id} />
+                      <Button
+                        type="submit"
+                        variant="secondary"
+                        size="sm"
+                        disabled={testPending}
+                      >
+                        {testPending ? labels.testing : labels.test}
+                      </Button>
+                    </form>
+                    {testState.detail ? (
+                      <p className="mt-1 text-xs text-destructive">{testState.detail}</p>
+                    ) : null}
+                    {testState.ok && testState.message ? (
+                      <p className="mt-1 text-xs text-emerald-600">
+                        {testState.demo ? "Simulasi demo: " : ""}
+                        {testState.message}
+                      </p>
+                    ) : null}
                   </div>
                 </div>
               );
@@ -488,17 +474,40 @@ export function IntegrationsView({
                         </Badge>
                       </TableCell>
                       <TableCell className="text-right sticky right-0 bg-background group-hover:bg-muted/60 border-l border-border">
-                        <Tooltip label={labels.copyKey}>
-                          <Button
-                            type="button"
-                            variant="secondary"
-                            size="icon"
-                            aria-label={labels.copyKey}
-                            onClick={() => copyKey(key.masked)}
-                          >
-                            <Copy />
-                          </Button>
-                        </Tooltip>
+                        <div className="flex items-center justify-end gap-1">
+                          <Tooltip label={labels.copyKey}>
+                            <Button
+                              type="button"
+                              variant="secondary"
+                              size="icon"
+                              aria-label={labels.copyKey}
+                              onClick={() => copyKey(key.masked)}
+                            >
+                              <Copy />
+                            </Button>
+                          </Tooltip>
+                          {key.status === "active" ? (
+                            <form action={rotateAction}>
+                              <input type="hidden" name="key_id" value={key.id} />
+                              <Button
+                                type="submit"
+                                variant="secondary"
+                                size="sm"
+                                disabled={rotatePending}
+                              >
+                                {rotatePending ? "…" : labels.rotateKey}
+                              </Button>
+                            </form>
+                          ) : null}
+                        </div>
+                        {rotateState.detail ? (
+                          <p className="mt-1 text-xs text-destructive">{rotateState.detail}</p>
+                        ) : null}
+                        {rotateState.ok && rotateState.message ? (
+                          <p className="mt-1 max-w-64 text-xs break-all text-emerald-600">
+                            {rotateState.message}
+                          </p>
+                        ) : null}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -557,41 +566,52 @@ export function IntegrationsView({
             <DialogTitle>{labels.addTitle}</DialogTitle>
             <DialogDescription>{labels.addBody}</DialogDescription>
           </DialogHeader>
-          <div className="space-y-3">
+          <form id="create-connector-form" action={createAction} className="space-y-3">
             <div className="space-y-1.5">
               <Label htmlFor="connector-kind">{labels.addKind}</Label>
               <select
                 id="connector-kind"
+                name="kind"
                 value={newKind}
                 onChange={(event) => setNewKind(event.target.value)}
                 className="h-9 w-full rounded-lg border border-input bg-background px-3 text-sm text-foreground focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/25"
               >
                 <option value="pos">POS</option>
-                <option value="erp">ERP</option>
-                <option value="camera">CCTV</option>
-                <option value="file">CSV</option>
-                <option value="webhook">Webhook</option>
-                <option value="auth">SSO</option>
+                <option value="supplier">Supplier</option>
+                <option value="ecommerce">Ecommerce</option>
+                <option value="logistics">Logistik</option>
+                <option value="cv">Computer vision</option>
               </select>
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="connector-name">{labels.addName}</Label>
               <Input
                 id="connector-name"
+                name="name"
                 value={newName}
                 onChange={(event) => setNewName(event.target.value)}
                 placeholder="POS cabang Bandung"
+                required
               />
             </div>
-          </div>
-          <DialogFooter>
-            <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-              {t.common.cancel}
-            </Button>
-            <Button type="button" onClick={addConnector} disabled={!newName.trim()}>
-              {labels.addSubmit}
-            </Button>
-          </DialogFooter>
+            {createState.detail ? (
+              <p className="text-sm text-destructive">{createState.detail}</p>
+            ) : null}
+            {createState.ok && createState.message ? (
+              <p className="text-sm text-emerald-600">
+                {createState.demo ? "Simulasi demo: " : ""}
+                {createState.message}
+              </p>
+            ) : null}
+            <DialogFooter>
+              <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
+                {t.common.cancel}
+              </Button>
+              <Button type="submit" disabled={createPending || !newName.trim()}>
+                {createPending ? "Menyimpan…" : labels.addSubmit}
+              </Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
     </div>

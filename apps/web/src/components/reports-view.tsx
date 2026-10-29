@@ -1,6 +1,8 @@
 "use client";
 
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useActionState, useMemo, useState } from "react";
+
+import { createReportAction, type WriteActionResult } from "@/actions/reports-integrations";
 
 import { ChevronDown, ChevronUp, Download, Plus } from "@/components/icons";
 import { PremiumAreaChart } from "@/components/ui/chart-kit";
@@ -136,7 +138,11 @@ export function ReportsView({
   const [kind, setKind] = useState("");
   const [expanded, setExpanded] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
-  const [newKind, setNewKind] = useState("daily");
+  const [newKind, setNewKind] = useState("weekly");
+  const [reportState, reportAction, reportPending] = useActionState(createReportAction, {
+    ok: false,
+    demo: false,
+  } as WriteActionResult);
   const [newScope, setNewScope] = useState(t.reports.allStores);
   const hasFilters = Boolean(query || kind);
 
@@ -210,34 +216,6 @@ export function ReportsView({
     link.click();
     URL.revokeObjectURL(url);
     toast({ title: labels.exportCta, variant: "success" });
-  }
-
-  function createReport() {
-    const today = new Date().toISOString().slice(0, 10);
-    const nextNumber =
-      reports.reduce(
-        (max, report) =>
-          Math.max(max, Number(report.id.match(/(\d+)$/)?.[1] ?? 0)),
-        0,
-      ) + 1;
-    const next: ReportRow = {
-      id: `RPT-2026-${nextNumber}`,
-      title: `${kindLabel[newKind] ?? labels.kindDaily}: ${newScope}`,
-      kind: newKind as ReportRow["kind"],
-      period_from: today,
-      period_to: today,
-      scope: newScope,
-      stores_count: newScope === t.reports.allStores ? 20 : 8,
-      status: "ready",
-      generated_at: `${today}T09:00:00+07:00`,
-      format: "CSV",
-      metrics: baseMetrics,
-    };
-    setReports((current) => [next, ...current]);
-    setExpanded(next.id);
-    setOpen(false);
-    setTab("reports");
-    toast({ title: labels.newReportSuccess, variant: "success" });
   }
 
   const availabilityValues = series.map((point) => point.availability_pct);
@@ -594,43 +572,81 @@ export function ReportsView({
             <DialogTitle>{labels.newReportTitle}</DialogTitle>
             <DialogDescription>{labels.newReportBody}</DialogDescription>
           </DialogHeader>
-          <div className="space-y-3">
+          <form action={reportAction} className="space-y-3">
+            <div className="space-y-1.5">
+              <Label htmlFor="report-new-title">{labels.newReportTitle}</Label>
+              <Input id="report-new-title" name="title" required placeholder={labels.newReportTitle} />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1.5">
+                <Label htmlFor="report-new-from">Dari</Label>
+                <Input
+                  id="report-new-from"
+                  name="period_from"
+                  type="date"
+                  required
+                  defaultValue={new Date().toISOString().slice(0, 10)}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="report-new-to">Sampai</Label>
+                <Input
+                  id="report-new-to"
+                  name="period_to"
+                  type="date"
+                  required
+                  defaultValue={new Date().toISOString().slice(0, 10)}
+                />
+              </div>
+            </div>
             <div className="space-y-1.5">
               <Label htmlFor="report-new-kind">{labels.newReportKind}</Label>
               <select
                 id="report-new-kind"
+                name="kind"
                 value={newKind}
                 onChange={(event) => setNewKind(event.target.value)}
                 className="h-9 w-full rounded-lg border border-input bg-background px-3 text-sm text-foreground focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/25"
               >
-                <option value="daily">{labels.kindDaily}</option>
                 <option value="weekly">{labels.kindWeekly}</option>
                 <option value="monthly">{labels.kindMonthly}</option>
+                <option value="custom">{labels.kindDaily}</option>
               </select>
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="report-new-scope">{labels.newReportScope}</Label>
               <select
                 id="report-new-scope"
+                name="scope"
                 value={newScope}
                 onChange={(event) => setNewScope(event.target.value)}
                 className="h-9 w-full rounded-lg border border-input bg-background px-3 text-sm text-foreground focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/25"
               >
-                <option value={t.reports.allStores}>{t.reports.allStores}</option>
+                <option value="all">{t.reports.allStores}</option>
                 <option value="Jawa Barat">Jawa Barat</option>
                 <option value="Jawa Tengah">Jawa Tengah</option>
                 <option value="Jawa Timur">Jawa Timur</option>
               </select>
             </div>
-          </div>
-          <DialogFooter>
-            <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
-              {t.common.cancel}
-            </Button>
-            <Button type="button" onClick={createReport}>
-              {labels.newReportSubmit}
-            </Button>
-          </DialogFooter>
+            <input type="hidden" name="format" value="pdf" />
+            {reportState.detail ? (
+              <p className="text-sm text-destructive">{reportState.detail}</p>
+            ) : null}
+            {reportState.ok && reportState.message ? (
+              <p className="text-sm text-emerald-600">
+                {reportState.demo ? "Simulasi demo: " : ""}
+                {reportState.message}
+              </p>
+            ) : null}
+            <DialogFooter>
+              <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
+                {t.common.cancel}
+              </Button>
+              <Button type="submit" disabled={reportPending}>
+                {reportPending ? "Menyimpan…" : labels.newReportSubmit}
+              </Button>
+            </DialogFooter>
+          </form>
         </DialogContent>
       </Dialog>
     </div>

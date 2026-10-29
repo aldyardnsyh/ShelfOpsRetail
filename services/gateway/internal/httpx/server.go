@@ -92,6 +92,8 @@ func (s *Server) Router() http.Handler {
 			r.Use(s.authMiddleware(false))
 
 			r.Get("/me", s.handleMe)
+			r.Post("/me/password", s.handleChangePassword)
+			r.With(RequirePermission(rbac.PermMemberManage)).Post("/workspace/members/invite", s.handleInviteMember)
 
 			r.Group(func(r chi.Router) {
 				r.Use(s.rateLimitAPI())
@@ -163,7 +165,12 @@ func (s *Server) Router() http.Handler {
 				r.With(RequirePermission(rbac.PermDashboardRead)).Get("/tracking", s.handleShipments)
 				r.With(RequirePermission(rbac.PermDashboardRead)).Get("/monitor", s.handleMonitorOverview)
 				r.With(RequirePermission(rbac.PermDashboardRead)).Get("/reports", s.handleReportsOverview)
+				r.With(RequirePermission(rbac.PermReportWrite)).Post("/reports", s.handleCreateReport)
+				r.With(RequirePermission(rbac.PermReportWrite)).Post("/report-schedules", s.handleCreateReportSchedule)
 				r.With(RequirePermission(rbac.PermDashboardRead)).Get("/integrations", s.handleIntegrationsOverview)
+				r.With(RequirePermission(rbac.PermIntegrationManage)).Post("/integrations", s.handleCreateIntegration)
+				r.With(RequirePermission(rbac.PermIntegrationManage)).Post("/integrations/{integrationId}/test", s.handleTestIntegration)
+				r.With(RequirePermission(rbac.PermIntegrationManage)).Post("/api-keys/{keyId}/rotate", s.handleRotateAPIKey)
 
 				r.With(RequirePermission(rbac.PermWorkspaceManage)).Get("/system/quota", s.handleQuota)
 			})
