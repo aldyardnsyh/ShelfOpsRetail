@@ -38,6 +38,11 @@ type Config struct {
 	CookieSecure    bool
 	LoginRatePerMin int
 
+	// AllowInsecureCookie melonggarkan aturan COOKIE_SECURE untuk deployment
+	// yang memangterminate TLS di luar aplikasi (load balancer, ingress,
+	// reverse proxy) atau untuk smoke test lokal lewat http://.
+	AllowInsecureCookie bool
+
 	GoogleClientID     string
 	GoogleClientSecret string
 	GoogleRedirectURL  string
@@ -130,6 +135,8 @@ func load(commit string, enforceProviders bool) (*Config, error) {
 		CookieDomain:    env("COOKIE_DOMAIN", ""),
 		CookieSecure:    envBool("COOKIE_SECURE", false),
 		LoginRatePerMin: envInt("LOGIN_RATE_LIMIT_PER_MIN", 10),
+
+		AllowInsecureCookie: envBool("ALLOW_INSECURE_COOKIE", false),
 
 		GoogleClientID:     env("GOOGLE_CLIENT_ID", ""),
 		GoogleClientSecret: env("GOOGLE_CLIENT_SECRET", ""),
@@ -238,8 +245,10 @@ func (c *Config) validate() error {
 		if len(c.SessionSecret) < 32 {
 			return fmt.Errorf("SESSION_SECRET wajib ≥32 karakter di produksi")
 		}
-		if !c.CookieSecure {
-			return fmt.Errorf("COOKIE_SECURE wajib true di produksi")
+		if !c.CookieSecure && !c.AllowInsecureCookie {
+			return fmt.Errorf(
+				"COOKIE_SECURE wajib true di produksi (atau set ALLOW_INSECURE_COOKIE=true " +
+					"bila TLS di terminate di luar aplikasi / smoke test lokal http)")
 		}
 	} else {
 		if c.JWTSecret == "" {
