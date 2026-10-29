@@ -1185,6 +1185,7 @@ components:
     PurchaseOrderLine:
       type: object
       properties:
+        po_line_id: { type: string, format: uuid }
         product_id: { type: string, format: uuid }
         sku: { type: string }
         product_name: { type: string }
