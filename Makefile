@@ -136,6 +136,24 @@ bootstrap-prod: ## Buat workspace + admin pertama di stack produksi (butuh ADMIN
 		-e BOOTSTRAP_PASSWORD="$(ADMIN_PASSWORD)" gateway bootstrap \
 		--email "$(ADMIN_EMAIL)" --workspace "$(or $(ADMIN_WORKSPACE),ShelfOps)"
 
+.PHONY: smoke-down
+smoke-down: ## Hentikan stack prod-smoke lokal
+	docker compose --env-file .env.prod-smoke -f infra/docker-compose.prod.yml down
+
+.PHONY: smoke
+smoke: ## Naikkan stack prod-smoke + jalankan smoke test (butuh .env.prod-smoke)
+	docker compose --env-file .env.prod-smoke -f infra/docker-compose.prod.yml up -d
+	@echo "menunggu gateway sehat..."
+	@for i in $$(seq 1 40); do \
+		if curl -sf http://localhost/api/v1/healthz >/dev/null 2>&1 || curl -sf http://localhost:8080/healthz >/dev/null 2>&1; then break; fi; \
+		sleep 5; \
+	done
+	@if command -v pwsh >/dev/null 2>&1; then \
+		pwsh -File scripts/smoke-prod.ps1 -BaseUrl http://localhost; \
+	else \
+		powershell -ExecutionPolicy Bypass -File scripts/smoke-prod.ps1 -BaseUrl http://localhost; \
+	fi
+
 .PHONY: deploy
 deploy: ## Deploy ke VPS (butuh .env VPS + SSH)
 	bash deploy/deploy.sh
