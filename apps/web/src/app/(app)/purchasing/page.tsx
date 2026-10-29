@@ -3,6 +3,7 @@ import { Suspense } from "react";
 
 import { ErrorState } from "@/components/error-state";
 import { PageHeader } from "@/components/page-header";
+import { PurchasingWritePanel } from "@/components/purchasing-write-panel";
 import {
   PurchasingView,
   type Grn,
@@ -10,7 +11,7 @@ import {
   type Supplier,
 } from "@/components/purchasing-view";
 import { formatNumber } from "@/lib/format";
-import { getPurchasing } from "@/lib/data";
+import { getInventory, getPurchasing } from "@/lib/data";
 import { getI18n } from "@/lib/i18n/server";
 import { KpiStrip } from "@/components/ui/kpi-strip";
 
@@ -57,6 +58,29 @@ export default async function PurchasingPage() {
     .map((order) => ({ id: order.store_id, name: order.store_name }))
     .filter((value, index, list) => list.findIndex((item) => item.id === value.id) === index);
 
+  // Produk diambil dari inventori: dipakai form pembuatan PO.
+  const inventoryRes = await getInventory();
+  const products = inventoryRes.ok
+    ? ((inventoryRes.data as { products?: { id: string; sku: string; name: string }[] }).products ?? [])
+    : [];
+
+  // Baris PO yang masih bisa diterima (qty_received < qty_order).
+  const openOrders = data.purchase_orders
+    .filter((order) => order.status !== "received" && order.status !== "cancelled")
+    .map((order) => ({
+      id: order.id,
+      code: order.po_code ?? order.id,
+      lines: ((order.lines ?? []) as { po_line_id?: string; sku?: string; qty_order?: number; qty_received?: number }[])
+        .filter((line) => line.po_line_id)
+        .map((line) => ({
+          po_line_id: line.po_line_id as string,
+          sku: line.sku ?? "",
+          qty_order: line.qty_order ?? 0,
+          qty_received: line.qty_received ?? 0,
+        })),
+    }))
+    .filter((order) => order.lines.some((line) => line.qty_received < line.qty_order));
+
   return (
     <div className="space-y-6">
       <PageHeader
@@ -92,6 +116,13 @@ export default async function PurchasingPage() {
   hint: t.purchasing.hintReceived.replace("{count}", formatNumber(s.received_count, locale)),
 },
         ]}
+      />
+
+      <PurchasingWritePanel
+        stores={stores.map((store) => ({ id: store.id, label: store.name }))}
+        suppliers={data.suppliers.map((supplier) => ({ id: supplier.id, label: supplier.name }))}
+        products={products.map((product) => ({ id: product.id, label: `${product.sku} Ã‚Â· ${product.name}` }))}
+        orders={openOrders}
       />
 
       <Suspense fallback={null}>

@@ -12,6 +12,10 @@ export type Capability =
   | "task.update"
   | "stock.update"
   | "purchase.create"
+  // Aksi tulis pengadaan (PO + penerimaan barang) dan finalisasi audit:
+  // mengikuti RBAC gateway (purchase_order.write & audit.write = admin+analyst).
+  | "purchase.write"
+  | "audit.finalize"
   | "price.update"
   | "camera.manage"
   | "member.manage"
@@ -28,6 +32,10 @@ const MATRIX: Record<Capability, readonly AppRole[]> = {
   "task.update": ["owner", "admin"],
   "stock.update": ["owner", "admin"],
   "purchase.create": ["owner", "admin"],
+  // Backend memberi admin+analyst izin purchase_order.write; UI mengikuti
+  // sumber yang sama agar tidak menolak aksi yang sah.
+  "purchase.write": ["owner", "admin", "analyst"],
+  "audit.finalize": ["owner", "admin", "analyst"],
   "price.update": ["owner", "admin"],
   "camera.manage": ["owner", "admin"],
   "member.manage": ["owner", "admin"],
