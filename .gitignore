@@ -82,3 +82,5 @@ notes-private/
 
 # Binary gateway hasil build lokal
 services/gateway/shelfops.exe*
+
+test-results/
