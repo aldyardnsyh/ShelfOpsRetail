@@ -153,6 +153,8 @@ func (s *Server) Router() http.Handler {
 				r.With(RequirePermission(rbac.PermDashboardRead)).Get("/tasks", s.handleTasks)
 				r.With(RequirePermission(rbac.PermTaskWrite)).Patch("/tasks/{taskId}", s.handleUpdateTask)
 				r.With(RequirePermission(rbac.PermDashboardRead)).Get("/purchasing", s.handlePurchasingOverview)
+				r.With(RequirePermission(rbac.PermPurchaseWrite)).Post("/purchase-orders", s.handleCreatePurchaseOrder)
+				r.With(RequirePermission(rbac.PermPurchaseWrite)).Post("/grns", s.handleCreateGoodsReceipt)
 				r.With(RequirePermission(rbac.PermDashboardRead)).Get("/tracking", s.handleShipments)
 				r.With(RequirePermission(rbac.PermDashboardRead)).Get("/monitor", s.handleMonitorOverview)
 				r.With(RequirePermission(rbac.PermDashboardRead)).Get("/reports", s.handleReportsOverview)

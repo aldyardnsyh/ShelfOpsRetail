@@ -26,7 +26,8 @@ const (
 	PermAuditRead       Permission = "audit.read"
 	PermDashboardRead   Permission = "dashboard.read"
 	PermAlertUpdate     Permission = "alert.update"
-	PermTaskWrite       Permission = "task.write" // tool aksi tulis (create task)
+	PermTaskWrite       Permission = "task.write"           // tool aksi tulis (create task)
+	PermPurchaseWrite   Permission = "purchase_order.write" // buat PO & catat penerimaan barang
 	PermEvalRead        Permission = "eval.read"
 	PermEvalRun         Permission = "eval.run"
 	PermTraceRead       Permission = "trace.read"
@@ -41,6 +42,7 @@ var matrix = map[Role]map[Permission]bool{
 		PermAuditWrite:    true,
 		PermAlertUpdate:   true,
 		PermTaskWrite:     true,
+		PermPurchaseWrite: true,
 		PermEvalRead:      true,
 		PermEvalRun:       true,
 		PermTraceRead:     true,
@@ -61,7 +63,7 @@ var permSelaluAda = []Permission{
 var allPermissions = []Permission{
 	PermWorkspaceManage, PermMemberManage, PermProviderManage, PermDocumentWrite,
 	PermDocumentRead, PermChatUse, PermAuditWrite, PermAuditRead, PermDashboardRead,
-	PermAlertUpdate, PermTaskWrite, PermEvalRead, PermEvalRun, PermTraceRead,
+	PermAlertUpdate, PermTaskWrite, PermPurchaseWrite, PermEvalRead, PermEvalRun, PermTraceRead,
 	PermBenchmarkRun, PermDataDelete,
 }
 

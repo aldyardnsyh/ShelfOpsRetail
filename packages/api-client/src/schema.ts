@@ -576,6 +576,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** Tutup sesi audit menjadi "final" dan buat alert + task tindak lanjut */
         post: operations["finalizeAudit"];
         delete?: never;
         options?: never;
@@ -627,6 +628,40 @@ export interface paths {
         get: operations["getImageContent"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/purchase-orders": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Buat purchase order beserta baris barang */
+        post: operations["createPurchaseOrder"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/grns": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Catat penerimaan barang terhadap purchase order (menambah stok) */
+        post: operations["createGoodsReceipt"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1318,6 +1353,96 @@ export interface components {
             items?: components["schemas"]["AuditSession"][];
             next_cursor?: string | null;
         };
+        PurchaseOrderCreate: {
+            /** Format: uuid */
+            store_id: string;
+            /** Format: uuid */
+            supplier_id: string;
+            /** Format: date */
+            expected_date?: string;
+            notes?: string;
+            items: {
+                /** Format: uuid */
+                product_id: string;
+                qty_order: number;
+                /** Format: int64 */
+                unit_cost_idr?: number;
+            }[];
+        };
+        PurchaseOrderLine: {
+            /** Format: uuid */
+            product_id?: string;
+            sku?: string;
+            product_name?: string;
+            qty_order?: number;
+            /** Format: int64 */
+            unit_cost_idr?: number;
+            /** Format: int64 */
+            subtotal_idr?: number;
+        };
+        PurchaseOrder: {
+            /** Format: uuid */
+            id?: string;
+            code?: string;
+            /** Format: uuid */
+            store_id?: string;
+            supplier?: string;
+            /** @enum {string} */
+            status?: "draft" | "sent" | "confirmed" | "receiving" | "received" | "cancelled";
+            /** Format: int64 */
+            total_idr?: number;
+            lines?: components["schemas"]["PurchaseOrderLine"][];
+            /** Format: date-time */
+            created_at?: string;
+        };
+        GoodsReceiptCreate: {
+            /** Format: uuid */
+            store_id?: string;
+            /** Format: uuid */
+            purchase_order_id: string;
+            idempotency_key?: string;
+            notes?: string;
+            items: {
+                /** Format: uuid */
+                po_line_id: string;
+                qty_received: number;
+            }[];
+        };
+        GoodsReceiptLine: {
+            /** Format: uuid */
+            po_line_id?: string;
+            /** Format: uuid */
+            product_id?: string;
+            sku?: string;
+            qty_received?: number;
+            /** Format: int64 */
+            unit_cost_idr?: number;
+        };
+        GoodsReceipt: {
+            /** Format: uuid */
+            id?: string;
+            code?: string;
+            /** Format: uuid */
+            purchase_order_id?: string;
+            purchase_order_code?: string;
+            /** Format: uuid */
+            store_id?: string;
+            /** @enum {string} */
+            status?: "received" | "cancelled";
+            lines?: components["schemas"]["GoodsReceiptLine"][];
+            stock_updated?: number;
+            idempotent_replay?: boolean;
+            /** Format: date-time */
+            received_at?: string;
+        };
+        AuditFinalizeResult: {
+            /** Format: uuid */
+            session_id?: string;
+            status?: string;
+            score?: number | null;
+            alerts_created?: number;
+            tasks_created?: number;
+        };
         AuditImagesUploadRequest: {
             files: {
                 filename: string;
@@ -1711,6 +1836,15 @@ export interface components {
         };
         /** @description tidak ditemukan (atau milik workspace lain — sengaja 404) */
         NotFound: {
+            headers: {
+                [name: string]: unknown;
+            };
+            content: {
+                "application/problem+json": components["schemas"]["Problem"];
+            };
+        };
+        /** @description konflik state (mis. qty diterima melebihi pesanan, PO sudah selesai) */
+        Conflict: {
             headers: {
                 [name: string]: unknown;
             };
@@ -2825,18 +2959,29 @@ export interface operations {
         parameters: {
             query?: never;
             header?: never;
-            path?: never;
+            path: {
+                id: components["parameters"]["PathId"];
+            };
             cookie?: never;
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
+            /** @description sesi difinalisasi */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["AuditSession"];
+                    "application/json": components["schemas"]["AuditFinalizeResult"];
+                };
+            };
+            /** @description sesi bukan berstatus review/partial (ulang tidak membuat alert ganda) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/problem+json": components["schemas"]["Problem"];
                 };
             };
         };
@@ -2933,6 +3078,69 @@ export interface operations {
                     "image/jpeg": string;
                 };
             };
+        };
+    };
+    createPurchaseOrder: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PurchaseOrderCreate"];
+            };
+        };
+        responses: {
+            /** @description PO dibuat (status "sent") */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PurchaseOrder"];
+                };
+            };
+            404: components["responses"]["NotFound"];
+            409: components["responses"]["Conflict"];
+        };
+    };
+    createGoodsReceipt: {
+        parameters: {
+            query?: never;
+            header?: {
+                "Idempotency-Key"?: components["parameters"]["IdempotencyKey"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GoodsReceiptCreate"];
+            };
+        };
+        responses: {
+            /** @description idempotent replay — dokumen penerimaan yang sama dikembalikan */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GoodsReceipt"];
+                };
+            };
+            /** @description penerimaan dicatat */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GoodsReceipt"];
+                };
+            };
+            404: components["responses"]["NotFound"];
+            409: components["responses"]["Conflict"];
         };
     };
     getKpis: {

@@ -461,8 +461,19 @@ paths:
     post:
       tags: [audits]
       operationId: finalizeAudit
+      summary: Tutup sesi audit menjadi "final" dan buat alert + task tindak lanjut
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
       responses:
-        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/AuditSession" } } } }
+        "200":
+          description: sesi difinalisasi
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AuditFinalizeResult" }
+        "409":
+          description: sesi bukan berstatus review/partial (ulang tidak membuat alert ganda)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
   /api/v1/detections/{id}:
     patch:
       tags: [audits]
@@ -494,6 +505,50 @@ paths:
       parameters: [{ $ref: "#/components/parameters/PathId" }]
       responses:
         "200": { description: bytes, content: { image/jpeg: { schema: { type: string, format: binary } } } }
+
+  /api/v1/purchase-orders:
+    post:
+      tags: [purchasing]
+      operationId: createPurchaseOrder
+      summary: Buat purchase order beserta baris barang
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PurchaseOrderCreate" }
+      responses:
+        "201":
+          description: PO dibuat (status "sent")
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PurchaseOrder" }
+        "404": { $ref: "#/components/responses/NotFound" }
+        "409": { $ref: "#/components/responses/Conflict" }
+  /api/v1/grns:
+    post:
+      tags: [purchasing]
+      operationId: createGoodsReceipt
+      summary: Catat penerimaan barang terhadap purchase order (menambah stok)
+      parameters:
+        - { $ref: "#/components/parameters/IdempotencyKey" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GoodsReceiptCreate" }
+      responses:
+        "201":
+          description: penerimaan dicatat
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GoodsReceipt" }
+        "200":
+          description: idempotent replay — dokumen penerimaan yang sama dikembalikan
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GoodsReceipt" }
+        "404": { $ref: "#/components/responses/NotFound" }
+        "409": { $ref: "#/components/responses/Conflict" }
 
   /api/v1/insights/kpis:
     get:
@@ -734,6 +789,9 @@ components:
       content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } }
     NotFound:
       description: tidak ditemukan (atau milik workspace lain — sengaja 404)
+      content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } }
+    Conflict:
+      description: konflik state (mis. qty diterima melebihi pesanan, PO sudah selesai)
       content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } }
     ValidationError:
       description: validasi gagal
@@ -1106,6 +1164,90 @@ components:
       properties:
         items: { type: array, items: { $ref: "#/components/schemas/AuditSession" } }
         next_cursor: { type: [string, "null"] }
+    PurchaseOrderCreate:
+      type: object
+      properties:
+        store_id: { type: string, format: uuid }
+        supplier_id: { type: string, format: uuid }
+        expected_date: { type: string, format: date }
+        notes: { type: string }
+        items:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            properties:
+              product_id: { type: string, format: uuid }
+              qty_order: { type: integer, minimum: 1 }
+              unit_cost_idr: { type: integer, minimum: 0, format: int64 }
+            required: [product_id, qty_order]
+      required: [store_id, supplier_id, items]
+    PurchaseOrderLine:
+      type: object
+      properties:
+        product_id: { type: string, format: uuid }
+        sku: { type: string }
+        product_name: { type: string }
+        qty_order: { type: integer }
+        unit_cost_idr: { type: integer, format: int64 }
+        subtotal_idr: { type: integer, format: int64 }
+    PurchaseOrder:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        code: { type: string }
+        store_id: { type: string, format: uuid }
+        supplier: { type: string }
+        status: { type: string, enum: [draft, sent, confirmed, receiving, received, cancelled] }
+        total_idr: { type: integer, format: int64 }
+        lines: { type: array, items: { $ref: "#/components/schemas/PurchaseOrderLine" } }
+        created_at: { type: string, format: date-time }
+    GoodsReceiptCreate:
+      type: object
+      properties:
+        store_id: { type: string, format: uuid }
+        purchase_order_id: { type: string, format: uuid }
+        idempotency_key: { type: string, maxLength: 120 }
+        notes: { type: string }
+        items:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            properties:
+              po_line_id: { type: string, format: uuid }
+              qty_received: { type: integer, minimum: 1 }
+            required: [po_line_id, qty_received]
+      required: [purchase_order_id, items]
+    GoodsReceiptLine:
+      type: object
+      properties:
+        po_line_id: { type: string, format: uuid }
+        product_id: { type: string, format: uuid }
+        sku: { type: string }
+        qty_received: { type: integer }
+        unit_cost_idr: { type: integer, format: int64 }
+    GoodsReceipt:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        code: { type: string }
+        purchase_order_id: { type: string, format: uuid }
+        purchase_order_code: { type: string }
+        store_id: { type: string, format: uuid }
+        status: { type: string, enum: [received, cancelled] }
+        lines: { type: array, items: { $ref: "#/components/schemas/GoodsReceiptLine" } }
+        stock_updated: { type: integer }
+        idempotent_replay: { type: boolean }
+        received_at: { type: string, format: date-time }
+    AuditFinalizeResult:
+      type: object
+      properties:
+        session_id: { type: string, format: uuid }
+        status: { type: string }
+        score: { type: [integer, "null"] }
+        alerts_created: { type: integer }
+        tasks_created: { type: integer }
     AuditImagesUploadRequest:
       type: object
       properties:
