@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
+	"github.com/aldyardnsyh/ShelfOpsRetail/services/gateway/internal/config"
 	"github.com/aldyardnsyh/ShelfOpsRetail/services/gateway/internal/problem"
 )
 
@@ -16,11 +17,7 @@ func chiURLParam(r *http.Request, name string) string {
 
 func jsonMarshalIndent(v any) ([]byte, error) { return json.Marshal(v) }
 
-type providerModes struct {
-	LLM       string `json:"llm"`
-	Embedding string `json:"embedding"`
-	VLM       string `json:"vlm"`
-}
+type providerModes = config.ProviderModes
 
 type healthResponse struct {
 	Status      string        `json:"status"`
@@ -39,23 +36,12 @@ type healthResponse struct {
 // yang sehat secara teknis tetap bisa memakai mode ini, tetapi tidak boleh
 // diklaim sebagai AI nyata: /readyz menampilkannya supaya operator melihat
 // kebenaran tanpa membaca env satu per satu.
+//
+// Daftar tiruan berasal dari config.ProviderModes (sumber tunggal), sehingga
+// tidak ada provider tiruan yang bisa "lolos" dari daftar karena implementasi
+// health handler berbeda dengan guard produksi.
 func (s *Server) mockModes() (providerModes, []string) {
-	modes := providerModes{
-		LLM:       s.Cfg.LLMProvider,
-		Embedding: s.Cfg.EmbeddingProvider,
-		VLM:       s.Cfg.VLMProvider,
-	}
-	var mocks []string
-	if modes.LLM == "replay" {
-		mocks = append(mocks, "llm=replay (jawaban contoh, bukan model)")
-	}
-	if modes.Embedding == "hash" {
-		mocks = append(mocks, "embedding=hash (leksikal, bukan semantik)")
-	}
-	if modes.VLM == "off" {
-		mocks = append(mocks, "vlm=off (OCR label harga tidak aktif)")
-	}
-	return modes, mocks
+	return s.Cfg.ProviderModes(), s.Cfg.MockProviders()
 }
 
 var startedAt = time.Now()

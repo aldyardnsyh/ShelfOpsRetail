@@ -74,6 +74,7 @@ class DetectionPipeline:
                         box,
                         image_digest=digest,
                         reference_price_idr=reference,
+                        image=image,
                     )
                     tag = PriceTagResult(
                         detection=box,

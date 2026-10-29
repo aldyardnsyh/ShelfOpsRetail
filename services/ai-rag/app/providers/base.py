@@ -45,6 +45,8 @@ class EmbeddingProvider(ABC):
     """Embedding provider returning one L2-normalised vector per input."""
 
     name: str = "unknown"
+    #: Berapa teks yang dikirim per permintaan jaringan.
+    batch_size: int = 16
 
     @property
     @abstractmethod

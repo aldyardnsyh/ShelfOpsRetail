@@ -143,7 +143,7 @@ class RagServicer(rag_pb2_grpc.RagServiceServicer):
             )
 
             embeddings: list[list[float]] = []
-            batch_size = 16
+            batch_size = max(1, int(getattr(self._embedder, "batch_size", 16)))
             for start in range(0, total, batch_size):
                 batch = chunks[start : start + batch_size]
                 embeddings.extend(self._embedder.embed([chunk.content for chunk in batch]))

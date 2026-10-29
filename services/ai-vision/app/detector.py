@@ -76,5 +76,8 @@ def build_detector(settings: Settings) -> Detector:
     if kind == "onnx":
         from app.onnx_detector import OnnxDetector
 
-        return OnnxDetector(model_version=settings.model_version)
+        return OnnxDetector(
+            model_version=settings.model_version,
+            model_path=settings.resolved_model_path(),
+        )
     raise DetectorError(f"unknown detector: {settings.detector}")

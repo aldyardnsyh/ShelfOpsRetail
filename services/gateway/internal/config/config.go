@@ -75,6 +75,16 @@ type Config struct {
 	VLMAPIKey   string
 	VLMModel    string
 
+	// Provider vision (detektor + OCR) dilaporkan /readyz dan dijaga guard
+	// produksi supaya tidak ada provider tiruan yang lolos dari daftar.
+	VisionDetector  string
+	VisionOCREngine string
+	VisionModelDir  string
+
+	// AllowMockProviders meloloskan boot produksi dengan provider tiruan.
+	// Default false: operator harus menyatakannya secara eksplisit.
+	AllowMockProviders bool
+
 	RAGGRPCAddr    string
 	VisionGRPCAddr string
 	VisionTimeout  time.Duration
@@ -88,6 +98,19 @@ type Config struct {
 }
 
 func Load(commit string) (*Config, error) {
+	return load(commit, false)
+}
+
+// LoadForServe memuat konfigurasi untuk boot server. Bedanya dengan Load:
+// guard provider produksi ikut dijalankan, sehingga `shelfops serve` menolak
+// boot bila provider AI masih tiruan. Perintah operasional (migrate, seed,
+// bootstrap, gc) sengaja tidak memakai guard ini supaya operator bisa
+// menyiapkan database sebelum provider diaktifkan.
+func LoadForServe(commit string) (*Config, error) {
+	return load(commit, true)
+}
+
+func load(commit string, enforceProviders bool) (*Config, error) {
 	c := &Config{
 		AppEnv:      env("APP_ENV", "development"),
 		BaseURL:     env("APP_BASE_URL", "http://localhost:8080"),
@@ -123,7 +146,7 @@ func Load(commit string) (*Config, error) {
 		UploadMaxDocMB:    envInt("UPLOAD_MAX_DOC_MB", 20),
 		UploadMaxImageMB:  envInt("UPLOAD_MAX_IMAGE_MB", 10),
 
-		LLMProvider:        strings.ToLower(env("LLM_PROVIDER", "replay")),
+		LLMProvider:        NormalizeProvider(env("LLM_PROVIDER", ProviderReplay)),
 		LLMPrimaryBaseURL:  env("LLM_PRIMARY_BASE_URL", ""),
 		LLMPrimaryAPIKey:   env("LLM_PRIMARY_API_KEY", ""),
 		LLMPrimaryModel:    env("LLM_PRIMARY_MODEL", ""),
@@ -133,17 +156,22 @@ func Load(commit string) (*Config, error) {
 		LLMDailyBudgetUSD:  envFloat("LLM_DAILY_BUDGET_USD", 1.0),
 		LLMRequestTimeout:  envDur("LLM_REQUEST_TIMEOUT", 45*time.Second),
 
-		EmbeddingProvider: strings.ToLower(env("EMBEDDING_PROVIDER", "hash")),
+		EmbeddingProvider: NormalizeProvider(env("EMBEDDING_PROVIDER", ProviderHash)),
 		EmbeddingBaseURL:  env("EMBEDDING_BASE_URL", ""),
 		EmbeddingAPIKey:   env("EMBEDDING_API_KEY", ""),
 		EmbeddingModel:    env("EMBEDDING_MODEL", ""),
 		EmbeddingDim:      envInt("EMBEDDING_DIM", 1024),
 		EmbeddingBatch:    envInt("EMBEDDING_BATCH", 32),
 
-		VLMProvider: strings.ToLower(env("VLM_PROVIDER", "off")),
+		VLMProvider: NormalizeProvider(env("VLM_PROVIDER", ProviderOff)),
 		VLMBaseURL:  env("VLM_BASE_URL", ""),
 		VLMAPIKey:   env("VLM_API_KEY", ""),
 		VLMModel:    env("VLM_MODEL", ""),
+
+		VisionDetector:     NormalizeProvider(env("VISION_DETECTOR", ProviderReplay)),
+		VisionOCREngine:    NormalizeProvider(env("VISION_OCR_ENGINE", ProviderStub)),
+		VisionModelDir:     env("MODEL_DIR", "/models"),
+		AllowMockProviders: envBool("ALLOW_MOCK_PROVIDERS", false),
 
 		RAGGRPCAddr:    env("RAG_GRPC_ADDR", "localhost:9001"),
 		VisionGRPCAddr: env("VISION_GRPC_ADDR", "localhost:9002"),
@@ -159,6 +187,11 @@ func Load(commit string) (*Config, error) {
 
 	if err := c.validate(); err != nil {
 		return nil, err
+	}
+	if enforceProviders {
+		if err := c.ValidateProviderReadiness(); err != nil {
+			return nil, err
+		}
 	}
 	return c, nil
 }
@@ -216,11 +249,8 @@ func (c *Config) validate() error {
 			c.SessionSecret = "dev-only-insecure-session-secret-change-me-0123456789"
 		}
 	}
-	if c.LLMProvider != "replay" && c.LLMPrimaryAPIKey == "" {
-		return fmt.Errorf("LLM_PRIMARY_API_KEY wajib diisi bila LLM_PROVIDER=%s", c.LLMProvider)
-	}
-	if c.EmbeddingProvider != "hash" && c.EmbeddingAPIKey == "" {
-		return fmt.Errorf("EMBEDDING_API_KEY wajib diisi bila EMBEDDING_PROVIDER=%s", c.EmbeddingProvider)
+	if err := c.validateProviderModes(); err != nil {
+		return err
 	}
 	if c.VisionConc < 1 {
 		c.VisionConc = 1

@@ -121,7 +121,9 @@ func runServe(args []string) error {
 	_ = fs.Parse(args)
 	_ = cfgPath
 
-	cfg, err := config.Load(commit)
+	// LoadForServe menjalankan guard provider produksi: boot ditolak bila
+	// provider AI masih tiruan (kecuali ALLOW_MOCK_PROVIDERS=true).
+	cfg, err := config.LoadForServe(commit)
 	if err != nil {
 		return err
 	}
