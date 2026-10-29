@@ -83,6 +83,11 @@ func (s *Server) Router() http.Handler {
 	r.Get("/readyz", s.handleReady)
 
 	r.Route("/api/v1", func(r chi.Router) {
+		// Alias health di bawah prefiks API: monitor luar sering memanggil
+		// /api/v1/healthz. Tanpa auth, sama seperti root /healthz.
+		r.Get("/healthz", s.handleHealth)
+		r.Get("/readyz", s.handleReady)
+
 		r.Group(func(r chi.Router) {
 			r.Use(s.authMiddleware(false))
 
