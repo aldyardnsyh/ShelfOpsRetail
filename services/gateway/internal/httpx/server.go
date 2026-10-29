@@ -116,6 +116,7 @@ func (s *Server) Router() http.Handler {
 				r.With(RequirePermission(rbac.PermAuditWrite)).Post("/audits/{auditId}/images", s.handleUploadAuditImage)
 				r.With(RequirePermission(rbac.PermAuditWrite), RateLimitByUser(s.aiLimiter, "Kuota analisis tercapai. Coba lagi nanti.")).
 					Post("/audits/{auditId}/start", s.handleStartAudit)
+				r.With(RequirePermission(rbac.PermAuditWrite)).Post("/audits/{auditId}/finalize", s.handleFinalizeAudit)
 				r.With(RequirePermission(rbac.PermDashboardRead)).Get("/sessions", s.handleListSessions)
 				r.With(RequirePermission(rbac.PermDashboardRead)).Get("/sessions/{sessionId}", s.handleGetSession)
 

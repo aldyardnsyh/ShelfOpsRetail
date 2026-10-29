@@ -300,3 +300,36 @@ func (s *Server) handleStartAudit(w http.ResponseWriter, r *http.Request) {
 	}
 	writeJSON(w, http.StatusOK, summary)
 }
+
+// handleFinalizeAudit menutup sesi audit menjadi "final" dan menurunkan alert
+// serta satu task tindak lanjut dari temuan OOS / price mismatch. Status selain
+// review/partial ditolak 409 agar pemanggilan ulang tidak membuat alert ganda.
+func (s *Server) handleFinalizeAudit(w http.ResponseWriter, r *http.Request) {
+	traceID := TraceID(r.Context())
+	id, _ := IdentityFrom(r.Context())
+	sessionID := chiURLParam(r, "auditId")
+	if _, err := uuid.Parse(sessionID); err != nil {
+		problem.Validation(traceID, problem.FieldError{Field: "auditId", Message: "harus UUID valid"}).Write(w)
+		return
+	}
+
+	res, err := s.Store.FinalizeAudit(r.Context(), id.WorkspaceID, id.UserID, sessionID)
+	if err != nil {
+		switch {
+		case errors.Is(err, store.ErrNotFound):
+			problem.NotFound("Sesi audit tidak ditemukan.", traceID).Write(w)
+		case errors.Is(err, store.ErrInvalidState):
+			reason := strings.TrimPrefix(err.Error(), store.ErrInvalidState.Error())
+			reason = strings.TrimPrefix(reason, ": ")
+			if reason == "" {
+				reason = "Sesi audit tidak berada pada status review atau partial."
+			}
+			problem.New(http.StatusConflict, "Audit tidak bisa difinalisasi", reason, traceID).Write(w)
+		default:
+			s.Log.Error("finalisasi audit", "trace_id", traceID, "session_id", sessionID, "error", err)
+			problem.Internal(traceID).Write(w)
+		}
+		return
+	}
+	writeJSON(w, http.StatusOK, res)
+}
