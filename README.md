@@ -8,48 +8,56 @@ menjawab dari SOP serta data toko dengan sitasi.
 
 ## Tangkapan layar
 
-| Landing | Ringkasan | Rak & bbox |
-| --- | --- | --- |
-| ![Landing](screenshots/01-landing.jpg) | ![Ringkasan](screenshots/03-dashboard.jpg) | ![Bbox](screenshots/07-shelf-detail.jpg) |
+Diambil langsung dari stack produksi yang berjalan (`docker compose`, 1440Ã—900).
 
-| Kamera | Pelacakan | Laporan |
-| --- | --- | --- |
-| ![Kamera](screenshots/27-cameras.jpg) | ![Pelacakan](screenshots/15-tracking.jpg) | ![Laporan](screenshots/16-reports.jpg) |
-
-Semua halaman tersedia di folder [`screenshots/`](screenshots):
-
-| Halaman | Berkas |
+| Landing | Login demo |
 | --- | --- |
-| Landing | [01-landing.jpg](screenshots/01-landing.jpg) |
-| Login | [02-login.jpg](screenshots/02-login.jpg) |
-| Ringkasan | [03-dashboard.jpg](screenshots/03-dashboard.jpg) |
-| Toko | [04-stores.jpg](screenshots/04-stores.jpg) |
-| Detail toko | [05-store-detail.jpg](screenshots/05-store-detail.jpg) |
-| Sesi rak | [06-shelf.jpg](screenshots/06-shelf.jpg) |
-| Detail rak dan bbox | [07-shelf-detail.jpg](screenshots/07-shelf-detail.jpg) |
-| Mulai pemantauan | [08-shelf-new.jpg](screenshots/08-shelf-new.jpg) |
-| Knowledge base | [09-knowledge.jpg](screenshots/09-knowledge.jpg) |
-| Detail dokumen | [10-knowledge-detail.jpg](screenshots/10-knowledge-detail.jpg) |
-| Harga | [11-pricing.jpg](screenshots/11-pricing.jpg) |
-| Pengadaan | [12-purchasing.jpg](screenshots/12-purchasing.jpg) |
-| Inventori | [13-inventory.jpg](screenshots/13-inventory.jpg) |
-| Tugas | [14-tasks.jpg](screenshots/14-tasks.jpg) |
-| Pelacakan | [15-tracking.jpg](screenshots/15-tracking.jpg) |
-| Laporan | [16-reports.jpg](screenshots/16-reports.jpg) |
-| Integrasi | [17-integrations.jpg](screenshots/17-integrations.jpg) |
-| Lab evaluasi | [18-evals.jpg](screenshots/18-evals.jpg) |
-| Benchmark | [19-benchmark.jpg](screenshots/19-benchmark.jpg) |
-| Perbandingan | [20-compare.jpg](screenshots/20-compare.jpg) |
-| Trace | [21-traces.jpg](screenshots/21-traces.jpg) |
-| Detail trace | [22-trace-detail.jpg](screenshots/22-trace-detail.jpg) |
-| Pengguna | [23-users.jpg](screenshots/23-users.jpg) |
-| Pengaturan | [24-settings.jpg](screenshots/24-settings.jpg) |
-| Log audit | [25-audit.jpg](screenshots/25-audit.jpg) |
-| Pengunjung | [26-visitors.jpg](screenshots/26-visitors.jpg) |
-| Kamera | [27-cameras.jpg](screenshots/27-cameras.jpg) |
-| Monitor penuh | [28-cameras-monitor.jpg](screenshots/28-cameras-monitor.jpg) |
-| Copilot | [29-copilot.jpg](screenshots/29-copilot.jpg) |
-| Dokumentasi modul | [30-docs.jpg](screenshots/30-docs.jpg) |
+| ![Landing](assets/screenshots/01-landing.png) | ![Login](assets/screenshots/02-login.png) |
+
+| Ringkasan toko | Inventori |
+| --- | --- |
+| ![Ringkasan](assets/screenshots/03-dashboard.png) | ![Inventori](assets/screenshots/04-inventory.png) |
+
+| Pengadaan (PO & penerimaan) | Pemantauan rak |
+| --- | --- |
+| ![Pengadaan](assets/screenshots/05-purchasing.png) | ![Pemantauan](assets/screenshots/06-audit.png) |
+
+| Tugas | Copilot dengan sitasi |
+| --- | --- |
+| ![Tugas](assets/screenshots/07-tasks.png) | ![Copilot](assets/screenshots/08-copilot.png) |
+
+Semua tangkapan tersimpan di [`assets/screenshots/`](assets/screenshots) dan bisa
+diregenerasi kapan saja dengan `npx tsx scripts/capture-screenshots.ts`
+(butuh stack sedang hidup).
+
+## Fitur utama
+
+| Modul | Isi |
+| --- | --- |
+| Pemantauan rak | Foto rak/CCTV â†’ deteksi facing, rak kosong, kesesuaian harga, skor kepatuhan |
+| Audit foto | Buat sesi â†’ unggah foto â†’ proses â†’ review â†’ **finalisasi** (otomatis membuat alert + task) |
+| Pengadaan | **Buat PO** dan **catat penerimaan barang** (menambah stok + jejak mutasi, idempoten) |
+| Inventori | Stok per toko/lokasi, reorder point, mutasi masuk/keluar |
+| Tugas & alert | Alert OOS/selisih harga berubah menjadi tugas dengan SLA |
+| Copilot | Tanya jawab dari SOP dan data toko dengan sitasi dan batas biaya harian |
+| Pengunjung & zona | Footfall, okupansi zona, durasi tinggal |
+| Lab evaluasi | Eval set, benchmark, perbandingan model, trace |
+| Admin | Pengguna, integrasi/konektor, pengaturan workspace, log audit |
+
+## Status kesiapan produksi
+
+| Area | Status |
+| --- | --- |
+| Stack Docker (Caddy + web + gateway + Postgres + ai-rag + ai-vision) | Berjalan sehat, `healthz`/`readyz` hijau |
+| Smoke test end-to-end | Lulus: login, upload dokumen, chat, auditâ†’finalize, PO, GRN (+idempoten), guard IDOR |
+| Provider AI nyata | Jalur `openai-compatible`, ONNX, RapidOCR/cloud tersedia lewat env |
+| Guard produksi | Gateway **menolak boot** bila provider AI masih tiruan, kecuali `ALLOW_MOCK_PROVIDERS=true` |
+| E2E browser | Playwright: landing (desktop+mobile) + alur login demo â†’ halaman operasional |
+| Data demo | `NEXT_PUBLIC_DEMO_MODE=1` menjalankan web tanpa backend memakai fixture |
+
+Detail env per provider dan langkah go-live ada di `.env.example` dan
+`docs/PRODUCTION.md`.
+ |
 
 ## Lima lapisan ekosistem
 
@@ -114,10 +122,28 @@ services/ai-rag     layanan RAG (gRPC + HTTP)
 services/ai-vision  layanan computer vision (gRPC + HTTP)
 infra               compose dev/prod, Caddy, skrip operasional
 api, proto          kontrak REST dan gRPC
-screenshots         tangkapan layar demo
+assets/screenshots  tangkapan layar (dari stack berjalan)
+scripts             skrip smoke test & capture screenshot
 ```
 
 ## Quickstart
+
+Jalankan seluruh stack (web + API + Postgres + AI) dengan Docker:
+
+```bash
+cp .env.example .env        # isi minimal: SHELFOPS_HOST, ACME_EMAIL, secret, ADMIN_*
+make images                 # atau: docker compose --env-file .env -f infra/docker-compose.prod.yml build
+docker compose --env-file .env -f infra/docker-compose.prod.yml up -d
+docker compose --env-file .env -f infra/docker-compose.prod.yml ps   # semua harus healthy
+
+# buat admin pertama (sekali)
+make bootstrap-prod
+```
+
+Buka `https://<SHELFOPS_HOST>/`. Untuk uji lokal tanpa TLS, set
+`SHELFOPS_HOST=http://localhost` dan `ALLOW_INSECURE_COOKIE=true`.
+
+Verifikasi cepat: `powershell -File scripts/smoke-prod.ps1 -BaseUrl http://localhost`.
 
 Mode demo statis, tanpa backend:
 
