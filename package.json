@@ -1,0 +1,28 @@
+{
+  "name": "shelfops",
+  "private": true,
+  "version": "0.1.0",
+  "description": "ShelfOps — Retail Intelligence Copilot (CV + RAG): monorepo web + gateway + AI services",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "apps/web",
+    "packages/api-client"
+  ],
+  "scripts": {
+    "check:secrets": "node scripts/check-secrets.mjs",
+    "gen:api": "npm run gen --workspace packages/api-client",
+    "sync:demo-fixtures": "node scripts/sync-demo-fixtures.mjs",
+    "dev": "npm run dev --workspace apps/web",
+    "build": "npm run build --workspace apps/web",
+    "test": "npm run test --workspace apps/web",
+    "lint": "npm run lint --workspace apps/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "verify": "npm run check:secrets && npm run lint && npm run typecheck && npm run test && npm run build"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
+}

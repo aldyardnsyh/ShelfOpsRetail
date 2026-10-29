@@ -1,0 +1,414 @@
+{
+  "de831b4b-dbec-ab93-cdfd-eb101d3efb3b": [
+    {
+      "id": "6ee9b92b-fd4f-ef40-8c66-376d8c7a022f",
+      "document_id": "de831b4b-dbec-ab93-cdfd-eb101d3efb3b",
+      "version": 1,
+      "ordinal": 1,
+      "page": 4,
+      "heading_path": "Ringkasan",
+      "token_count": 38,
+      "content": "Panduan kolom PO menjelaskan arti setiap kolom pada dokumen purchase order yang dikirim ke supplier, termasuk satuan, harga satuan, dan syarat pembayaran.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "ef9ea2e3-5295-c2f2-ec31-72fc232687dd",
+      "document_id": "de831b4b-dbec-ab93-cdfd-eb101d3efb3b",
+      "version": 1,
+      "ordinal": 2,
+      "page": 1,
+      "heading_path": "Langkah Operasional",
+      "token_count": 41,
+      "content": "Kolom kuantitas memakai satuan terkecil yang disepakati. Konversi dari karton ke pcs harus dicantumkan pada kolom keterangan agar penerimaan barang tidak salah hitung.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "3c9483ca-d763-ff3f-1a8f-3e4b8164c742",
+      "document_id": "de831b4b-dbec-ab93-cdfd-eb101d3efb3b",
+      "version": 1,
+      "ordinal": 3,
+      "page": 4,
+      "heading_path": "Kontrol Kualitas",
+      "token_count": 43,
+      "content": "Tanggal kirim pada PO adalah tanggal barang tiba di gudang toko, bukan tanggal pengiriman dari gudang supplier. Selisih lebih dari satu hari wajib dikonfirmasi ke supplier.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "1b637c8b-908d-2a9b-8ed0-9b8618ed90f3",
+      "document_id": "de831b4b-dbec-ab93-cdfd-eb101d3efb3b",
+      "version": 1,
+      "ordinal": 4,
+      "page": 1,
+      "heading_path": "Pengecualian & Eskalasi",
+      "token_count": 35,
+      "content": "PO yang sudah dikirim tidak boleh diubah isinya. Perubahan dilakukan dengan menerbitkan PO revisi bernomor urut dan menautkannya ke PO asal.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "5becbfa6-0bec-5e79-e15d-f1a4d53dcdf1",
+      "document_id": "de831b4b-dbec-ab93-cdfd-eb101d3efb3b",
+      "version": 1,
+      "ordinal": 5,
+      "page": 4,
+      "heading_path": "Bukti & Audit",
+      "token_count": 40,
+      "content": "Barang yang diterima diperiksa terhadap PO pada saat serah terima. Selisih kuantitas dicatat sebagai temuan penerimaan dan diselesaikan sebelum faktur diproses.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    }
+  ],
+  "dba0d941-fed3-bfe7-ddeb-7bf218ab1fd3": [
+    {
+      "id": "4800c4bb-fbd8-173a-e2d9-fece963e8358",
+      "document_id": "dba0d941-fed3-bfe7-ddeb-7bf218ab1fd3",
+      "version": 1,
+      "ordinal": 1,
+      "page": 4,
+      "heading_path": "Ringkasan",
+      "token_count": 42,
+      "content": "Panduan Copilot menjelaskan cara mengajukan pertanyaan operasional dan membaca jawaban bersitasi. Copilot hanya menjawab berdasarkan data toko yang boleh diakses pengguna.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "e27153b9-1fc2-576b-7c00-1b0200836db0",
+      "document_id": "dba0d941-fed3-bfe7-ddeb-7bf218ab1fd3",
+      "version": 1,
+      "ordinal": 2,
+      "page": 1,
+      "heading_path": "Langkah Operasional",
+      "token_count": 42,
+      "content": "Setiap jawaban wajib menyertakan rujukan ke dokumen sumber atau baris data toko. Bila rujukan tidak tersedia, Copilot menolak menjawab dan menyarankan eskalasi ke manusia.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "2a6631ad-79d3-c245-144e-b19c2a69d0e8",
+      "document_id": "dba0d941-fed3-bfe7-ddeb-7bf218ab1fd3",
+      "version": 1,
+      "ordinal": 3,
+      "page": 4,
+      "heading_path": "Kontrol Kualitas",
+      "token_count": 38,
+      "content": "Pertanyaan yang menyentuh data pribadi pengunjung dibatasi pada agregat. Copilot tidak menampilkan identitas individu, hanya jumlah dan durasi kunjungan.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    }
+  ],
+  "cabcf898-23b3-77a8-e036-b70c2e50c0c6": [
+    {
+      "id": "81604212-c8c6-b0cb-c4f4-929569590070",
+      "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+      "version": 1,
+      "ordinal": 1,
+      "page": 4,
+      "heading_path": "Ringkasan",
+      "token_count": 35,
+      "content": "SOP pengecekan rak harian mengatur urutan pemeriksaan rak dari lorong masuk hingga kasir, dengan fokus pada ketersediaan dan kerapian facing.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "3a387ceb-13c5-348f-387a-55f70ebbcba3",
+      "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+      "version": 1,
+      "ordinal": 2,
+      "page": 1,
+      "heading_path": "Langkah Operasional",
+      "token_count": 40,
+      "content": "Pengecekan dilakukan dua kali: sebelum toko dibuka untuk memastikan rak terisi, dan satu jam sebelum tutup untuk menangkap kekosongan akibat penjualan hari itu.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "6ea3a284-0e82-1bcb-61f5-2f0c6e4d21c1",
+      "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+      "version": 1,
+      "ordinal": 3,
+      "page": 4,
+      "heading_path": "Kontrol Kualitas",
+      "token_count": 35,
+      "content": "Facing dirapikan sejajar dengan tepi depan rak. Produk yang terjatuh atau rusak dipisahkan ke keranjang retur dan dicatat sebagai penyusutan.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "4ddae22f-0136-da34-6c7a-61f5ef3cbd96",
+      "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+      "version": 1,
+      "ordinal": 4,
+      "page": 1,
+      "heading_path": "Pengecualian & Eskalasi",
+      "token_count": 32,
+      "content": "Hasil pengecekan dicatat per lorong beserta jumlah facing kosong. Catatan ini menjadi masukan untuk perencanaan restock esok hari.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    }
+  ],
+  "8587ebc9-48b1-6be1-1fc2-c6871eaf363d": [
+    {
+      "id": "c2af0911-058a-66ba-6869-fcdbf70bab48",
+      "document_id": "8587ebc9-48b1-6be1-1fc2-c6871eaf363d",
+      "version": 1,
+      "ordinal": 1,
+      "page": 4,
+      "heading_path": "Ringkasan",
+      "token_count": 36,
+      "content": "Playbook selisih harga menjelaskan langkah ketika label rak berbeda dari harga referensi, mulai dari verifikasi bukti foto sampai koreksi label.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "75bf3634-9407-6844-1d1b-3226e678c775",
+      "document_id": "8587ebc9-48b1-6be1-1fc2-c6871eaf363d",
+      "version": 1,
+      "ordinal": 2,
+      "page": 1,
+      "heading_path": "Langkah Operasional",
+      "token_count": 44,
+      "content": "Langkah pertama adalah memastikan selisih bukan akibat salah baca. Petugas membandingkan foto label, harga referensi aktif, dan harga di sistem kasir sebelum menyimpulkan temuan.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "54229e81-2560-bb7a-d454-3af1c5823237",
+      "document_id": "8587ebc9-48b1-6be1-1fc2-c6871eaf363d",
+      "version": 1,
+      "ordinal": 3,
+      "page": 4,
+      "heading_path": "Kontrol Kualitas",
+      "token_count": 43,
+      "content": "Selisih di atas 5 persen wajib diperbaiki hari yang sama dan dilaporkan ke kategori manager. Selisih yang berulang pada produk yang sama dalam sebulan masuk daftar pengawasan.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "4b8241e2-0a58-394a-237f-b0061b6ea09b",
+      "document_id": "8587ebc9-48b1-6be1-1fc2-c6871eaf363d",
+      "version": 1,
+      "ordinal": 4,
+      "page": 1,
+      "heading_path": "Pengecualian & Eskalasi",
+      "token_count": 37,
+      "content": "Setiap koreksi label meninggalkan jejak: foto sebelum, foto sesudah, waktu koreksi, dan nama petugas. Jejak ini dipakai saat evaluasi kinerja bulanan.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    }
+  ],
+  "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f": [
+    {
+      "id": "02c128e1-2dcb-d729-d141-a97382714a06",
+      "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+      "version": 1,
+      "ordinal": 1,
+      "page": 4,
+      "heading_path": "Ringkasan",
+      "token_count": 42,
+      "content": "Daftar harga referensi Q4 memuat harga jual yang berlaku untuk seluruh toko pada kuartal berjalan. Harga referensi menjadi pembanding tunggal saat memeriksa label di rak.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "2b36b982-1d33-7fc1-c5f8-6b78c6133472",
+      "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+      "version": 1,
+      "ordinal": 2,
+      "page": 1,
+      "heading_path": "Langkah Operasional",
+      "token_count": 45,
+      "content": "Perubahan harga harus disetujui kategori manager lalu diterbitkan paling lambat H-2 sebelum periode berlaku. Harga lama tetap dipakai sampai tanggal efektif baru tercatat di sistem.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "a57fb6ab-b468-5958-f68e-76f33d4a91da",
+      "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+      "version": 1,
+      "ordinal": 3,
+      "page": 4,
+      "heading_path": "Kontrol Kualitas",
+      "token_count": 52,
+      "content": "Selisih antara label rak dan harga referensi dikategorikan menjadi tiga tingkat: selisih di bawah 2 persen, antara 2 sampai 5 persen, dan di atas 5 persen. Dua tingkat terakhir wajib diperbaiki hari yang sama.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "7fb62713-7bbc-a260-9f25-e89587487ca2",
+      "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+      "version": 1,
+      "ordinal": 4,
+      "page": 1,
+      "heading_path": "Pengecualian & Eskalasi",
+      "token_count": 41,
+      "content": "Produk promo memakai harga khusus yang hanya aktif selama periode promo. Setelah promo berakhir, label wajib dikembalikan ke harga normal pada penutupan toko hari itu.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "107ec65e-f805-698c-9c45-7aac7b3f1d7e",
+      "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+      "version": 1,
+      "ordinal": 5,
+      "page": 4,
+      "heading_path": "Bukti & Audit",
+      "token_count": 38,
+      "content": "Daftar harga diekspor setiap Senin untuk kebutuhan rekonsiliasi dengan sistem kasir. Ekspor menyertakan versi daftar agar jejak perubahan dapat ditelusuri.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "9e38f6c2-5cfb-fdb2-83e6-23f8511dcb3f",
+      "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+      "version": 1,
+      "ordinal": 6,
+      "page": 1,
+      "heading_path": "Ringkasan",
+      "token_count": 33,
+      "content": "Harga yang tidak lagi dipakai ditandai tidak aktif, bukan dihapus, supaya riwayat transaksi lama tetap dapat direkonstruksi saat audit.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    }
+  ],
+  "24c7a153-be11-947a-7cac-6be7221a4f43": [
+    {
+      "id": "c361ae25-8e6a-90a0-3b5f-0bbc1c247837",
+      "document_id": "24c7a153-be11-947a-7cac-6be7221a4f43",
+      "version": 1,
+      "ordinal": 1,
+      "page": 4,
+      "heading_path": "Ringkasan",
+      "token_count": 32,
+      "content": "Prosedur label harga baru mengatur pembuatan, pencetakan, dan pemasangan label untuk produk yang baru masuk daftar harga referensi.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "6c4f0ada-36df-b4c4-a3e9-cfca328acd7b",
+      "document_id": "24c7a153-be11-947a-7cac-6be7221a4f43",
+      "version": 1,
+      "ordinal": 2,
+      "page": 1,
+      "heading_path": "Langkah Operasional",
+      "token_count": 36,
+      "content": "Label dicetak dari sistem, bukan ditulis tangan. Setiap label memuat nama produk, harga, satuan, dan kode batang yang sesuai dengan master produk.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "7d4ccce9-ef9c-f3e4-87e1-3a46f3394077",
+      "document_id": "24c7a153-be11-947a-7cac-6be7221a4f43",
+      "version": 1,
+      "ordinal": 3,
+      "page": 4,
+      "heading_path": "Kontrol Kualitas",
+      "token_count": 38,
+      "content": "Label dipasang pada rel harga di depan produk, bukan menempel pada kemasan. Label lama dicabut bersamaan agar tidak ada dua harga terbaca pada satu posisi.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    }
+  ],
+  "162e5e8c-c68e-5a48-2192-c73e6eb3530b": [
+    {
+      "id": "5f1ffa02-6e62-a3f6-a4de-ad6b2b543b4c",
+      "document_id": "162e5e8c-c68e-5a48-2192-c73e6eb3530b",
+      "version": 1,
+      "ordinal": 1,
+      "page": 4,
+      "heading_path": "Ringkasan",
+      "token_count": 47,
+      "content": "Checklist inspeksi mingguan memeriksa kebersihan rak, kelengkapan label harga, dan kesesuaian facing terhadap planogram aktif. Inspeksi dijadwalkan setiap Senin pagi sebelum jam operasional.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "95518daf-6876-8ecb-c699-1b3acd4ea85f",
+      "document_id": "162e5e8c-c68e-5a48-2192-c73e6eb3530b",
+      "version": 1,
+      "ordinal": 2,
+      "page": 1,
+      "heading_path": "Langkah Operasional",
+      "token_count": 48,
+      "content": "Setiap lorong dinilai pada lima titik: rak atas, rak mata, rak bawah, ujung gondola, dan display promo. Nilai 1 diberikan bila seluruh facing terisi, 0 bila ada kekosongan lebih dari dua posisi.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "8eea3666-5a8e-d085-6eff-55e73cd0bb71",
+      "document_id": "162e5e8c-c68e-5a48-2192-c73e6eb3530b",
+      "version": 1,
+      "ordinal": 3,
+      "page": 4,
+      "heading_path": "Kontrol Kualitas",
+      "token_count": 46,
+      "content": "Temuan inspeksi wajib disertai satu foto per lorong dan dikirim ke antrean tugas dengan tenggat 1x24 jam. Temuan yang tidak ditindaklanjuti dalam tenggat naik menjadi peringatan tinggi.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "64d72254-9459-6ffd-f4c4-6707486a0f44",
+      "document_id": "162e5e8c-c68e-5a48-2192-c73e6eb3530b",
+      "version": 1,
+      "ordinal": 4,
+      "page": 1,
+      "heading_path": "Pengecualian & Eskalasi",
+      "token_count": 38,
+      "content": "Checklist ditutup oleh kepala toko dengan tanda tangan digital. Rekap mingguan dipakai sebagai dasar penilaian kinerja tim rak dan bahan pembinaan vendor.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "5e0b47e9-5d20-4ba2-efde-baff841a149c",
+      "document_id": "162e5e8c-c68e-5a48-2192-c73e6eb3530b",
+      "version": 1,
+      "ordinal": 5,
+      "page": 4,
+      "heading_path": "Bukti & Audit",
+      "token_count": 32,
+      "content": "Bukti audit disimpan minimal 90 hari. Setiap perubahan status temuan tercatat di audit log beserta pengguna, waktu, dan alasannya.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "d0c96ec3-cb9a-cba8-33e6-f460b1c46937",
+      "document_id": "162e5e8c-c68e-5a48-2192-c73e6eb3530b",
+      "version": 1,
+      "ordinal": 6,
+      "page": 1,
+      "heading_path": "Ringkasan",
+      "token_count": 47,
+      "content": "Checklist inspeksi mingguan memeriksa kebersihan rak, kelengkapan label harga, dan kesesuaian facing terhadap planogram aktif. Inspeksi dijadwalkan setiap Senin pagi sebelum jam operasional.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    }
+  ],
+  "0b4756cb-b920-a8f6-f05e-6ddcd50b289b": [
+    {
+      "id": "5207d377-70fe-470d-696f-b3871fd8bc49",
+      "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+      "version": 1,
+      "ordinal": 1,
+      "page": 4,
+      "heading_path": "Ringkasan",
+      "token_count": 42,
+      "content": "Pedoman restock minuman dingin mengatur urutan pengisian chiller: minuman cepat laku lebih dekat ke pintu, minuman premium pada rak mata, dan stok cadangan di rak bawah.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "e2ee5f78-a4fd-dca1-3a0c-dec89d87fd52",
+      "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+      "version": 1,
+      "ordinal": 2,
+      "page": 1,
+      "heading_path": "Langkah Operasional",
+      "token_count": 38,
+      "content": "Suhu chiller dijaga antara 2 sampai 4 derajat Celsius dan dicatat dua kali sehari. Penyimpangan suhu lebih dari 30 menit wajib dilaporkan ke tim fasilitas.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "8f6299a1-ead9-d50e-d1a2-2b898c78b7a1",
+      "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+      "version": 1,
+      "ordinal": 3,
+      "page": 4,
+      "heading_path": "Kontrol Kualitas",
+      "token_count": 36,
+      "content": "Restock dilakukan pagi sebelum toko dibuka dan sore setelah jam sibuk. Pengisian ulang saat jam sibuk hanya untuk produk yang benar-benar kosong.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "5d5f04a3-6b7c-484e-d3a6-4e12b33a088f",
+      "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+      "version": 1,
+      "ordinal": 4,
+      "page": 1,
+      "heading_path": "Pengecualian & Eskalasi",
+      "token_count": 42,
+      "content": "Rotasi FIFO diterapkan setiap pengisian: produk dengan tanggal kedaluwarsa terdekat dipindahkan ke baris depan. Produk yang mendekati kedaluwarsa diberi penanda khusus.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    },
+    {
+      "id": "b38d4897-9194-4b8e-99e6-ba218de49eb3",
+      "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+      "version": 1,
+      "ordinal": 5,
+      "page": 4,
+      "heading_path": "Bukti & Audit",
+      "token_count": 34,
+      "content": "Facing kosong dicatat per lorong. Kekosongan lebih dari dua posisi memicu permintaan restock ke gudang dan masuk ke antrean tugas tim rak.",
+      "created_at": "2026-10-28T09:01:12.023355+07:00"
+    }
+  ]
+}

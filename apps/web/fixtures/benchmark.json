@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "testbed": "jetson-orin-nano",
+    "tested_at": "2026-10-28T23:12:29.88969+07:00",
+    "image_set": "ShelfOps CV bench v3 (1.240 gambar)",
+    "note_key": "benchmark_notes"
+  },
+  "rows": [
+    {
+      "id": "8432ff6b-b086-e5ee-71da-0bbbe9020d39",
+      "platform": "jetson-orin-nano",
+      "runtime": "fp32",
+      "latency_ms_p50": 38.20000076293945,
+      "throughput_ips": 26,
+      "memory_mb": 1024,
+      "map50": 0.9010000228881836,
+      "note": ""
+    },
+    {
+      "id": "4cfc1002-3e00-4f37-d716-dbe6d7e0f2ac",
+      "platform": "jetson-orin-nano",
+      "runtime": "fp16",
+      "latency_ms_p50": 22.5,
+      "throughput_ips": 44,
+      "memory_mb": 672,
+      "map50": 0.8960000276565552,
+      "note": ""
+    },
+    {
+      "id": "4bcf094f-caf9-b71d-0957-e25e1a57bb13",
+      "platform": "jetson-orin-nano",
+      "runtime": "int8",
+      "latency_ms_p50": 18.700000762939453,
+      "throughput_ips": 53,
+      "memory_mb": 488,
+      "map50": 0.8840000033378601,
+      "note": ""
+    },
+    {
+      "id": "7860d6cd-40a1-be59-4d71-4567eb83d1d4",
+      "platform": "jetson-orin-nano",
+      "runtime": "int8",
+      "latency_ms_p50": 17.200000762939453,
+      "throughput_ips": 58,
+      "memory_mb": 452,
+      "map50": 0.8809999823570251,
+      "note": "int8 tanpa kalibrasi Label"
+    },
+    {
+      "id": "16c43788-185f-c8c6-84a6-6a9cf7757665",
+      "platform": "cloud",
+      "runtime": "cloud_vlm",
+      "latency_ms_p50": 120,
+      "throughput_ips": 8,
+      "memory_mb": 0,
+      "map50": 0.9120000004768372,
+      "note": ""
+    }
+  ]
+}

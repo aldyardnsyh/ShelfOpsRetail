@@ -1,0 +1,1514 @@
+{
+  "01a180fe-74f0-726e-81e6-a1c8d64db536": {
+    "conversation": {
+      "id": "01a180fe-74f0-726e-81e6-a1c8d64db536",
+      "title": "Uji produksi",
+      "message_count": 4,
+      "created_at": "2026-10-28T12:32:02.152836+07:00",
+      "updated_at": "2026-10-28T12:52:27.305911+07:00",
+      "messages": [
+        {
+          "id": "01a180fe-75d7-72f2-a1bc-81126309c48e",
+          "role": "user",
+          "content": "Apa SOP cek rak?",
+          "status": "done",
+          "model": null,
+          "tokens_in": 0,
+          "tokens_out": 0,
+          "cost_usd": 0,
+          "latency_ms": 0,
+          "refused": false,
+          "replay": false,
+          "citations": [],
+          "tool_calls": [],
+          "created_at": "2026-10-28T12:32:02.387424+07:00"
+        },
+        {
+          "id": "01a180fe-75eb-79a8-8b9b-8deef1def905",
+          "role": "assistant",
+          "content": "Berdasarkan konteks yang tersedia: SOP Uji Coba ShelfOps [S1] Cek rak dinding setiap pagi sebelum shift kedua. [S1]",
+          "status": "done",
+          "model": null,
+          "tokens_in": 166,
+          "tokens_out": 18,
+          "cost_usd": 0,
+          "latency_ms": 70,
+          "refused": false,
+          "replay": false,
+          "citations": [
+            {
+              "ordinal": 1,
+              "document_id": null,
+              "document_title": "",
+              "chunk_id": null,
+              "page": null,
+              "heading_path": "",
+              "score": 1,
+              "snippet": "SOP Uji Coba ShelfOps\n\n1. Cek rak dinding setiap pagi sebelum shift kedua.\n2. Restock chiller maksimal 30 menit setelah alert OOS.\n3. Ganti label harga pada hari yang sama dengan perubahan buku harga.\n\nDokumen ini fiktif dan dipakai hanya untuk menguji alur unggah."
+            }
+          ],
+          "tool_calls": [],
+          "created_at": "2026-10-28T12:32:02.407336+07:00"
+        },
+        {
+          "id": "01a18111-269b-7004-af4b-7c8e1cbd0672",
+          "role": "user",
+          "content": "kenapa oos di bekasi",
+          "status": "done",
+          "model": null,
+          "tokens_in": 0,
+          "tokens_out": 0,
+          "cost_usd": 0,
+          "latency_ms": 0,
+          "refused": false,
+          "replay": false,
+          "citations": [],
+          "tool_calls": [],
+          "created_at": "2026-10-28T12:52:27.287441+07:00"
+        },
+        {
+          "id": "01a18111-26ad-78de-bed9-00a98a0a4087",
+          "role": "assistant",
+          "content": "Berdasarkan konteks yang tersedia: Restock chiller maksimal 30 menit setelah alert OOS. [S1]",
+          "status": "done",
+          "model": null,
+          "tokens_in": 192,
+          "tokens_out": 13,
+          "cost_usd": 0,
+          "latency_ms": 17,
+          "refused": false,
+          "replay": false,
+          "citations": [
+            {
+              "ordinal": 1,
+              "document_id": null,
+              "document_title": "",
+              "chunk_id": null,
+              "page": null,
+              "heading_path": "",
+              "score": 1,
+              "snippet": "SOP Uji Coba ShelfOps\n\n1. Cek rak dinding setiap pagi sebelum shift kedua.\n2. Restock chiller maksimal 30 menit setelah alert OOS.\n3. Ganti label harga pada hari yang sama dengan perubahan buku harga.\n\nDokumen ini fiktif dan dipakai hanya untuk menguji alur unggah."
+            }
+          ],
+          "tool_calls": [],
+          "created_at": "2026-10-28T12:52:27.305911+07:00"
+        }
+      ]
+    },
+    "messages": [
+      {
+        "id": "01a180fe-75d7-72f2-a1bc-81126309c48e",
+        "role": "user",
+        "content": "Apa SOP cek rak?",
+        "status": "done",
+        "model": null,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "cost_usd": 0,
+        "latency_ms": 0,
+        "refused": false,
+        "replay": false,
+        "citations": [],
+        "tool_calls": [],
+        "created_at": "2026-10-28T12:32:02.387424+07:00"
+      },
+      {
+        "id": "01a180fe-75eb-79a8-8b9b-8deef1def905",
+        "role": "assistant",
+        "content": "Berdasarkan konteks yang tersedia: SOP Uji Coba ShelfOps [S1] Cek rak dinding setiap pagi sebelum shift kedua. [S1]",
+        "status": "done",
+        "model": null,
+        "tokens_in": 166,
+        "tokens_out": 18,
+        "cost_usd": 0,
+        "latency_ms": 70,
+        "refused": false,
+        "replay": false,
+        "citations": [
+          {
+            "ordinal": 1,
+            "document_id": null,
+            "document_title": "",
+            "chunk_id": null,
+            "page": null,
+            "heading_path": "",
+            "score": 1,
+            "snippet": "SOP Uji Coba ShelfOps\n\n1. Cek rak dinding setiap pagi sebelum shift kedua.\n2. Restock chiller maksimal 30 menit setelah alert OOS.\n3. Ganti label harga pada hari yang sama dengan perubahan buku harga.\n\nDokumen ini fiktif dan dipakai hanya untuk menguji alur unggah."
+          }
+        ],
+        "tool_calls": [],
+        "created_at": "2026-10-28T12:32:02.407336+07:00"
+      },
+      {
+        "id": "01a18111-269b-7004-af4b-7c8e1cbd0672",
+        "role": "user",
+        "content": "kenapa oos di bekasi",
+        "status": "done",
+        "model": null,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "cost_usd": 0,
+        "latency_ms": 0,
+        "refused": false,
+        "replay": false,
+        "citations": [],
+        "tool_calls": [],
+        "created_at": "2026-10-28T12:52:27.287441+07:00"
+      },
+      {
+        "id": "01a18111-26ad-78de-bed9-00a98a0a4087",
+        "role": "assistant",
+        "content": "Berdasarkan konteks yang tersedia: Restock chiller maksimal 30 menit setelah alert OOS. [S1]",
+        "status": "done",
+        "model": null,
+        "tokens_in": 192,
+        "tokens_out": 13,
+        "cost_usd": 0,
+        "latency_ms": 17,
+        "refused": false,
+        "replay": false,
+        "citations": [
+          {
+            "ordinal": 1,
+            "document_id": null,
+            "document_title": "",
+            "chunk_id": null,
+            "page": null,
+            "heading_path": "",
+            "score": 1,
+            "snippet": "SOP Uji Coba ShelfOps\n\n1. Cek rak dinding setiap pagi sebelum shift kedua.\n2. Restock chiller maksimal 30 menit setelah alert OOS.\n3. Ganti label harga pada hari yang sama dengan perubahan buku harga.\n\nDokumen ini fiktif dan dipakai hanya untuk menguji alur unggah."
+          }
+        ],
+        "tool_calls": [],
+        "created_at": "2026-10-28T12:52:27.305911+07:00"
+      }
+    ]
+  },
+  "bf437895-5caa-1738-8ca3-4c0a89069fbd": {
+    "conversation": {
+      "id": "bf437895-5caa-1738-8ca3-4c0a89069fbd",
+      "title": "Topik insiden paling sering",
+      "message_count": 6,
+      "created_at": "2026-10-26T03:34:42.011901+07:00",
+      "updated_at": "2026-10-28T12:52:03.406023+07:00",
+      "messages": [
+        {
+          "id": "b97a4fe6-bc6b-1252-4ff7-5d2f2410c860",
+          "role": "user",
+          "content": "Insiden apa yang paling sering minggu ini?",
+          "status": "done",
+          "model": null,
+          "tokens_in": 24,
+          "tokens_out": 0,
+          "cost_usd": 0,
+          "latency_ms": 0,
+          "refused": false,
+          "replay": false,
+          "citations": [],
+          "tool_calls": [],
+          "created_at": "2026-10-26T03:35:12.011901+07:00"
+        },
+        {
+          "id": "baafecf2-ffcb-d013-8d70-d12c32c47096",
+          "role": "assistant",
+          "content": "Ringkasan kompliance mingguan: rata-rata 88,2% naik 1,4 pt dari minggu lalu. 3 toko di bawah 85% (S-003, S-011, S-017). Top penyebab: ketidakhadiran Update-to-app di rak chiller dan label harga belum diganti.",
+          "status": "done",
+          "model": "glm-5-flash",
+          "tokens_in": 350,
+          "tokens_out": 280,
+          "cost_usd": 0,
+          "latency_ms": 426,
+          "refused": false,
+          "replay": false,
+          "citations": [
+            {
+              "ordinal": 1,
+              "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+              "document_title": "SOP Pengecekan Rak Harian",
+              "chunk_id": null,
+              "page": 2,
+              "heading_path": "SOP · Bab 1",
+              "score": 0.8500000238418579,
+              "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+            },
+            {
+              "ordinal": 2,
+              "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+              "document_title": "Pedoman Restock Minuman Dingin",
+              "chunk_id": null,
+              "page": 3,
+              "heading_path": "SOP · Bab 2",
+              "score": 0.8199999928474426,
+              "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+            },
+            {
+              "ordinal": 3,
+              "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+              "document_title": "Daftar Harga Referensi Q4",
+              "chunk_id": null,
+              "page": 1,
+              "heading_path": "SOP · Bab 3",
+              "score": 0.7900000214576721,
+              "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+            }
+          ],
+          "tool_calls": [
+            {
+              "id": "ce4f8953-4159-9d1d-1fd1-859403192c5e",
+              "name": "insights.kpis",
+              "args": {
+                "period": "7d"
+              },
+              "result_summary": "compliance 88.2% (+1.4), oos 3 open",
+              "status": "done",
+              "requires_confirmation": false,
+              "duration_ms": 212,
+              "created_at": "2026-10-24T21:34:42.038684+07:00"
+            }
+          ],
+          "created_at": "2026-10-26T03:35:42.011901+07:00"
+        },
+        {
+          "id": "afb73557-3b41-be78-eb30-6eca9eafc8c3",
+          "role": "user",
+          "content": "Insiden apa yang paling sering minggu ini?",
+          "status": "done",
+          "model": null,
+          "tokens_in": 24,
+          "tokens_out": 0,
+          "cost_usd": 0,
+          "latency_ms": 0,
+          "refused": false,
+          "replay": false,
+          "citations": [],
+          "tool_calls": [],
+          "created_at": "2026-10-26T03:36:12.011901+07:00"
+        },
+        {
+          "id": "316084ea-a200-9a0d-1e60-21b9fd8d938e",
+          "role": "assistant",
+          "content": "Rak toko Bekasi hari ini: compliance 87,5% (good). Oos terbesar di air glass 1,5L — 6 dari 12 facing kosong. Alert oos saat ini 3 item, semuanya prioritas sedang. Detail lengkap: sitasi SOP dan trend 14 hari di grafik kanan.",
+          "status": "done",
+          "model": "glm-5-flash",
+          "tokens_in": 350,
+          "tokens_out": 280,
+          "cost_usd": 0,
+          "latency_ms": 426,
+          "refused": false,
+          "replay": false,
+          "citations": [
+            {
+              "ordinal": 1,
+              "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+              "document_title": "SOP Pengecekan Rak Harian",
+              "chunk_id": null,
+              "page": 2,
+              "heading_path": "SOP · Bab 1",
+              "score": 0.8500000238418579,
+              "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+            },
+            {
+              "ordinal": 2,
+              "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+              "document_title": "Pedoman Restock Minuman Dingin",
+              "chunk_id": null,
+              "page": 3,
+              "heading_path": "SOP · Bab 2",
+              "score": 0.8199999928474426,
+              "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+            },
+            {
+              "ordinal": 3,
+              "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+              "document_title": "Daftar Harga Referensi Q4",
+              "chunk_id": null,
+              "page": 1,
+              "heading_path": "SOP · Bab 3",
+              "score": 0.7900000214576721,
+              "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+            }
+          ],
+          "tool_calls": [],
+          "created_at": "2026-10-26T03:36:42.011901+07:00"
+        },
+        {
+          "id": "01a18110-c93f-712a-8fe8-5ad35662eb67",
+          "role": "user",
+          "content": "apa",
+          "status": "done",
+          "model": null,
+          "tokens_in": 0,
+          "tokens_out": 0,
+          "cost_usd": 0,
+          "latency_ms": 0,
+          "refused": false,
+          "replay": false,
+          "citations": [],
+          "tool_calls": [],
+          "created_at": "2026-10-28T12:52:03.387498+07:00"
+        },
+        {
+          "id": "01a18110-c951-759f-a953-036aa635f29d",
+          "role": "assistant",
+          "content": "Berdasarkan konteks yang tersedia: SOP Uji Coba ShelfOps [S1]",
+          "status": "done",
+          "model": null,
+          "tokens_in": 254,
+          "tokens_out": 9,
+          "cost_usd": 0,
+          "latency_ms": 17,
+          "refused": false,
+          "replay": false,
+          "citations": [
+            {
+              "ordinal": 1,
+              "document_id": null,
+              "document_title": "",
+              "chunk_id": null,
+              "page": null,
+              "heading_path": "",
+              "score": 1,
+              "snippet": "SOP Uji Coba ShelfOps\n\n1. Cek rak dinding setiap pagi sebelum shift kedua.\n2. Restock chiller maksimal 30 menit setelah alert OOS.\n3. Ganti label harga pada hari yang sama dengan perubahan buku harga.\n\nDokumen ini fiktif dan dipakai hanya untuk menguji alur unggah."
+            }
+          ],
+          "tool_calls": [],
+          "created_at": "2026-10-28T12:52:03.406023+07:00"
+        }
+      ]
+    },
+    "messages": [
+      {
+        "id": "b97a4fe6-bc6b-1252-4ff7-5d2f2410c860",
+        "role": "user",
+        "content": "Insiden apa yang paling sering minggu ini?",
+        "status": "done",
+        "model": null,
+        "tokens_in": 24,
+        "tokens_out": 0,
+        "cost_usd": 0,
+        "latency_ms": 0,
+        "refused": false,
+        "replay": false,
+        "citations": [],
+        "tool_calls": [],
+        "created_at": "2026-10-26T03:35:12.011901+07:00"
+      },
+      {
+        "id": "baafecf2-ffcb-d013-8d70-d12c32c47096",
+        "role": "assistant",
+        "content": "Ringkasan kompliance mingguan: rata-rata 88,2% naik 1,4 pt dari minggu lalu. 3 toko di bawah 85% (S-003, S-011, S-017). Top penyebab: ketidakhadiran Update-to-app di rak chiller dan label harga belum diganti.",
+        "status": "done",
+        "model": "glm-5-flash",
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0,
+        "latency_ms": 426,
+        "refused": false,
+        "replay": false,
+        "citations": [
+          {
+            "ordinal": 1,
+            "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+            "document_title": "SOP Pengecekan Rak Harian",
+            "chunk_id": null,
+            "page": 2,
+            "heading_path": "SOP · Bab 1",
+            "score": 0.8500000238418579,
+            "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+          },
+          {
+            "ordinal": 2,
+            "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+            "document_title": "Pedoman Restock Minuman Dingin",
+            "chunk_id": null,
+            "page": 3,
+            "heading_path": "SOP · Bab 2",
+            "score": 0.8199999928474426,
+            "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+          },
+          {
+            "ordinal": 3,
+            "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+            "document_title": "Daftar Harga Referensi Q4",
+            "chunk_id": null,
+            "page": 1,
+            "heading_path": "SOP · Bab 3",
+            "score": 0.7900000214576721,
+            "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+          }
+        ],
+        "tool_calls": [
+          {
+            "id": "ce4f8953-4159-9d1d-1fd1-859403192c5e",
+            "name": "insights.kpis",
+            "args": {
+              "period": "7d"
+            },
+            "result_summary": "compliance 88.2% (+1.4), oos 3 open",
+            "status": "done",
+            "requires_confirmation": false,
+            "duration_ms": 212,
+            "created_at": "2026-10-24T21:34:42.038684+07:00"
+          }
+        ],
+        "created_at": "2026-10-26T03:35:42.011901+07:00"
+      },
+      {
+        "id": "afb73557-3b41-be78-eb30-6eca9eafc8c3",
+        "role": "user",
+        "content": "Insiden apa yang paling sering minggu ini?",
+        "status": "done",
+        "model": null,
+        "tokens_in": 24,
+        "tokens_out": 0,
+        "cost_usd": 0,
+        "latency_ms": 0,
+        "refused": false,
+        "replay": false,
+        "citations": [],
+        "tool_calls": [],
+        "created_at": "2026-10-26T03:36:12.011901+07:00"
+      },
+      {
+        "id": "316084ea-a200-9a0d-1e60-21b9fd8d938e",
+        "role": "assistant",
+        "content": "Rak toko Bekasi hari ini: compliance 87,5% (good). Oos terbesar di air glass 1,5L — 6 dari 12 facing kosong. Alert oos saat ini 3 item, semuanya prioritas sedang. Detail lengkap: sitasi SOP dan trend 14 hari di grafik kanan.",
+        "status": "done",
+        "model": "glm-5-flash",
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0,
+        "latency_ms": 426,
+        "refused": false,
+        "replay": false,
+        "citations": [
+          {
+            "ordinal": 1,
+            "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+            "document_title": "SOP Pengecekan Rak Harian",
+            "chunk_id": null,
+            "page": 2,
+            "heading_path": "SOP · Bab 1",
+            "score": 0.8500000238418579,
+            "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+          },
+          {
+            "ordinal": 2,
+            "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+            "document_title": "Pedoman Restock Minuman Dingin",
+            "chunk_id": null,
+            "page": 3,
+            "heading_path": "SOP · Bab 2",
+            "score": 0.8199999928474426,
+            "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+          },
+          {
+            "ordinal": 3,
+            "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+            "document_title": "Daftar Harga Referensi Q4",
+            "chunk_id": null,
+            "page": 1,
+            "heading_path": "SOP · Bab 3",
+            "score": 0.7900000214576721,
+            "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+          }
+        ],
+        "tool_calls": [],
+        "created_at": "2026-10-26T03:36:42.011901+07:00"
+      },
+      {
+        "id": "01a18110-c93f-712a-8fe8-5ad35662eb67",
+        "role": "user",
+        "content": "apa",
+        "status": "done",
+        "model": null,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "cost_usd": 0,
+        "latency_ms": 0,
+        "refused": false,
+        "replay": false,
+        "citations": [],
+        "tool_calls": [],
+        "created_at": "2026-10-28T12:52:03.387498+07:00"
+      },
+      {
+        "id": "01a18110-c951-759f-a953-036aa635f29d",
+        "role": "assistant",
+        "content": "Berdasarkan konteks yang tersedia: SOP Uji Coba ShelfOps [S1]",
+        "status": "done",
+        "model": null,
+        "tokens_in": 254,
+        "tokens_out": 9,
+        "cost_usd": 0,
+        "latency_ms": 17,
+        "refused": false,
+        "replay": false,
+        "citations": [
+          {
+            "ordinal": 1,
+            "document_id": null,
+            "document_title": "",
+            "chunk_id": null,
+            "page": null,
+            "heading_path": "",
+            "score": 1,
+            "snippet": "SOP Uji Coba ShelfOps\n\n1. Cek rak dinding setiap pagi sebelum shift kedua.\n2. Restock chiller maksimal 30 menit setelah alert OOS.\n3. Ganti label harga pada hari yang sama dengan perubahan buku harga.\n\nDokumen ini fiktif dan dipakai hanya untuk menguji alur unggah."
+          }
+        ],
+        "tool_calls": [],
+        "created_at": "2026-10-28T12:52:03.406023+07:00"
+      }
+    ]
+  },
+  "01a180e0-99c2-7224-a12a-794a1063ef47": {
+    "conversation": {
+      "id": "01a180e0-99c2-7224-a12a-794a1063ef47",
+      "title": "Uji produksi",
+      "message_count": 2,
+      "created_at": "2026-10-28T11:59:25.503116+07:00",
+      "updated_at": "2026-10-28T11:59:25.719809+07:00",
+      "messages": [
+        {
+          "id": "01a180e0-9a89-724e-b851-8467a8702e69",
+          "role": "user",
+          "content": "Apa SOP cek rak?",
+          "status": "done",
+          "model": null,
+          "tokens_in": 0,
+          "tokens_out": 0,
+          "cost_usd": 0,
+          "latency_ms": 0,
+          "refused": false,
+          "replay": false,
+          "citations": [],
+          "tool_calls": [],
+          "created_at": "2026-10-28T11:59:25.701844+07:00"
+        },
+        {
+          "id": "01a180e0-9a9b-7167-9437-49bb30e70e56",
+          "role": "assistant",
+          "content": "",
+          "status": "pending",
+          "model": null,
+          "tokens_in": 0,
+          "tokens_out": 0,
+          "cost_usd": 0,
+          "latency_ms": 0,
+          "refused": false,
+          "replay": false,
+          "citations": [],
+          "tool_calls": [],
+          "created_at": "2026-10-28T11:59:25.719809+07:00"
+        }
+      ]
+    },
+    "messages": [
+      {
+        "id": "01a180e0-9a89-724e-b851-8467a8702e69",
+        "role": "user",
+        "content": "Apa SOP cek rak?",
+        "status": "done",
+        "model": null,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "cost_usd": 0,
+        "latency_ms": 0,
+        "refused": false,
+        "replay": false,
+        "citations": [],
+        "tool_calls": [],
+        "created_at": "2026-10-28T11:59:25.701844+07:00"
+      },
+      {
+        "id": "01a180e0-9a9b-7167-9437-49bb30e70e56",
+        "role": "assistant",
+        "content": "",
+        "status": "pending",
+        "model": null,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "cost_usd": 0,
+        "latency_ms": 0,
+        "refused": false,
+        "replay": false,
+        "citations": [],
+        "tool_calls": [],
+        "created_at": "2026-10-28T11:59:25.719809+07:00"
+      }
+    ]
+  },
+  "a2e653d5-609c-7b02-4ae5-3c8fc81bf016": {
+    "conversation": {
+      "id": "a2e653d5-609c-7b02-4ae5-3c8fc81bf016",
+      "title": "Rak toko Bekasi hari ini",
+      "message_count": 4,
+      "created_at": "2026-10-20T03:34:42.011901+07:00",
+      "updated_at": "2026-10-28T10:29:17.80414+07:00",
+      "messages": [
+        {
+          "id": "6d6c08bc-afa6-08cf-6e63-f1b1306dc782",
+          "role": "user",
+          "content": "Bagaimana kondisi rak toko Bekasi hari ini?",
+          "status": "done",
+          "model": null,
+          "tokens_in": 24,
+          "tokens_out": 0,
+          "cost_usd": 0,
+          "latency_ms": 0,
+          "refused": false,
+          "replay": false,
+          "citations": [],
+          "tool_calls": [],
+          "created_at": "2026-10-20T03:35:12.011901+07:00"
+        },
+        {
+          "id": "c1b05b62-2f79-33ac-7639-93e71030b5bd",
+          "role": "assistant",
+          "content": "Ringkasan kompliance mingguan: rata-rata 88,2% naik 1,4 pt dari minggu lalu. 3 toko di bawah 85% (S-003, S-011, S-017). Top penyebab: ketidakhadiran Update-to-app di rak chiller dan label harga belum diganti.",
+          "status": "done",
+          "model": "glm-5-flash",
+          "tokens_in": 350,
+          "tokens_out": 280,
+          "cost_usd": 0,
+          "latency_ms": 426,
+          "refused": false,
+          "replay": false,
+          "citations": [
+            {
+              "ordinal": 1,
+              "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+              "document_title": "SOP Pengecekan Rak Harian",
+              "chunk_id": null,
+              "page": 2,
+              "heading_path": "SOP · Bab 1",
+              "score": 0.8500000238418579,
+              "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+            },
+            {
+              "ordinal": 2,
+              "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+              "document_title": "Pedoman Restock Minuman Dingin",
+              "chunk_id": null,
+              "page": 3,
+              "heading_path": "SOP · Bab 2",
+              "score": 0.8199999928474426,
+              "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+            },
+            {
+              "ordinal": 3,
+              "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+              "document_title": "Daftar Harga Referensi Q4",
+              "chunk_id": null,
+              "page": 1,
+              "heading_path": "SOP · Bab 3",
+              "score": 0.7900000214576721,
+              "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+            }
+          ],
+          "tool_calls": [
+            {
+              "id": "8a192ff7-cd65-9f00-2cb5-c66f1e6b101c",
+              "name": "insights.kpis",
+              "args": {
+                "period": "7d"
+              },
+              "result_summary": "compliance 88.2% (+1.4), oos 3 open",
+              "status": "done",
+              "requires_confirmation": false,
+              "duration_ms": 212,
+              "created_at": "2026-10-24T21:34:42.038684+07:00"
+            }
+          ],
+          "created_at": "2026-10-20T03:35:42.011901+07:00"
+        },
+        {
+          "id": "7e874efe-fc1c-1602-86d2-baa6947189f5",
+          "role": "user",
+          "content": "Bagaimana kondisi rak toko Bekasi hari ini?",
+          "status": "done",
+          "model": null,
+          "tokens_in": 24,
+          "tokens_out": 0,
+          "cost_usd": 0,
+          "latency_ms": 0,
+          "refused": false,
+          "replay": false,
+          "citations": [],
+          "tool_calls": [],
+          "created_at": "2026-10-20T03:36:12.011901+07:00"
+        },
+        {
+          "id": "4ebbb303-4156-dcd3-3ece-2bfe86769baf",
+          "role": "assistant",
+          "content": "Rak toko Bekasi hari ini: compliance 87,5% (good). Oos terbesar di air glass 1,5L — 6 dari 12 facing kosong. Alert oos saat ini 3 item, semuanya prioritas sedang. Detail lengkap: sitasi SOP dan trend 14 hari di grafik kanan.",
+          "status": "done",
+          "model": "glm-5-flash",
+          "tokens_in": 350,
+          "tokens_out": 280,
+          "cost_usd": 0,
+          "latency_ms": 426,
+          "refused": false,
+          "replay": false,
+          "citations": [
+            {
+              "ordinal": 1,
+              "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+              "document_title": "SOP Pengecekan Rak Harian",
+              "chunk_id": null,
+              "page": 2,
+              "heading_path": "SOP · Bab 1",
+              "score": 0.8500000238418579,
+              "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+            },
+            {
+              "ordinal": 2,
+              "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+              "document_title": "Pedoman Restock Minuman Dingin",
+              "chunk_id": null,
+              "page": 3,
+              "heading_path": "SOP · Bab 2",
+              "score": 0.8199999928474426,
+              "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+            },
+            {
+              "ordinal": 3,
+              "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+              "document_title": "Daftar Harga Referensi Q4",
+              "chunk_id": null,
+              "page": 1,
+              "heading_path": "SOP · Bab 3",
+              "score": 0.7900000214576721,
+              "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+            }
+          ],
+          "tool_calls": [],
+          "created_at": "2026-10-20T03:36:42.011901+07:00"
+        }
+      ]
+    },
+    "messages": [
+      {
+        "id": "6d6c08bc-afa6-08cf-6e63-f1b1306dc782",
+        "role": "user",
+        "content": "Bagaimana kondisi rak toko Bekasi hari ini?",
+        "status": "done",
+        "model": null,
+        "tokens_in": 24,
+        "tokens_out": 0,
+        "cost_usd": 0,
+        "latency_ms": 0,
+        "refused": false,
+        "replay": false,
+        "citations": [],
+        "tool_calls": [],
+        "created_at": "2026-10-20T03:35:12.011901+07:00"
+      },
+      {
+        "id": "c1b05b62-2f79-33ac-7639-93e71030b5bd",
+        "role": "assistant",
+        "content": "Ringkasan kompliance mingguan: rata-rata 88,2% naik 1,4 pt dari minggu lalu. 3 toko di bawah 85% (S-003, S-011, S-017). Top penyebab: ketidakhadiran Update-to-app di rak chiller dan label harga belum diganti.",
+        "status": "done",
+        "model": "glm-5-flash",
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0,
+        "latency_ms": 426,
+        "refused": false,
+        "replay": false,
+        "citations": [
+          {
+            "ordinal": 1,
+            "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+            "document_title": "SOP Pengecekan Rak Harian",
+            "chunk_id": null,
+            "page": 2,
+            "heading_path": "SOP · Bab 1",
+            "score": 0.8500000238418579,
+            "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+          },
+          {
+            "ordinal": 2,
+            "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+            "document_title": "Pedoman Restock Minuman Dingin",
+            "chunk_id": null,
+            "page": 3,
+            "heading_path": "SOP · Bab 2",
+            "score": 0.8199999928474426,
+            "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+          },
+          {
+            "ordinal": 3,
+            "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+            "document_title": "Daftar Harga Referensi Q4",
+            "chunk_id": null,
+            "page": 1,
+            "heading_path": "SOP · Bab 3",
+            "score": 0.7900000214576721,
+            "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+          }
+        ],
+        "tool_calls": [
+          {
+            "id": "8a192ff7-cd65-9f00-2cb5-c66f1e6b101c",
+            "name": "insights.kpis",
+            "args": {
+              "period": "7d"
+            },
+            "result_summary": "compliance 88.2% (+1.4), oos 3 open",
+            "status": "done",
+            "requires_confirmation": false,
+            "duration_ms": 212,
+            "created_at": "2026-10-24T21:34:42.038684+07:00"
+          }
+        ],
+        "created_at": "2026-10-20T03:35:42.011901+07:00"
+      },
+      {
+        "id": "7e874efe-fc1c-1602-86d2-baa6947189f5",
+        "role": "user",
+        "content": "Bagaimana kondisi rak toko Bekasi hari ini?",
+        "status": "done",
+        "model": null,
+        "tokens_in": 24,
+        "tokens_out": 0,
+        "cost_usd": 0,
+        "latency_ms": 0,
+        "refused": false,
+        "replay": false,
+        "citations": [],
+        "tool_calls": [],
+        "created_at": "2026-10-20T03:36:12.011901+07:00"
+      },
+      {
+        "id": "4ebbb303-4156-dcd3-3ece-2bfe86769baf",
+        "role": "assistant",
+        "content": "Rak toko Bekasi hari ini: compliance 87,5% (good). Oos terbesar di air glass 1,5L — 6 dari 12 facing kosong. Alert oos saat ini 3 item, semuanya prioritas sedang. Detail lengkap: sitasi SOP dan trend 14 hari di grafik kanan.",
+        "status": "done",
+        "model": "glm-5-flash",
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0,
+        "latency_ms": 426,
+        "refused": false,
+        "replay": false,
+        "citations": [
+          {
+            "ordinal": 1,
+            "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+            "document_title": "SOP Pengecekan Rak Harian",
+            "chunk_id": null,
+            "page": 2,
+            "heading_path": "SOP · Bab 1",
+            "score": 0.8500000238418579,
+            "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+          },
+          {
+            "ordinal": 2,
+            "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+            "document_title": "Pedoman Restock Minuman Dingin",
+            "chunk_id": null,
+            "page": 3,
+            "heading_path": "SOP · Bab 2",
+            "score": 0.8199999928474426,
+            "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+          },
+          {
+            "ordinal": 3,
+            "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+            "document_title": "Daftar Harga Referensi Q4",
+            "chunk_id": null,
+            "page": 1,
+            "heading_path": "SOP · Bab 3",
+            "score": 0.7900000214576721,
+            "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+          }
+        ],
+        "tool_calls": [],
+        "created_at": "2026-10-20T03:36:42.011901+07:00"
+      }
+    ]
+  },
+  "78855c1f-142b-9111-1cd4-3d2dd02e07bf": {
+    "conversation": {
+      "id": "78855c1f-142b-9111-1cd4-3d2dd02e07bf",
+      "title": "Ringkasan kompliance mingguan",
+      "message_count": 4,
+      "created_at": "2026-10-22T03:34:42.011901+07:00",
+      "updated_at": "2026-10-28T10:29:17.80414+07:00",
+      "messages": [
+        {
+          "id": "9d732193-0314-9920-b5c5-a793341edba7",
+          "role": "user",
+          "content": "Berikan ringkasan kompliance mingguan semua toko",
+          "status": "done",
+          "model": null,
+          "tokens_in": 24,
+          "tokens_out": 0,
+          "cost_usd": 0,
+          "latency_ms": 0,
+          "refused": false,
+          "replay": false,
+          "citations": [],
+          "tool_calls": [],
+          "created_at": "2026-10-22T03:35:12.011901+07:00"
+        },
+        {
+          "id": "92ef8a3a-a519-8328-b994-9619429f459b",
+          "role": "assistant",
+          "content": "Ringkasan kompliance mingguan: rata-rata 88,2% naik 1,4 pt dari minggu lalu. 3 toko di bawah 85% (S-003, S-011, S-017). Top penyebab: ketidakhadiran Update-to-app di rak chiller dan label harga belum diganti.",
+          "status": "done",
+          "model": "glm-5-flash",
+          "tokens_in": 350,
+          "tokens_out": 280,
+          "cost_usd": 0,
+          "latency_ms": 426,
+          "refused": false,
+          "replay": false,
+          "citations": [
+            {
+              "ordinal": 1,
+              "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+              "document_title": "SOP Pengecekan Rak Harian",
+              "chunk_id": null,
+              "page": 2,
+              "heading_path": "SOP · Bab 1",
+              "score": 0.8500000238418579,
+              "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+            },
+            {
+              "ordinal": 2,
+              "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+              "document_title": "Pedoman Restock Minuman Dingin",
+              "chunk_id": null,
+              "page": 3,
+              "heading_path": "SOP · Bab 2",
+              "score": 0.8199999928474426,
+              "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+            },
+            {
+              "ordinal": 3,
+              "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+              "document_title": "Daftar Harga Referensi Q4",
+              "chunk_id": null,
+              "page": 1,
+              "heading_path": "SOP · Bab 3",
+              "score": 0.7900000214576721,
+              "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+            }
+          ],
+          "tool_calls": [
+            {
+              "id": "4d212a1c-8f46-b7b2-d0ac-57362e99f046",
+              "name": "insights.kpis",
+              "args": {
+                "period": "7d"
+              },
+              "result_summary": "compliance 88.2% (+1.4), oos 3 open",
+              "status": "done",
+              "requires_confirmation": false,
+              "duration_ms": 212,
+              "created_at": "2026-10-24T21:34:42.038684+07:00"
+            }
+          ],
+          "created_at": "2026-10-22T03:35:42.011901+07:00"
+        },
+        {
+          "id": "29bcd020-5341-8566-1073-c824703170f8",
+          "role": "user",
+          "content": "Berikan ringkasan kompliance mingguan semua toko",
+          "status": "done",
+          "model": null,
+          "tokens_in": 24,
+          "tokens_out": 0,
+          "cost_usd": 0,
+          "latency_ms": 0,
+          "refused": false,
+          "replay": false,
+          "citations": [],
+          "tool_calls": [],
+          "created_at": "2026-10-22T03:36:12.011901+07:00"
+        },
+        {
+          "id": "4e439f21-e31b-cd7c-1c84-d28ce2e6f0cc",
+          "role": "assistant",
+          "content": "Rak toko Bekasi hari ini: compliance 87,5% (good). Oos terbesar di air glass 1,5L — 6 dari 12 facing kosong. Alert oos saat ini 3 item, semuanya prioritas sedang. Detail lengkap: sitasi SOP dan trend 14 hari di grafik kanan.",
+          "status": "done",
+          "model": "glm-5-flash",
+          "tokens_in": 350,
+          "tokens_out": 280,
+          "cost_usd": 0,
+          "latency_ms": 426,
+          "refused": false,
+          "replay": false,
+          "citations": [
+            {
+              "ordinal": 1,
+              "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+              "document_title": "SOP Pengecekan Rak Harian",
+              "chunk_id": null,
+              "page": 2,
+              "heading_path": "SOP · Bab 1",
+              "score": 0.8500000238418579,
+              "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+            },
+            {
+              "ordinal": 2,
+              "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+              "document_title": "Pedoman Restock Minuman Dingin",
+              "chunk_id": null,
+              "page": 3,
+              "heading_path": "SOP · Bab 2",
+              "score": 0.8199999928474426,
+              "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+            },
+            {
+              "ordinal": 3,
+              "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+              "document_title": "Daftar Harga Referensi Q4",
+              "chunk_id": null,
+              "page": 1,
+              "heading_path": "SOP · Bab 3",
+              "score": 0.7900000214576721,
+              "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+            }
+          ],
+          "tool_calls": [],
+          "created_at": "2026-10-22T03:36:42.011901+07:00"
+        }
+      ]
+    },
+    "messages": [
+      {
+        "id": "9d732193-0314-9920-b5c5-a793341edba7",
+        "role": "user",
+        "content": "Berikan ringkasan kompliance mingguan semua toko",
+        "status": "done",
+        "model": null,
+        "tokens_in": 24,
+        "tokens_out": 0,
+        "cost_usd": 0,
+        "latency_ms": 0,
+        "refused": false,
+        "replay": false,
+        "citations": [],
+        "tool_calls": [],
+        "created_at": "2026-10-22T03:35:12.011901+07:00"
+      },
+      {
+        "id": "92ef8a3a-a519-8328-b994-9619429f459b",
+        "role": "assistant",
+        "content": "Ringkasan kompliance mingguan: rata-rata 88,2% naik 1,4 pt dari minggu lalu. 3 toko di bawah 85% (S-003, S-011, S-017). Top penyebab: ketidakhadiran Update-to-app di rak chiller dan label harga belum diganti.",
+        "status": "done",
+        "model": "glm-5-flash",
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0,
+        "latency_ms": 426,
+        "refused": false,
+        "replay": false,
+        "citations": [
+          {
+            "ordinal": 1,
+            "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+            "document_title": "SOP Pengecekan Rak Harian",
+            "chunk_id": null,
+            "page": 2,
+            "heading_path": "SOP · Bab 1",
+            "score": 0.8500000238418579,
+            "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+          },
+          {
+            "ordinal": 2,
+            "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+            "document_title": "Pedoman Restock Minuman Dingin",
+            "chunk_id": null,
+            "page": 3,
+            "heading_path": "SOP · Bab 2",
+            "score": 0.8199999928474426,
+            "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+          },
+          {
+            "ordinal": 3,
+            "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+            "document_title": "Daftar Harga Referensi Q4",
+            "chunk_id": null,
+            "page": 1,
+            "heading_path": "SOP · Bab 3",
+            "score": 0.7900000214576721,
+            "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+          }
+        ],
+        "tool_calls": [
+          {
+            "id": "4d212a1c-8f46-b7b2-d0ac-57362e99f046",
+            "name": "insights.kpis",
+            "args": {
+              "period": "7d"
+            },
+            "result_summary": "compliance 88.2% (+1.4), oos 3 open",
+            "status": "done",
+            "requires_confirmation": false,
+            "duration_ms": 212,
+            "created_at": "2026-10-24T21:34:42.038684+07:00"
+          }
+        ],
+        "created_at": "2026-10-22T03:35:42.011901+07:00"
+      },
+      {
+        "id": "29bcd020-5341-8566-1073-c824703170f8",
+        "role": "user",
+        "content": "Berikan ringkasan kompliance mingguan semua toko",
+        "status": "done",
+        "model": null,
+        "tokens_in": 24,
+        "tokens_out": 0,
+        "cost_usd": 0,
+        "latency_ms": 0,
+        "refused": false,
+        "replay": false,
+        "citations": [],
+        "tool_calls": [],
+        "created_at": "2026-10-22T03:36:12.011901+07:00"
+      },
+      {
+        "id": "4e439f21-e31b-cd7c-1c84-d28ce2e6f0cc",
+        "role": "assistant",
+        "content": "Rak toko Bekasi hari ini: compliance 87,5% (good). Oos terbesar di air glass 1,5L — 6 dari 12 facing kosong. Alert oos saat ini 3 item, semuanya prioritas sedang. Detail lengkap: sitasi SOP dan trend 14 hari di grafik kanan.",
+        "status": "done",
+        "model": "glm-5-flash",
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0,
+        "latency_ms": 426,
+        "refused": false,
+        "replay": false,
+        "citations": [
+          {
+            "ordinal": 1,
+            "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+            "document_title": "SOP Pengecekan Rak Harian",
+            "chunk_id": null,
+            "page": 2,
+            "heading_path": "SOP · Bab 1",
+            "score": 0.8500000238418579,
+            "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+          },
+          {
+            "ordinal": 2,
+            "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+            "document_title": "Pedoman Restock Minuman Dingin",
+            "chunk_id": null,
+            "page": 3,
+            "heading_path": "SOP · Bab 2",
+            "score": 0.8199999928474426,
+            "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+          },
+          {
+            "ordinal": 3,
+            "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+            "document_title": "Daftar Harga Referensi Q4",
+            "chunk_id": null,
+            "page": 1,
+            "heading_path": "SOP · Bab 3",
+            "score": 0.7900000214576721,
+            "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+          }
+        ],
+        "tool_calls": [],
+        "created_at": "2026-10-22T03:36:42.011901+07:00"
+      }
+    ]
+  },
+  "4a5dda15-1f5b-c07d-f2ee-5f4e0ceba77d": {
+    "conversation": {
+      "id": "4a5dda15-1f5b-c07d-f2ee-5f4e0ceba77d",
+      "title": "Status label harga terakhir",
+      "message_count": 4,
+      "created_at": "2026-10-24T03:34:42.011901+07:00",
+      "updated_at": "2026-10-28T10:29:17.80414+07:00",
+      "messages": [
+        {
+          "id": "9e7c07b0-9a1d-4f9d-567e-5a487c970f42",
+          "role": "user",
+          "content": "Berapa mismatch label harga minggu ini?",
+          "status": "done",
+          "model": null,
+          "tokens_in": 24,
+          "tokens_out": 0,
+          "cost_usd": 0,
+          "latency_ms": 0,
+          "refused": false,
+          "replay": false,
+          "citations": [],
+          "tool_calls": [],
+          "created_at": "2026-10-24T03:35:12.011901+07:00"
+        },
+        {
+          "id": "abeb47ad-5387-d28c-2df7-6034b18b3882",
+          "role": "assistant",
+          "content": "Ringkasan kompliance mingguan: rata-rata 88,2% naik 1,4 pt dari minggu lalu. 3 toko di bawah 85% (S-003, S-011, S-017). Top penyebab: ketidakhadiran Update-to-app di rak chiller dan label harga belum diganti.",
+          "status": "done",
+          "model": "glm-5-flash",
+          "tokens_in": 350,
+          "tokens_out": 280,
+          "cost_usd": 0,
+          "latency_ms": 426,
+          "refused": false,
+          "replay": false,
+          "citations": [
+            {
+              "ordinal": 1,
+              "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+              "document_title": "SOP Pengecekan Rak Harian",
+              "chunk_id": null,
+              "page": 2,
+              "heading_path": "SOP · Bab 1",
+              "score": 0.8500000238418579,
+              "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+            },
+            {
+              "ordinal": 2,
+              "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+              "document_title": "Pedoman Restock Minuman Dingin",
+              "chunk_id": null,
+              "page": 3,
+              "heading_path": "SOP · Bab 2",
+              "score": 0.8199999928474426,
+              "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+            },
+            {
+              "ordinal": 3,
+              "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+              "document_title": "Daftar Harga Referensi Q4",
+              "chunk_id": null,
+              "page": 1,
+              "heading_path": "SOP · Bab 3",
+              "score": 0.7900000214576721,
+              "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+            }
+          ],
+          "tool_calls": [
+            {
+              "id": "e8edcecb-a7c8-e066-3784-025a4e234431",
+              "name": "insights.kpis",
+              "args": {
+                "period": "7d"
+              },
+              "result_summary": "compliance 88.2% (+1.4), oos 3 open",
+              "status": "done",
+              "requires_confirmation": false,
+              "duration_ms": 212,
+              "created_at": "2026-10-24T21:34:42.038684+07:00"
+            }
+          ],
+          "created_at": "2026-10-24T03:35:42.011901+07:00"
+        },
+        {
+          "id": "c89e8d5c-567b-10bc-8d02-620d462980dc",
+          "role": "user",
+          "content": "Berapa mismatch label harga minggu ini?",
+          "status": "done",
+          "model": null,
+          "tokens_in": 24,
+          "tokens_out": 0,
+          "cost_usd": 0,
+          "latency_ms": 0,
+          "refused": false,
+          "replay": false,
+          "citations": [],
+          "tool_calls": [],
+          "created_at": "2026-10-24T03:36:12.011901+07:00"
+        },
+        {
+          "id": "9e092f8c-c224-07b5-f162-9f0086279e5c",
+          "role": "assistant",
+          "content": "Rak toko Bekasi hari ini: compliance 87,5% (good). Oos terbesar di air glass 1,5L — 6 dari 12 facing kosong. Alert oos saat ini 3 item, semuanya prioritas sedang. Detail lengkap: sitasi SOP dan trend 14 hari di grafik kanan.",
+          "status": "done",
+          "model": "glm-5-flash",
+          "tokens_in": 350,
+          "tokens_out": 280,
+          "cost_usd": 0,
+          "latency_ms": 426,
+          "refused": false,
+          "replay": false,
+          "citations": [
+            {
+              "ordinal": 1,
+              "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+              "document_title": "SOP Pengecekan Rak Harian",
+              "chunk_id": null,
+              "page": 2,
+              "heading_path": "SOP · Bab 1",
+              "score": 0.8500000238418579,
+              "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+            },
+            {
+              "ordinal": 2,
+              "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+              "document_title": "Pedoman Restock Minuman Dingin",
+              "chunk_id": null,
+              "page": 3,
+              "heading_path": "SOP · Bab 2",
+              "score": 0.8199999928474426,
+              "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+            },
+            {
+              "ordinal": 3,
+              "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+              "document_title": "Daftar Harga Referensi Q4",
+              "chunk_id": null,
+              "page": 1,
+              "heading_path": "SOP · Bab 3",
+              "score": 0.7900000214576721,
+              "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+            }
+          ],
+          "tool_calls": [],
+          "created_at": "2026-10-24T03:36:42.011901+07:00"
+        }
+      ]
+    },
+    "messages": [
+      {
+        "id": "9e7c07b0-9a1d-4f9d-567e-5a487c970f42",
+        "role": "user",
+        "content": "Berapa mismatch label harga minggu ini?",
+        "status": "done",
+        "model": null,
+        "tokens_in": 24,
+        "tokens_out": 0,
+        "cost_usd": 0,
+        "latency_ms": 0,
+        "refused": false,
+        "replay": false,
+        "citations": [],
+        "tool_calls": [],
+        "created_at": "2026-10-24T03:35:12.011901+07:00"
+      },
+      {
+        "id": "abeb47ad-5387-d28c-2df7-6034b18b3882",
+        "role": "assistant",
+        "content": "Ringkasan kompliance mingguan: rata-rata 88,2% naik 1,4 pt dari minggu lalu. 3 toko di bawah 85% (S-003, S-011, S-017). Top penyebab: ketidakhadiran Update-to-app di rak chiller dan label harga belum diganti.",
+        "status": "done",
+        "model": "glm-5-flash",
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0,
+        "latency_ms": 426,
+        "refused": false,
+        "replay": false,
+        "citations": [
+          {
+            "ordinal": 1,
+            "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+            "document_title": "SOP Pengecekan Rak Harian",
+            "chunk_id": null,
+            "page": 2,
+            "heading_path": "SOP · Bab 1",
+            "score": 0.8500000238418579,
+            "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+          },
+          {
+            "ordinal": 2,
+            "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+            "document_title": "Pedoman Restock Minuman Dingin",
+            "chunk_id": null,
+            "page": 3,
+            "heading_path": "SOP · Bab 2",
+            "score": 0.8199999928474426,
+            "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+          },
+          {
+            "ordinal": 3,
+            "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+            "document_title": "Daftar Harga Referensi Q4",
+            "chunk_id": null,
+            "page": 1,
+            "heading_path": "SOP · Bab 3",
+            "score": 0.7900000214576721,
+            "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+          }
+        ],
+        "tool_calls": [
+          {
+            "id": "e8edcecb-a7c8-e066-3784-025a4e234431",
+            "name": "insights.kpis",
+            "args": {
+              "period": "7d"
+            },
+            "result_summary": "compliance 88.2% (+1.4), oos 3 open",
+            "status": "done",
+            "requires_confirmation": false,
+            "duration_ms": 212,
+            "created_at": "2026-10-24T21:34:42.038684+07:00"
+          }
+        ],
+        "created_at": "2026-10-24T03:35:42.011901+07:00"
+      },
+      {
+        "id": "c89e8d5c-567b-10bc-8d02-620d462980dc",
+        "role": "user",
+        "content": "Berapa mismatch label harga minggu ini?",
+        "status": "done",
+        "model": null,
+        "tokens_in": 24,
+        "tokens_out": 0,
+        "cost_usd": 0,
+        "latency_ms": 0,
+        "refused": false,
+        "replay": false,
+        "citations": [],
+        "tool_calls": [],
+        "created_at": "2026-10-24T03:36:12.011901+07:00"
+      },
+      {
+        "id": "9e092f8c-c224-07b5-f162-9f0086279e5c",
+        "role": "assistant",
+        "content": "Rak toko Bekasi hari ini: compliance 87,5% (good). Oos terbesar di air glass 1,5L — 6 dari 12 facing kosong. Alert oos saat ini 3 item, semuanya prioritas sedang. Detail lengkap: sitasi SOP dan trend 14 hari di grafik kanan.",
+        "status": "done",
+        "model": "glm-5-flash",
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0,
+        "latency_ms": 426,
+        "refused": false,
+        "replay": false,
+        "citations": [
+          {
+            "ordinal": 1,
+            "document_id": "cabcf898-23b3-77a8-e036-b70c2e50c0c6",
+            "document_title": "SOP Pengecekan Rak Harian",
+            "chunk_id": null,
+            "page": 2,
+            "heading_path": "SOP · Bab 1",
+            "score": 0.8500000238418579,
+            "snippet": "Wajib cek rak dinding setiap pagi sebelum shift 2."
+          },
+          {
+            "ordinal": 2,
+            "document_id": "0b4756cb-b920-a8f6-f05e-6ddcd50b289b",
+            "document_title": "Pedoman Restock Minuman Dingin",
+            "chunk_id": null,
+            "page": 3,
+            "heading_path": "SOP · Bab 2",
+            "score": 0.8199999928474426,
+            "snippet": "Restock chiller maksimal 30 menit setelah alert OOS."
+          },
+          {
+            "ordinal": 3,
+            "document_id": "7ae5a3b8-ab44-90ba-b3c6-3c7c721f959f",
+            "document_title": "Daftar Harga Referensi Q4",
+            "chunk_id": null,
+            "page": 1,
+            "heading_path": "SOP · Bab 3",
+            "score": 0.7900000214576721,
+            "snippet": "Label harga harus diganti hari yang sama dengan perubahan buku harga."
+          }
+        ],
+        "tool_calls": [],
+        "created_at": "2026-10-24T03:36:42.011901+07:00"
+      }
+    ]
+  }
+}

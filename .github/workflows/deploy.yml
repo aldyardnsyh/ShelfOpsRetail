@@ -1,0 +1,80 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: Tag image (kosong = git SHA pendek HEAD)
+        required: false
+        default: ""
+      image_source:
+        description: Sumber image
+        type: choice
+        options:
+          - build
+          - pull
+        default: build
+      skip_public_healthcheck:
+        description: Lewati healthcheck URL publik
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: deploy VPS
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: production
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          IMAGE_TAG_INPUT: ${{ inputs.image_tag }}
+          IMAGE_SOURCE_INPUT: ${{ inputs.image_source }}
+          SKIP_PUBLIC_CHECK: ${{ inputs.skip_public_healthcheck }}
+          SHELFOPS_DIR: ${{ vars.SHELFOPS_DIR || '/opt/shelfops' }}
+          IMAGE_PREFIX: ${{ vars.IMAGE_PREFIX || 'shelfops' }}
+          PUBLIC_HEALTH_URL: ${{ vars.PUBLIC_HEALTH_URL }}
+          GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
+          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          command_timeout: 30m
+          script_stop: true
+          envs: IMAGE_TAG_INPUT,IMAGE_SOURCE_INPUT,SKIP_PUBLIC_CHECK,SHELFOPS_DIR,IMAGE_PREFIX,PUBLIC_HEALTH_URL,GHCR_USERNAME,GHCR_TOKEN
+          script: |
+            set -Eeuo pipefail
+            APP_DIR="${SHELFOPS_DIR:-$HOME/shelfops}"
+            cd "$APP_DIR"
+
+            git fetch --prune origin main
+            git checkout main
+            git reset --hard origin/main
+
+            if [ "$IMAGE_SOURCE_INPUT" = "pull" ] && [ -n "${GHCR_TOKEN:-}" ]; then
+              printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
+            fi
+
+            export IMAGE_SOURCE="$IMAGE_SOURCE_INPUT"
+            export IMAGE_TAG="${IMAGE_TAG_INPUT:-$(git rev-parse --short=12 HEAD)}"
+            if [ -n "${IMAGE_PREFIX:-}" ]; then
+              export IMAGE_PREFIX
+            fi
+            if [ "$SKIP_PUBLIC_CHECK" = "true" ]; then
+              export PUBLIC_HEALTHCHECK=never
+            fi
+            if [ -n "${PUBLIC_HEALTH_URL:-}" ]; then
+              export PUBLIC_HEALTH_URL
+            fi
+
+            bash deploy/deploy.sh

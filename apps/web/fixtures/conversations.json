@@ -1,0 +1,47 @@
+{
+  "items": [
+    {
+      "id": "01a180fe-74f0-726e-81e6-a1c8d64db536",
+      "title": "Uji produksi",
+      "message_count": 4,
+      "created_at": "2026-10-28T12:32:02.152836+07:00",
+      "updated_at": "2026-10-28T12:52:27.305911+07:00"
+    },
+    {
+      "id": "bf437895-5caa-1738-8ca3-4c0a89069fbd",
+      "title": "Topik insiden paling sering",
+      "message_count": 6,
+      "created_at": "2026-10-26T03:34:42.011901+07:00",
+      "updated_at": "2026-10-28T12:52:03.406023+07:00"
+    },
+    {
+      "id": "01a180e0-99c2-7224-a12a-794a1063ef47",
+      "title": "Uji produksi",
+      "message_count": 2,
+      "created_at": "2026-10-28T11:59:25.503116+07:00",
+      "updated_at": "2026-10-28T11:59:25.719809+07:00"
+    },
+    {
+      "id": "a2e653d5-609c-7b02-4ae5-3c8fc81bf016",
+      "title": "Rak toko Bekasi hari ini",
+      "message_count": 4,
+      "created_at": "2026-10-20T03:34:42.011901+07:00",
+      "updated_at": "2026-10-28T10:29:17.80414+07:00"
+    },
+    {
+      "id": "78855c1f-142b-9111-1cd4-3d2dd02e07bf",
+      "title": "Ringkasan kompliance mingguan",
+      "message_count": 4,
+      "created_at": "2026-10-22T03:34:42.011901+07:00",
+      "updated_at": "2026-10-28T10:29:17.80414+07:00"
+    },
+    {
+      "id": "4a5dda15-1f5b-c07d-f2ee-5f4e0ceba77d",
+      "title": "Status label harga terakhir",
+      "message_count": 4,
+      "created_at": "2026-10-24T03:34:42.011901+07:00",
+      "updated_at": "2026-10-28T10:29:17.80414+07:00"
+    }
+  ],
+  "next_cursor": null
+}

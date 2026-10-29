@@ -1,0 +1,205 @@
+{
+  "session_id": "d6e6068b-0000-7000-8000-000000000001",
+  "planogram_name": "Planogram Minuman Q4",
+  "image": {
+    "id": "9313ae59-0000-7000-8000-000000000001",
+    "url": "/fixtures/shelf-1.svg",
+    "width": 1600,
+    "height": 900
+  },
+  "score": 87,
+  "metrics": {
+    "facing_total": 38,
+    "oos_count": 3,
+    "price_mismatch": 2,
+    "facing_gap": 4,
+    "price_read": 24
+  },
+  "breakdown": {
+    "availability": 0.93,
+    "share_adherence": 0.82,
+    "price_accuracy": 0.8
+  },
+  "detections": [
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000101",
+      "bbox": [0.0675, 0.18, 0.12625, 0.31111],
+      "confidence": 0.96,
+      "label": "Teh Kemasan",
+      "row_index": 1,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000102",
+      "bbox": [0.35625, 0.17111, 0.415, 0.31111],
+      "confidence": 0.92,
+      "label": "Air Mineral",
+      "row_index": 1,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000103",
+      "bbox": [0.66, 0.18889, 0.71875, 0.31111],
+      "confidence": 0.88,
+      "label": "Teh Kemasan",
+      "row_index": 1,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000104",
+      "bbox": [0.79688, 0.17111, 0.85562, 0.31111],
+      "confidence": 0.83,
+      "label": "Susu UHT",
+      "row_index": 1,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000105",
+      "bbox": [0.0725, 0.38556, 0.13125, 0.51667],
+      "confidence": 0.94,
+      "label": "Susu UHT",
+      "row_index": 2,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000106",
+      "bbox": [0.20938, 0.39444, 0.26812, 0.51667],
+      "confidence": 0.89,
+      "label": "Kopi Sachet",
+      "row_index": 2,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000107",
+      "bbox": [0.36125, 0.37667, 0.42, 0.51667],
+      "confidence": 0.91,
+      "label": "Susu UHT",
+      "row_index": 2,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000108",
+      "bbox": [0.65, 0.39444, 0.70875, 0.51667],
+      "confidence": 0.86,
+      "label": "Air Mineral",
+      "row_index": 2,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000109",
+      "bbox": [0.0625, 0.59111, 0.12125, 0.72222],
+      "confidence": 0.84,
+      "label": "Kopi Sachet",
+      "row_index": 3,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000110",
+      "bbox": [0.21438, 0.6, 0.27312, 0.72222],
+      "confidence": 0.95,
+      "label": "Air Mineral",
+      "row_index": 3,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000111",
+      "bbox": [0.36625, 0.58222, 0.425, 0.72222],
+      "confidence": 0.74,
+      "label": "Kopi Sachet",
+      "row_index": 3,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000112",
+      "bbox": [0.80688, 0.58222, 0.86562, 0.72222],
+      "confidence": 0.9,
+      "label": "Teh Kemasan",
+      "row_index": 3,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000113",
+      "bbox": [0.0675, 0.79667, 0.12625, 0.92778],
+      "confidence": 0.93,
+      "label": "Air Mineral",
+      "row_index": 4,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000114",
+      "bbox": [0.35625, 0.78778, 0.415, 0.92778],
+      "confidence": 0.87,
+      "label": "Teh Kemasan",
+      "row_index": 4,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000115",
+      "bbox": [0.50813, 0.79667, 0.56688, 0.92778],
+      "confidence": 0.9,
+      "label": "Susu UHT",
+      "row_index": 4,
+      "source": "model"
+    },
+    {
+      "id": "a1e8f2c4-0000-4000-8000-000000000116",
+      "bbox": [0.66, 0.80556, 0.71875, 0.92778],
+      "confidence": 0.82,
+      "label": "Kopi Sachet",
+      "row_index": 4,
+      "source": "model"
+    }
+  ],
+  "issues": [
+    {
+      "id": "b1e8f2c4-0000-4000-8000-000000000201",
+      "type": "oos",
+      "label": "Susu UHT",
+      "row_index": 2,
+      "severity": "high",
+      "facings": 2
+    },
+    {
+      "id": "b1e8f2c4-0000-4000-8000-000000000202",
+      "type": "oos",
+      "label": "Air Mineral",
+      "row_index": 4,
+      "severity": "medium",
+      "facings": 1
+    },
+    {
+      "id": "b1e8f2c4-0000-4000-8000-000000000203",
+      "type": "price_mismatch",
+      "label": "Teh Kemasan",
+      "row_index": 1,
+      "severity": "medium",
+      "price_actual_idr": 6500,
+      "price_expected_idr": 5000
+    },
+    {
+      "id": "b1e8f2c4-0000-4000-8000-000000000204",
+      "type": "price_mismatch",
+      "label": "Kopi Sachet",
+      "row_index": 3,
+      "severity": "medium",
+      "price_actual_idr": 2800,
+      "price_expected_idr": 2500
+    },
+    {
+      "id": "b1e8f2c4-0000-4000-8000-000000000205",
+      "type": "gap",
+      "label": "Kopi Sachet",
+      "row_index": 3,
+      "severity": "medium",
+      "facings": 2
+    },
+    {
+      "id": "b1e8f2c4-0000-4000-8000-000000000206",
+      "type": "low_confidence",
+      "label": "Kopi Sachet",
+      "row_index": 3,
+      "severity": "low",
+      "confidence": 0.74
+    }
+  ]
+}

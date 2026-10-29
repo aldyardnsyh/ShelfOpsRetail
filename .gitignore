@@ -1,0 +1,84 @@
+# ignore build & dependency artifacts
+node_modules/
+.next/
+out/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+.turbo/
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.uv/
+
+# go
+bin/
+services/gateway/shelfops
+services/gateway/shelfops.exe
+
+# env & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# data & uploads (runtime)
+data/
+infra/data/
+uploads/
+*.sql.gz
+
+# deploy state & backup lokal
+.deploy/
+backups/
+
+# logs & os
+*.log
+.DS_Store
+Thumbs.db
+
+# artefak QA lokal (screenshot, log server, evidence)
+qa-artifacts/
+
+# state tooling desain lokal
+apps/web/.impeccable/
+
+# editor
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# misc
+*.local
+.gradle/
+
+# =====================================================================
+# PRIVAT — TIDAK BOLEH MASUK REPO PUBLIK
+# PRD, riset, dan design system adalah "otak developer"; repo publik hanya
+# memuat kode + dokumen turunan yang aman (ADR, runbook, catatan publik).
+# File-file ini tetap ada di working directory lokal, hanya tidak di-track.
+# =====================================================================
+PRD*.md
+stitch_shelfops_design_system/
+docs/design/
+docs/private/
+*.stitch.*
+# hasil riset lokal / catatan mentah
+research/
+notes-private/
+*.private.md
+# fixture yang berisi contoh kredensial
+*credentials*
+*.credentials.*
+
+# Binary gateway hasil build lokal
+services/gateway/shelfops.exe*

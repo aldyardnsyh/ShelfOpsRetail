@@ -1,0 +1,30 @@
+{
+  "user": {
+    "id": "01a18348-c9b3-7777-87f3-37e33db04272",
+    "email": "demo-b587b1cbb601@demo.local",
+    "name": "Pengunjung Demo",
+    "locale": "id"
+  },
+  "workspace": {
+    "id": "00000000-0000-7000-8000-000000000001",
+    "name": "Demo ShelfOps (data fiktif)",
+    "is_demo": true,
+    "demo_expires_at": null,
+    "locale": "id"
+  },
+  "role": "analyst",
+  "permissions": [
+    "document.write",
+    "document.read",
+    "chat.use",
+    "audit.write",
+    "audit.read",
+    "dashboard.read",
+    "alert.update",
+    "task.write",
+    "eval.read",
+    "eval.run",
+    "trace.read"
+  ],
+  "demo": true
+}

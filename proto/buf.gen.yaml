@@ -1,0 +1,20 @@
+version: v2
+clean: false
+plugins:
+  # Go stubs untuk gateway/worker
+  - remote: buf.build/protocolbuffers/go:v1.36.6
+    out: ../services/gateway/gen
+    opt: paths=source_relative
+  - remote: buf.build/grpc/go:v1.5.1
+    out: ../services/gateway/gen
+    opt: paths=source_relative
+  # Python stubs untuk ai-rag
+  - remote: buf.build/protocolbuffers/python:v29.3
+    out: ../services/ai-rag/gen
+  - remote: buf.build/grpc/python:v1.68.1
+    out: ../services/ai-rag/gen
+  # Python stubs untuk ai-vision
+  - remote: buf.build/protocolbuffers/python:v29.3
+    out: ../services/ai-vision/gen
+  - remote: buf.build/grpc/python:v1.68.1
+    out: ../services/ai-vision/gen

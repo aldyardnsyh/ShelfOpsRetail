@@ -1,0 +1,260 @@
+{
+  "summary": {
+    "total": 8,
+    "ready": 6,
+    "scheduled": 1,
+    "last_generated": "2026-10-25T18:34:33.861682+07:00",
+    "stores_covered": 12,
+    "avg_availability_pct": 94.96,
+    "period_days": 28
+  },
+  "reports": [
+    {
+      "id": "9e3427e7-c676-403d-84ef-ec17876313d7",
+      "title": "Bulanan · 22/Oct",
+      "kind": "monthly",
+      "period_from": "2026-10-16T00:00:00Z",
+      "period_to": "2026-10-22T00:00:00Z",
+      "scope": "all",
+      "stores_count": 5,
+      "status": "ready",
+      "generated_at": "2026-10-25T18:34:33.861682+07:00",
+      "format": "csv",
+      "metrics": {
+        "visitors": 1317,
+        "oos_rate_pct": 4.5,
+        "availability_pct": 92.1
+      }
+    },
+    {
+      "id": "2e53036c-d822-46cd-8846-7d787a878334",
+      "title": "Insiden · 19/Oct",
+      "kind": "incident",
+      "period_from": "2026-10-13T00:00:00Z",
+      "period_to": "2026-10-19T00:00:00Z",
+      "scope": "all",
+      "stores_count": 6,
+      "status": "ready",
+      "generated_at": "2026-10-25T09:34:33.861682+07:00",
+      "format": "xlsx",
+      "metrics": {
+        "visitors": 1394,
+        "oos_rate_pct": 4.8,
+        "availability_pct": 91.7
+      }
+    },
+    {
+      "id": "e47cb298-c72f-4a07-89f8-bba619073309",
+      "title": "Kustom · 16/Oct",
+      "kind": "custom",
+      "period_from": "2026-10-10T00:00:00Z",
+      "period_to": "2026-10-16T00:00:00Z",
+      "scope": "Jawa Barat",
+      "stores_count": 7,
+      "status": "ready",
+      "generated_at": "2026-10-25T00:34:33.861682+07:00",
+      "format": "pdf",
+      "metrics": {
+        "visitors": 1471,
+        "oos_rate_pct": 5.1,
+        "availability_pct": 91.3
+      }
+    },
+    {
+      "id": "fe95c74c-5f92-4f87-9282-25ba3b70199b",
+      "title": "Mingguan · 13/Oct",
+      "kind": "weekly",
+      "period_from": "2026-10-07T00:00:00Z",
+      "period_to": "2026-10-13T00:00:00Z",
+      "scope": "all",
+      "stores_count": 8,
+      "status": "ready",
+      "generated_at": "2026-10-24T15:34:33.861682+07:00",
+      "format": "csv",
+      "metrics": {
+        "visitors": 1548,
+        "oos_rate_pct": 5.4,
+        "availability_pct": 90.9
+      }
+    },
+    {
+      "id": "6ad7957f-2dd2-4316-ab00-8bb4317ff943",
+      "title": "Bulanan · 10/Oct",
+      "kind": "monthly",
+      "period_from": "2026-10-04T00:00:00Z",
+      "period_to": "2026-10-10T00:00:00Z",
+      "scope": "all",
+      "stores_count": 9,
+      "status": "ready",
+      "generated_at": "2026-10-24T06:34:33.861682+07:00",
+      "format": "xlsx",
+      "metrics": {
+        "visitors": 1625,
+        "oos_rate_pct": 5.7,
+        "availability_pct": 90.5
+      }
+    },
+    {
+      "id": "45c8d60a-3747-4c54-a6c3-18f4a0424781",
+      "title": "Insiden · 07/Oct",
+      "kind": "incident",
+      "period_from": "2026-10-01T00:00:00Z",
+      "period_to": "2026-10-07T00:00:00Z",
+      "scope": "Jawa Barat",
+      "stores_count": 10,
+      "status": "ready",
+      "generated_at": "2026-10-23T21:34:33.861682+07:00",
+      "format": "pdf",
+      "metrics": {
+        "visitors": 1702,
+        "oos_rate_pct": 6,
+        "availability_pct": 90.1
+      }
+    },
+    {
+      "id": "2ef50f97-6dd5-433e-9628-f27b2a378db9",
+      "title": "Kustom · 04/Oct",
+      "kind": "custom",
+      "period_from": "2026-09-28T00:00:00Z",
+      "period_to": "2026-10-04T00:00:00Z",
+      "scope": "all",
+      "stores_count": 11,
+      "status": "scheduled",
+      "generated_at": null,
+      "format": "csv",
+      "metrics": {
+        "visitors": 1779,
+        "oos_rate_pct": 6.3,
+        "availability_pct": 89.7
+      }
+    },
+    {
+      "id": "772d77a1-a542-445b-b94e-9b5091635ac4",
+      "title": "Mingguan · 01/Oct",
+      "kind": "weekly",
+      "period_from": "2026-09-25T00:00:00Z",
+      "period_to": "2026-10-01T00:00:00Z",
+      "scope": "all",
+      "stores_count": 12,
+      "status": "processing",
+      "generated_at": null,
+      "format": "xlsx",
+      "metrics": {
+        "visitors": 1856,
+        "oos_rate_pct": 6.6,
+        "availability_pct": 89.3
+      }
+    }
+  ],
+  "series": [
+    {
+      "date": "2026-10-15",
+      "availability_pct": 94.48,
+      "oos_rate_pct": 5.52,
+      "visitors": 4653
+    },
+    {
+      "date": "2026-10-16",
+      "availability_pct": 96.04,
+      "oos_rate_pct": 3.96,
+      "visitors": 4353
+    },
+    {
+      "date": "2026-10-17",
+      "availability_pct": 94.5,
+      "oos_rate_pct": 5.5,
+      "visitors": 4933
+    },
+    {
+      "date": "2026-10-18",
+      "availability_pct": 94.14,
+      "oos_rate_pct": 5.86,
+      "visitors": 4413
+    },
+    {
+      "date": "2026-10-19",
+      "availability_pct": 92.95,
+      "oos_rate_pct": 7.05,
+      "visitors": 4553
+    },
+    {
+      "date": "2026-10-20",
+      "availability_pct": 94.07,
+      "oos_rate_pct": 5.93,
+      "visitors": 4693
+    },
+    {
+      "date": "2026-10-21",
+      "availability_pct": 94.48,
+      "oos_rate_pct": 5.52,
+      "visitors": 4613
+    },
+    {
+      "date": "2026-10-22",
+      "availability_pct": 94.27,
+      "oos_rate_pct": 5.73,
+      "visitors": 4313
+    },
+    {
+      "date": "2026-10-23",
+      "availability_pct": 94.32,
+      "oos_rate_pct": 5.68,
+      "visitors": 4893
+    },
+    {
+      "date": "2026-10-24",
+      "availability_pct": 92.95,
+      "oos_rate_pct": 7.05,
+      "visitors": 4593
+    },
+    {
+      "date": "2026-10-25",
+      "availability_pct": 97.36,
+      "oos_rate_pct": 2.64,
+      "visitors": 5313
+    },
+    {
+      "date": "2026-10-28",
+      "availability_pct": 100,
+      "oos_rate_pct": 0,
+      "visitors": 1940
+    }
+  ],
+  "schedules": [
+    {
+      "id": "210a2f0e-49e8-4f14-a93e-1cd5a349bf48",
+      "name": "Laporan Bulanan Regional",
+      "cadence": "monthly",
+      "scope": "Jawa Barat",
+      "format": "xlsx",
+      "recipients": [
+        "budi@shelfops.local"
+      ],
+      "active": true
+    },
+    {
+      "id": "daba2a05-c78b-4b73-8631-f776a75edba0",
+      "name": "Laporan Insiden Mingguan",
+      "cadence": "weekly",
+      "scope": "Jawa Timur",
+      "format": "csv",
+      "recipients": [
+        "sari@shelfops.local"
+      ],
+      "active": false
+    },
+    {
+      "id": "4d5f259d-1c26-4cad-bcca-e543402c208f",
+      "name": "Laporan Mingguan Regional",
+      "cadence": "weekly",
+      "scope": "all",
+      "format": "pdf",
+      "recipients": [
+        "rina@shelfops.local",
+        "ops@shelfops.local"
+      ],
+      "active": true
+    }
+  ],
+  "notes": "Laporan dihitung dari audit + traffic harian; jadwal aktif mengirim otomatis ke daftar penerima."
+}

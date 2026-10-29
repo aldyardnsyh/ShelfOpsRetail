@@ -1,0 +1,161 @@
+syntax = "proto3";
+
+package shelfops.v1;
+
+option go_package = "github.com/aldyardnsyh/ShelfOpsRetail/services/gateway/gen/shelfops/v1;shelfopsv1";
+
+// Kontrak gateway/worker <-> ai-rag (PRD §11.2).
+// Catatan: nama pesan mengikuti buf lint STANDARD (D-016); field identik dengan PRD.
+service RagService {
+  rpc Ingest(IngestRequest) returns (stream IngestResponse);
+  rpc Chat(ChatRequest) returns (stream ChatResponse);
+  rpc Search(SearchRequest) returns (SearchResponse);
+  rpc Health(RagServiceHealthRequest) returns (RagServiceHealthResponse);
+}
+
+message IngestRequest {
+  string request_id = 1;
+  string workspace_id = 2;
+  string document_id = 3;
+  int32 version = 4;
+  string object_key = 5;
+  string mime = 6;
+  string language = 7;          // id | en
+  int32 chunk_size = 8;         // 0 = default 500
+  int32 chunk_overlap = 9;      // 0 = default 60
+  bool force_reindex = 10;
+  reserved 11 to 20;
+}
+
+message IngestResponse {
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    STATE_PARSING = 1;
+    STATE_CHUNKING = 2;
+    STATE_EMBEDDING = 3;
+    STATE_READY = 4;
+    STATE_FAILED = 5;
+  }
+  State state = 1;
+  float progress = 2;           // 0..1
+  int32 chunks_done = 3;
+  int32 chunks_total = 4;
+  string message = 5;
+  string error = 6;
+}
+
+message HistoryTurn {
+  string role = 1;              // user | assistant
+  string content = 2;
+}
+
+message ChatRequest {
+  string request_id = 1;
+  string workspace_id = 2;
+  string conversation_id = 3;
+  string user_id = 4;
+  string message = 5;
+  repeated HistoryTurn history = 6;
+  string model_hint = 7;
+  map<string, string> filters = 8;
+  // Konfigurasi retrieval dari gateway (dipindai & dicatat sebagai bagian trace)
+  int32 top_k_vector = 9;
+  int32 top_k_lexical = 10;
+  int32 rrf_k = 11;
+  int32 top_n_final = 12;
+  float refuse_threshold = 13;
+  bool allow_tools = 14;
+  int32 max_steps = 15;
+  reserved 16 to 30;
+}
+
+message Citation {
+  int32 ordinal = 1;
+  string chunk_id = 2;
+  string document_id = 3;
+  string document_title = 4;
+  int32 page = 5;
+  string heading_path = 6;
+  float score = 7;
+  string snippet = 8;
+}
+
+message ToolCallRef {
+  string id = 1;
+  string name = 2;
+  string args_json = 3;
+  string status = 4;            // pending | awaiting_confirmation | running | done | failed | rejected
+  string result_summary = 5;
+  int32 duration_ms = 6;
+  bool requires_confirmation = 7;
+}
+
+message ChatResponse {
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    TYPE_TOKEN = 1;
+    TYPE_CITATION = 2;
+    TYPE_TOOL_START = 3;
+    TYPE_TOOL_END = 4;
+    TYPE_CONFIRM_REQUIRED = 5;
+    TYPE_DONE = 6;
+    TYPE_ERROR = 7;
+    TYPE_STEP = 8;              // langkah agent (transparansi)
+  }
+  Type type = 1;
+  string text = 2;
+  Citation citation = 3;
+  ToolCallRef tool_call = 4;
+  int32 step = 5;
+  string request_id = 6;
+  // usage hanya di TYPE_DONE
+  int32 tokens_in = 7;
+  int32 tokens_out = 8;
+  double cost_usd = 9;
+  int32 latency_ms = 10;
+  string provider = 11;
+  string model = 12;
+  bool refused = 13;
+  bool replay = 14;             // mode Replay ADR-010
+  string error = 15;
+  reserved 16 to 30;
+}
+
+message SearchRequest {
+  string request_id = 1;
+  string workspace_id = 2;
+  string query = 3;
+  int32 top_k = 4;
+  map<string, string> filters = 5;
+  bool rerank = 6;
+}
+
+message SearchHit {
+  string chunk_id = 1;
+  string document_id = 2;
+  string document_title = 3;
+  int32 page = 4;
+  string heading_path = 5;
+  float score = 6;
+  string content = 7;
+  int32 rank_vector = 8;
+  int32 rank_lexical = 9;
+}
+
+message SearchResponse {
+  repeated SearchHit hits = 1;
+  int32 latency_ms = 2;
+  bool empty = 3;
+  string error = 4;
+}
+
+message RagServiceHealthRequest {}
+
+message RagServiceHealthResponse {
+  bool ready = 1;
+  string version = 2;
+  string llm_provider = 3;
+  string embedding_provider = 4;
+  int32 embedding_dim = 5;
+  string degradation = 6;       // L0/L1
+}

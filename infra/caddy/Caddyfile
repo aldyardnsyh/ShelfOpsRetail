@@ -1,0 +1,77 @@
+{
+	email {$ACME_EMAIL}
+	admin 127.0.0.1:2019
+	persist_config off
+}
+
+# Header untuk respons JSON API: tidak ada aset yang perlu dimuat.
+(api_headers) {
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		Cross-Origin-Opener-Policy "same-origin"
+		Cross-Origin-Resource-Policy "same-site"
+		Content-Security-Policy "default-src 'none'; frame-ancestors 'none'; base-uri 'none'"
+		-Server
+	}
+}
+
+# Header untuk halaman web. Next.js menyisipkan skrip dan style inline,
+# jadi CSP harus mengizinkannya; sumber eksternal tetap dilarang.
+(web_headers) {
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		Cross-Origin-Opener-Policy "same-origin"
+		Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+		-Server
+	}
+}
+
+# Satu host publik: web + API pada origin yang sama.
+{$SHELFOPS_HOST} {
+	encode zstd gzip
+
+	# API: SSE chat butuh flush segera, upload dokumen sampai 25 MB.
+	handle /api/* {
+		import api_headers
+
+		request_body {
+			max_size 25MB
+		}
+
+		reverse_proxy gateway:8080 {
+			flush_interval -1
+			health_uri /healthz
+			health_interval 30s
+			health_timeout 5s
+			header_up X-Real-IP {remote_host}
+		}
+	}
+
+	# Probe publik untuk uptime monitor.
+	handle /healthz {
+		import api_headers
+		reverse_proxy gateway:8080
+	}
+
+	# Sisanya halaman web.
+	handle {
+		import web_headers
+		reverse_proxy web:3000
+	}
+
+	log {
+		output stdout
+		format json
+	}
+}
+
+# ai-rag (:50051/:8081) dan ai-vision (:50052/:8082) hanya hidup di jaringan
+# Docker shelfops_backend dan tidak dipublikasikan ke host.

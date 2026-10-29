@@ -1,0 +1,164 @@
+[
+  {
+    "date": "2026-09-29",
+    "compliance": 86.17,
+    "oos_rate": 5.7,
+    "audits": 6
+  },
+  {
+    "date": "2026-09-30",
+    "compliance": 85.5,
+    "oos_rate": 4.98,
+    "audits": 8
+  },
+  {
+    "date": "2026-10-01",
+    "compliance": 91,
+    "oos_rate": 3.57,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-02",
+    "compliance": 90,
+    "oos_rate": 4.48,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-03",
+    "compliance": 86.88,
+    "oos_rate": 5.45,
+    "audits": 8
+  },
+  {
+    "date": "2026-10-04",
+    "compliance": 88,
+    "oos_rate": 4.76,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-05",
+    "compliance": 85.83,
+    "oos_rate": 5.33,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-06",
+    "compliance": 86.5,
+    "oos_rate": 3.93,
+    "audits": 8
+  },
+  {
+    "date": "2026-10-07",
+    "compliance": 88,
+    "oos_rate": 5.65,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-08",
+    "compliance": 87.17,
+    "oos_rate": 3.56,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-09",
+    "compliance": 86.25,
+    "oos_rate": 4.52,
+    "audits": 8
+  },
+  {
+    "date": "2026-10-10",
+    "compliance": 90.17,
+    "oos_rate": 7.89,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-11",
+    "compliance": 89.5,
+    "oos_rate": 3.9,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-12",
+    "compliance": 86.38,
+    "oos_rate": 4.53,
+    "audits": 8
+  },
+  {
+    "date": "2026-10-13",
+    "compliance": 84.83,
+    "oos_rate": 4.41,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-14",
+    "compliance": 88.83,
+    "oos_rate": 4.33,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-15",
+    "compliance": 86,
+    "oos_rate": 5.52,
+    "audits": 8
+  },
+  {
+    "date": "2026-10-16",
+    "compliance": 87.83,
+    "oos_rate": 3.96,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-17",
+    "compliance": 87.17,
+    "oos_rate": 5.5,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-18",
+    "compliance": 86,
+    "oos_rate": 5.86,
+    "audits": 8
+  },
+  {
+    "date": "2026-10-19",
+    "compliance": 90.33,
+    "oos_rate": 7.05,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-20",
+    "compliance": 86.67,
+    "oos_rate": 5.93,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-21",
+    "compliance": 90.38,
+    "oos_rate": 5.52,
+    "audits": 8
+  },
+  {
+    "date": "2026-10-22",
+    "compliance": 87.5,
+    "oos_rate": 5.73,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-23",
+    "compliance": 89,
+    "oos_rate": 5.68,
+    "audits": 6
+  },
+  {
+    "date": "2026-10-24",
+    "compliance": 83.5,
+    "oos_rate": 7.05,
+    "audits": 8
+  },
+  {
+    "date": "2026-10-25",
+    "compliance": 89.33,
+    "oos_rate": 2.64,
+    "audits": 6
+  }
+]

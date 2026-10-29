@@ -1,0 +1,364 @@
+{
+  "summary": {
+    "suppliers_active": 5,
+    "pos_open": 8,
+    "pos_total": 12,
+    "value_open_idr": 52500000,
+    "late_count": 6,
+    "received_count": 2,
+    "as_of": "2026-10-28T23:12:28.856132+07:00"
+  },
+  "suppliers": [
+    {
+      "id": "6c882f6c-ed87-eaef-afe6-fde6095f3768",
+      "name": "CV Moleng Utama",
+      "category": "Bahan Dapur",
+      "lead_time_days": 5,
+      "on_time_pct": 85,
+      "active": true
+    },
+    {
+      "id": "1fed8f3d-0f1d-33a0-aa35-728a39f2931d",
+      "name": "PT Distribusi Sinar",
+      "category": "Minuman",
+      "lead_time_days": 3,
+      "on_time_pct": 89,
+      "active": true
+    },
+    {
+      "id": "79f9aeb3-a771-103d-f216-47aa7585a415",
+      "name": "PT Logistik Nusantara",
+      "category": "Logistik",
+      "lead_time_days": 2,
+      "on_time_pct": 83,
+      "active": true
+    },
+    {
+      "id": "c1cbcd03-39f1-da89-6efd-478d8de86b92",
+      "name": "PT Pangan Abadi",
+      "category": "Snack",
+      "lead_time_days": 3,
+      "on_time_pct": 81,
+      "active": true
+    },
+    {
+      "id": "4c0aaef0-ffe1-da3d-ad96-404a54ab2ba1",
+      "name": "PT Pasokan Sehati",
+      "category": "Makanan",
+      "lead_time_days": 4,
+      "on_time_pct": 87,
+      "active": true
+    }
+  ],
+  "purchase_orders": [
+    {
+      "id": "07188c3e-d6ba-8dd2-c2f2-09fb2e6e7f3b",
+      "po_code": "PO-1014-011",
+      "supplier_id": "1fed8f3d-0f1d-33a0-aa35-728a39f2931d",
+      "supplier_name": "PT Distribusi Sinar",
+      "store_id": "629416f1-45fe-47ac-b5ba-a3cf507b7f56",
+      "store_name": "Swalayan Mitra Bogor",
+      "status": "cancelled",
+      "created_at": "2026-10-26T03:34:33.861682+07:00",
+      "expected_at": "2026-10-17T07:00:00+07:00",
+      "lines": [
+        {
+          "product_id": "4190c366-c2bc-546a-d306-10276967d2c9",
+          "sku": "SKU-0001",
+          "product_name": "Air Mineral 600ml",
+          "qty_order": 13,
+          "qty_received": 0,
+          "unit_cost_idr": 3600
+        }
+      ],
+      "total_idr": 6250000,
+      "note": ""
+    },
+    {
+      "id": "8035a057-616d-66d7-8bc1-c33f744befe1",
+      "po_code": "PO-1022-003",
+      "supplier_id": "1fed8f3d-0f1d-33a0-aa35-728a39f2931d",
+      "supplier_name": "PT Distribusi Sinar",
+      "store_id": "118e917e-f403-47a4-a9ff-95cdb97078f4",
+      "store_name": "Pasar Segar Depok",
+      "status": "receiving",
+      "created_at": "2026-10-26T03:34:33.861682+07:00",
+      "expected_at": "2026-10-25T07:00:00+07:00",
+      "lines": [
+        {
+          "product_id": "4190c366-c2bc-546a-d306-10276967d2c9",
+          "sku": "SKU-0001",
+          "product_name": "Air Mineral 600ml",
+          "qty_order": 3,
+          "qty_received": 6,
+          "unit_cost_idr": 3600
+        }
+      ],
+      "total_idr": 1250000,
+      "note": ""
+    },
+    {
+      "id": "1edf6548-0268-1345-27db-12645fdbc91b",
+      "po_code": "PO-1016-009",
+      "supplier_id": "79f9aeb3-a771-103d-f216-47aa7585a415",
+      "supplier_name": "PT Logistik Nusantara",
+      "store_id": "52bc6078-629c-48a3-9307-e091828f1961",
+      "store_name": "Gerai Nusa Tangerang",
+      "status": "receiving",
+      "created_at": "2026-10-26T03:34:33.861682+07:00",
+      "expected_at": "2026-10-19T07:00:00+07:00",
+      "lines": [
+        {
+          "product_id": "adbd46fe-6aa1-6a13-5d82-97f892157d46",
+          "sku": "SKU-0003",
+          "product_name": "Susu UHT 1L",
+          "qty_order": 11,
+          "qty_received": 2,
+          "unit_cost_idr": 4800
+        }
+      ],
+      "total_idr": 8750000,
+      "note": ""
+    },
+    {
+      "id": "5cca2b63-9906-f7fe-499b-b13e03e9abc5",
+      "po_code": "PO-1013-012",
+      "supplier_id": "6c882f6c-ed87-eaef-afe6-fde6095f3768",
+      "supplier_name": "CV Moleng Utama",
+      "store_id": "67a19397-ebdd-429e-9c6e-cecd4b1b0055",
+      "store_name": "Swalayan Mitra Semarang",
+      "status": "draft",
+      "created_at": "2026-10-26T03:34:33.861682+07:00",
+      "expected_at": "2026-10-16T07:00:00+07:00",
+      "lines": [
+        {
+          "product_id": "214bddb2-776e-ff7e-6ec7-d2ec783f30c5",
+          "sku": "SKU-0002",
+          "product_name": "Teh Kemasan 250ml",
+          "qty_order": 6,
+          "qty_received": 0,
+          "unit_cost_idr": 4200
+        }
+      ],
+      "total_idr": 1250000,
+      "note": ""
+    },
+    {
+      "id": "3cc55a6e-a927-8d06-d15f-903158f88c2e",
+      "po_code": "PO-1017-008",
+      "supplier_id": "79f9aeb3-a771-103d-f216-47aa7585a415",
+      "supplier_name": "PT Logistik Nusantara",
+      "store_id": "4e333c94-266e-4ce6-84b0-dc3130cfaff3",
+      "store_name": "Pasar Segar Yogyakarta",
+      "status": "confirmed",
+      "created_at": "2026-10-26T03:34:33.861682+07:00",
+      "expected_at": "2026-10-20T07:00:00+07:00",
+      "lines": [
+        {
+          "product_id": "4190c366-c2bc-546a-d306-10276967d2c9",
+          "sku": "SKU-0001",
+          "product_name": "Air Mineral 600ml",
+          "qty_order": 15,
+          "qty_received": 0,
+          "unit_cost_idr": 3600
+        }
+      ],
+      "total_idr": 5000000,
+      "note": ""
+    },
+    {
+      "id": "aa6fd782-6231-ad2c-567a-d4803e73bd1b",
+      "po_code": "PO-1023-002",
+      "supplier_id": "1fed8f3d-0f1d-33a0-aa35-728a39f2931d",
+      "supplier_name": "PT Distribusi Sinar",
+      "store_id": "053b6aa7-22ed-4f44-b27e-25ab5c33d7bf",
+      "store_name": "Minimarket Maju Jaya Bekasi",
+      "status": "confirmed",
+      "created_at": "2026-10-26T03:34:33.861682+07:00",
+      "expected_at": "2026-10-26T07:00:00+07:00",
+      "lines": [
+        {
+          "product_id": "d61fa47b-162e-5227-2957-93c010a8745f",
+          "sku": "SKU-0004",
+          "product_name": "Kopi Sachet 10s",
+          "qty_order": 15,
+          "qty_received": 0,
+          "unit_cost_idr": 5400
+        }
+      ],
+      "total_idr": 10000000,
+      "note": ""
+    },
+    {
+      "id": "9a427565-cf9a-4170-1b6c-c4957bf00da7",
+      "po_code": "PO-1018-007",
+      "supplier_id": "c1cbcd03-39f1-da89-6efd-478d8de86b92",
+      "supplier_name": "PT Pangan Abadi",
+      "store_id": "435fa180-da06-485e-bfa2-2c69d64b574d",
+      "store_name": "Toko Sejahtera Cikarang",
+      "status": "sent",
+      "created_at": "2026-10-26T03:34:33.861682+07:00",
+      "expected_at": "2026-10-21T07:00:00+07:00",
+      "lines": [
+        {
+          "product_id": "d61fa47b-162e-5227-2957-93c010a8745f",
+          "sku": "SKU-0004",
+          "product_name": "Kopi Sachet 10s",
+          "qty_order": 11,
+          "qty_received": 0,
+          "unit_cost_idr": 5400
+        }
+      ],
+      "total_idr": 11250000,
+      "note": ""
+    },
+    {
+      "id": "c81aae25-9426-ab4a-4b27-d7b87a274809",
+      "po_code": "PO-1024-001",
+      "supplier_id": "4c0aaef0-ffe1-da3d-ad96-404a54ab2ba1",
+      "supplier_name": "PT Pasokan Sehati",
+      "store_id": "0253eabc-868b-4e5d-b67d-18e486a91ed7",
+      "store_name": "Pasar Segar Depok",
+      "status": "sent",
+      "created_at": "2026-10-26T03:34:33.861682+07:00",
+      "expected_at": "2026-10-27T07:00:00+07:00",
+      "lines": [
+        {
+          "product_id": "d61fa47b-162e-5227-2957-93c010a8745f",
+          "sku": "SKU-0004",
+          "product_name": "Kopi Sachet 10s",
+          "qty_order": 6,
+          "qty_received": 0,
+          "unit_cost_idr": 5400
+        }
+      ],
+      "total_idr": 10000000,
+      "note": ""
+    },
+    {
+      "id": "d2decf3d-de61-e52f-15b9-cdd5a6426d8e",
+      "po_code": "PO-1021-004",
+      "supplier_id": "6c882f6c-ed87-eaef-afe6-fde6095f3768",
+      "supplier_name": "CV Moleng Utama",
+      "store_id": "2f2c174e-0c25-43a4-a93e-c6c02df0ae14",
+      "store_name": "Toko Sejahtera Surabaya",
+      "status": "received",
+      "created_at": "2026-10-26T03:34:33.861682+07:00",
+      "expected_at": "2026-10-24T07:00:00+07:00",
+      "lines": [
+        {
+          "product_id": "d61fa47b-162e-5227-2957-93c010a8745f",
+          "sku": "SKU-0004",
+          "product_name": "Kopi Sachet 10s",
+          "qty_order": 15,
+          "qty_received": 0,
+          "unit_cost_idr": 5400
+        }
+      ],
+      "total_idr": 8750000,
+      "note": ""
+    },
+    {
+      "id": "43988552-1534-b8d8-837d-b0972c78e218",
+      "po_code": "PO-1020-005",
+      "supplier_id": "4c0aaef0-ffe1-da3d-ad96-404a54ab2ba1",
+      "supplier_name": "PT Pasokan Sehati",
+      "store_id": "301b5326-e3ba-42d6-bf20-cf3d7168ce99",
+      "store_name": "Swalayan Mitra Semarang",
+      "status": "cancelled",
+      "created_at": "2026-10-26T03:34:33.861682+07:00",
+      "expected_at": "2026-10-23T07:00:00+07:00",
+      "lines": [
+        {
+          "product_id": "214bddb2-776e-ff7e-6ec7-d2ec783f30c5",
+          "sku": "SKU-0002",
+          "product_name": "Teh Kemasan 250ml",
+          "qty_order": 19,
+          "qty_received": 0,
+          "unit_cost_idr": 4200
+        }
+      ],
+      "total_idr": 8750000,
+      "note": ""
+    },
+    {
+      "id": "8caaccc5-f5a1-f790-4fb8-22374df407dd",
+      "po_code": "PO-1019-006",
+      "supplier_id": "1fed8f3d-0f1d-33a0-aa35-728a39f2931d",
+      "supplier_name": "PT Distribusi Sinar",
+      "store_id": "30badaa5-6ad0-4eef-8d1a-a2f3ea754706",
+      "store_name": "Pasar Segar Yogyakarta",
+      "status": "draft",
+      "created_at": "2026-10-26T03:34:33.861682+07:00",
+      "expected_at": "2026-10-22T07:00:00+07:00",
+      "lines": [
+        {
+          "product_id": "adbd46fe-6aa1-6a13-5d82-97f892157d46",
+          "sku": "SKU-0003",
+          "product_name": "Susu UHT 1L",
+          "qty_order": 18,
+          "qty_received": 0,
+          "unit_cost_idr": 4800
+        }
+      ],
+      "total_idr": 5000000,
+      "note": ""
+    },
+    {
+      "id": "830e97b6-de0e-69ae-c9c8-b0b3399b3d47",
+      "po_code": "PO-1015-010",
+      "supplier_id": "6c882f6c-ed87-eaef-afe6-fde6095f3768",
+      "supplier_name": "CV Moleng Utama",
+      "store_id": "591d0fe5-a567-4d59-afcd-ce6d16ae7196",
+      "store_name": "Gerai Nusa Malang",
+      "status": "received",
+      "created_at": "2026-10-26T03:34:33.861682+07:00",
+      "expected_at": "2026-10-18T07:00:00+07:00",
+      "lines": [
+        {
+          "product_id": "4190c366-c2bc-546a-d306-10276967d2c9",
+          "sku": "SKU-0001",
+          "product_name": "Air Mineral 600ml",
+          "qty_order": 7,
+          "qty_received": 0,
+          "unit_cost_idr": 3600
+        }
+      ],
+      "total_idr": 3750000,
+      "note": ""
+    }
+  ],
+  "grns": [
+    {
+      "id": "3523983c-dc8c-48aa-98da-96d651bdeff1",
+      "ref": "GRN-3523983c",
+      "po_id": "8035a057-616d-66d7-8bc1-c33f744befe1",
+      "store_id": "118e917e-f403-47a4-a9ff-95cdb97078f4",
+      "store_name": "Pasar Segar Depok",
+      "product_id": "4190c366-c2bc-546a-d306-10276967d2c9",
+      "sku": "SKU-0001",
+      "product_name": "Air Mineral 600ml",
+      "qty": 6,
+      "value_idr": 21600,
+      "received_at": "2026-10-25T07:00:00+07:00",
+      "status": "received",
+      "supplier_name": "PT Distribusi Sinar"
+    },
+    {
+      "id": "b9e73d66-28eb-4077-ad9b-5ad7ddc7c5e1",
+      "ref": "GRN-b9e73d66",
+      "po_id": "1edf6548-0268-1345-27db-12645fdbc91b",
+      "store_id": "52bc6078-629c-48a3-9307-e091828f1961",
+      "store_name": "Gerai Nusa Tangerang",
+      "product_id": "adbd46fe-6aa1-6a13-5d82-97f892157d46",
+      "sku": "SKU-0003",
+      "product_name": "Susu UHT 1L",
+      "qty": 2,
+      "value_idr": 9600,
+      "received_at": "2026-10-19T07:00:00+07:00",
+      "status": "partial",
+      "supplier_name": "PT Logistik Nusantara"
+    }
+  ],
+  "notes": "PO terbuka memicu restock ke inventory; GRN dihitung dari garis penerimaan qty_received > 0."
+}

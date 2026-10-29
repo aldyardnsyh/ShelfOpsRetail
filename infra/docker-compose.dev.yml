@@ -1,0 +1,35 @@
+name: shelfops-dev
+
+# Container_name sengaja sama dengan container dev manual (shelfops-pg-dev).
+# Hentikan container lama sebelum `docker compose up`; data lama ada di volume
+# anonim milik container tersebut, sedangkan compose memakai volume bernama.
+# Setelah pindah, jalankan `make migrate seed` sekali.
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: shelfops-pg-dev
+    restart: unless-stopped
+    shm_size: 128mb
+    ports:
+      - "55433:5432"
+    environment:
+      POSTGRES_USER: shelfops
+      POSTGRES_PASSWORD: shelfops_dev_password
+      POSTGRES_DB: shelfops
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shelfops -d shelfops"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  pgdata:
+    name: shelfops_pg_dev_data

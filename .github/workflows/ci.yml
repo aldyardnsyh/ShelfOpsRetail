@@ -1,0 +1,150 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  secrets:
+    name: secrets scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Cek file privat dan pola rahasia
+        run: node scripts/check-secrets.mjs
+
+  gateway:
+    name: gateway (Go)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: shelfops
+          POSTGRES_PASSWORD: shelfops_ci_password
+          POSTGRES_DB: shelfops
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U shelfops -d shelfops"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    defaults:
+      run:
+        working-directory: services/gateway
+    env:
+      APP_ENV: test
+      PGUSER: shelfops
+      PGPASSWORD: shelfops_ci_password
+      PGDATABASE: shelfops
+      PGHOST: 127.0.0.1
+      PGPORT: "5432"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: services/gateway/go.mod
+          cache-dependency-path: services/gateway/go.sum
+      - name: Download modules
+        run: go mod download
+      - name: Vet
+        run: go vet ./...
+      - name: Build
+        run: go build ./...
+      - name: Test (migrate + seed + race)
+        run: |
+          export DATABASE_URL="$(printf 'postgres://%s:%s@%s:%s/%s?sslmode=disable' "$PGUSER" "$PGPASSWORD" "$PGHOST" "$PGPORT" "$PGDATABASE")"
+          export TEST_DATABASE_URL="$DATABASE_URL"
+          go run ./cmd/shelfops seed
+          go test ./... -race -count=1
+
+  web:
+    name: web (Next.js)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install
+        run: npm ci --no-audit --no-fund
+      - name: Build api-client
+        run: npm run build --workspace packages/api-client --if-present
+      - name: Test web fixtures
+        # Kontrak fixture demo: bentuk payload + integritas relasi antar file.
+        run: npm run test --workspace apps/web
+      - name: Build web
+        # CI memvalidasi profil production: URL API wajib eksplisit agar build
+        # gagal cepat bila deployment lupa mengonfigurasinya (lihat next.config.ts).
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:8080
+        run: npm run build --workspace apps/web
+
+  python:
+    name: ${{ matrix.service }} (Python)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        service: [ai-rag, ai-vision]
+    defaults:
+      run:
+        working-directory: services/${{ matrix.service }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.13.1"
+          python-version: "3.11"
+          enable-cache: true
+          cache-dependency-glob: services/${{ matrix.service }}/uv.lock
+      - name: Sync dependency
+        run: |
+          if [ -f uv.lock ]; then
+            uv sync --frozen
+          else
+            uv sync
+          fi
+      - name: Pytest
+        run: uv run pytest -q
+
+  contracts:
+    name: contracts (buf)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: bufbuild/buf-setup-action@v1
+        with:
+          version: "1.47.2"
+      - name: buf lint
+        working-directory: proto
+        run: buf lint
+      - name: buf breaking (commit terakhir)
+        working-directory: proto
+        run: |
+          if git -C .. rev-parse --verify HEAD~1 >/dev/null 2>&1; then
+            buf breaking --against "../.git#ref=HEAD~1,subdir=proto"
+          else
+            echo "HEAD~1 tidak tersedia; breaking check dilewati"
+          fi

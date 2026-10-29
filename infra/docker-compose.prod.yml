@@ -1,0 +1,348 @@
+name: shelfops
+
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+x-hardening: &default-hardening
+  security_opt:
+    - no-new-privileges:true
+  cap_drop:
+    - ALL
+
+services:
+  caddy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      SHELFOPS_HOST: "${SHELFOPS_HOST:?SHELFOPS_HOST wajib diisi (mis. shelfops.example.com)}"
+      ACME_EMAIL: "${ACME_EMAIL:?ACME_EMAIL wajib diisi}"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      gateway:
+        condition: service_healthy
+      web:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:2019/config/ >/dev/null"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+    <<: *default-hardening
+    cap_add:
+      - NET_BIND_SERVICE
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 96M
+    logging: *default-logging
+
+  gateway:
+    image: "${IMAGE_PREFIX:-shelfops}/gateway:${IMAGE_TAG:-latest}"
+    build:
+      context: ../services/gateway
+      dockerfile: Dockerfile
+      args:
+        GIT_SHA: "${IMAGE_TAG:-local}"
+    restart: unless-stopped
+    environment:
+      APP_ENV: production
+      APP_BASE_URL: "${APP_BASE_URL:?APP_BASE_URL wajib diisi}"
+      WEB_BASE_URL: "${WEB_BASE_URL:?WEB_BASE_URL wajib diisi}"
+      LOG_LEVEL: "${LOG_LEVEL:-info}"
+      GATEWAY_MODE: all
+      GATEWAY_HTTP_ADDR: ":8080"
+      GATEWAY_SHUTDOWN_TIMEOUT: "${GATEWAY_SHUTDOWN_TIMEOUT:-20s}"
+      DATABASE_URL: "${DATABASE_URL:?DATABASE_URL wajib diisi}"
+      DB_MAX_CONNS: "${DB_MAX_CONNS:-10}"
+      MIGRATE_ON_START: "true"
+      JWT_SECRET: "${JWT_SECRET:?JWT_SECRET wajib diisi}"
+      SESSION_SECRET: "${SESSION_SECRET:?SESSION_SECRET wajib diisi}"
+      ACCESS_TOKEN_TTL: "${ACCESS_TOKEN_TTL:-15m}"
+      REFRESH_TOKEN_TTL: "${REFRESH_TOKEN_TTL:-720h}"
+      COOKIE_DOMAIN: "${COOKIE_DOMAIN:-}"
+      COOKIE_SECURE: "true"
+      LOGIN_RATE_LIMIT_PER_MIN: "${LOGIN_RATE_LIMIT_PER_MIN:-10}"
+      GOOGLE_CLIENT_ID: "${GOOGLE_CLIENT_ID:-}"
+      GOOGLE_CLIENT_SECRET: "${GOOGLE_CLIENT_SECRET:-}"
+      GOOGLE_REDIRECT_URL: "${GOOGLE_REDIRECT_URL:-}"
+      DEMO_ENABLED: "${DEMO_ENABLED:-true}"
+      DEMO_RESET_HOURS: "${DEMO_RESET_HOURS:-24}"
+      DEMO_AI_REQUESTS_PER_HOUR: "${DEMO_AI_REQUESTS_PER_HOUR:-30}"
+      OBJECT_STORE_DRIVER: local
+      OBJECT_STORE_ROOT: /data/uploads
+      UPLOAD_TTL_HOURS: "${UPLOAD_TTL_HOURS:-24}"
+      UPLOAD_MAX_IMAGE_MB: "${UPLOAD_MAX_IMAGE_MB:-10}"
+      UPLOAD_MAX_DOC_MB: "${UPLOAD_MAX_DOC_MB:-20}"
+      LLM_PROVIDER: "${LLM_PROVIDER:-replay}"
+      LLM_PRIMARY_BASE_URL: "${LLM_PRIMARY_BASE_URL:-}"
+      LLM_PRIMARY_API_KEY: "${LLM_PRIMARY_API_KEY:-}"
+      LLM_PRIMARY_MODEL: "${LLM_PRIMARY_MODEL:-}"
+      LLM_FALLBACK_BASE_URL: "${LLM_FALLBACK_BASE_URL:-}"
+      LLM_FALLBACK_API_KEY: "${LLM_FALLBACK_API_KEY:-}"
+      LLM_FALLBACK_MODEL: "${LLM_FALLBACK_MODEL:-}"
+      LLM_DAILY_BUDGET_USD: "${LLM_DAILY_BUDGET_USD:-1.00}"
+      LLM_REQUEST_TIMEOUT: "${LLM_REQUEST_TIMEOUT:-45s}"
+      EMBEDDING_PROVIDER: "${EMBEDDING_PROVIDER:-hash}"
+      EMBEDDING_BASE_URL: "${EMBEDDING_BASE_URL:-}"
+      EMBEDDING_API_KEY: "${EMBEDDING_API_KEY:-}"
+      EMBEDDING_MODEL: "${EMBEDDING_MODEL:-}"
+      EMBEDDING_DIM: "${EMBEDDING_DIM:-1024}"
+      EMBEDDING_BATCH: "${EMBEDDING_BATCH:-32}"
+      VLM_PROVIDER: "${VLM_PROVIDER:-off}"
+      VLM_BASE_URL: "${VLM_BASE_URL:-}"
+      VLM_API_KEY: "${VLM_API_KEY:-}"
+      VLM_MODEL: "${VLM_MODEL:-}"
+      RAG_GRPC_ADDR: ai-rag:50051
+      VISION_GRPC_ADDR: ai-vision:50052
+      VISION_TIMEOUT: "${VISION_TIMEOUT:-30s}"
+      VISION_CONCURRENCY: "${VISION_CONCURRENCY:-1}"
+      VISION_BATCH_SIZE: "${VISION_BATCH_SIZE:-8}"
+      VISION_BATCH_WAIT_MS: "${VISION_BATCH_WAIT_MS:-25}"
+      RATE_LIMIT_PER_MIN: "${RATE_LIMIT_PER_MIN:-300}"
+      QUEUE_MAX_DEPTH: "${QUEUE_MAX_DEPTH:-10}"
+      TRACE_SAMPLE_RATE: "${TRACE_SAMPLE_RATE:-1.0}"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "${OTEL_EXPORTER_OTLP_ENDPOINT:-}"
+    volumes:
+      - uploads:/data/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ai-rag:
+        condition: service_started
+      ai-vision:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/readyz >/dev/null"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    stop_grace_period: 30s
+    <<: *default-hardening
+    deploy:
+      resources:
+        limits:
+          cpus: "1.00"
+          memory: 224M
+    logging: *default-logging
+
+  # Web Next.js. Satu domain dengan API lewat Caddy, jadi cookie sesi
+  # SameSite=Lax tetap terkirim tanpa CORS maupun konfigurasi domain cookie.
+  web:
+    image: "${IMAGE_PREFIX:-shelfops}/web:${IMAGE_TAG:-latest}"
+    build:
+      context: ..
+      dockerfile: apps/web/Dockerfile
+      args:
+        NEXT_PUBLIC_DEMO_MODE: "${WEB_DEMO_MODE:-0}"
+        NEXT_PUBLIC_API_URL: ""
+        NEXT_PUBLIC_API_SAME_ORIGIN: "1"
+    restart: unless-stopped
+    environment:
+      # Server component memanggil gateway lewat jaringan internal; browser
+      # memakai path relatif /api/v1 pada host yang sama.
+      API_BASE_URL: "http://gateway:8080"
+      NEXT_PUBLIC_DEMO_MODE: "${WEB_DEMO_MODE:-0}"
+      NEXT_PUBLIC_API_URL: ""
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
+    depends_on:
+      gateway:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/login >/dev/null"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    stop_grace_period: 20s
+    <<: *default-hardening
+    deploy:
+      resources:
+        limits:
+          cpus: "1.00"
+          memory: 512M
+    logging: *default-logging
+
+  ai-rag:
+    image: "${IMAGE_PREFIX:-shelfops}/ai-rag:${IMAGE_TAG:-latest}"
+    build:
+      context: ../services/ai-rag
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      RAG_APP_ENV: production
+      RAG_LOG_LEVEL: "${LOG_LEVEL:-info}"
+      RAG_GRPC_HOST: "0.0.0.0"
+      RAG_GRPC_PORT: "${RAG_GRPC_PORT:-50051}"
+      RAG_HTTP_HOST: "0.0.0.0"
+      RAG_HTTP_PORT: "${RAG_HTTP_PORT:-8081}"
+      RAG_DATABASE_URL: "${DATABASE_URL:?DATABASE_URL wajib diisi}"
+      DATABASE_URL: "${DATABASE_URL:?DATABASE_URL wajib diisi}"
+      RAG_OBJECT_STORE_ROOT: /data/uploads
+      RAG_EMBEDDING_PROVIDER: "${EMBEDDING_PROVIDER:-hash}"
+      RAG_EMBEDDING_BASE_URL: "${EMBEDDING_BASE_URL:-}"
+      RAG_EMBEDDING_API_KEY: "${EMBEDDING_API_KEY:-}"
+      RAG_EMBEDDING_MODEL: "${EMBEDDING_MODEL:-}"
+      RAG_EMBEDDING_DIM: "${RAG_EMBEDDING_DIM:-256}"
+      RAG_VECTOR_DIM: "${EMBEDDING_DIM:-1024}"
+      RAG_CHUNK_SIZE: "${RAG_CHUNK_SIZE:-800}"
+      RAG_CHUNK_OVERLAP: "${RAG_CHUNK_OVERLAP:-120}"
+      RAG_TOP_N_FINAL: "${RAG_TOP_N_FINAL:-6}"
+      RAG_LLM_PROVIDER: "${LLM_PROVIDER:-replay}"
+      RAG_LLM_PRIMARY_BASE_URL: "${LLM_PRIMARY_BASE_URL:-}"
+      RAG_LLM_PRIMARY_API_KEY: "${LLM_PRIMARY_API_KEY:-}"
+      RAG_LLM_PRIMARY_MODEL: "${LLM_PRIMARY_MODEL:-}"
+      RAG_LLM_FALLBACK_BASE_URL: "${LLM_FALLBACK_BASE_URL:-}"
+      RAG_LLM_FALLBACK_API_KEY: "${LLM_FALLBACK_API_KEY:-}"
+      RAG_LLM_FALLBACK_MODEL: "${LLM_FALLBACK_MODEL:-}"
+      RAG_LLM_REQUEST_TIMEOUT: "${LLM_REQUEST_TIMEOUT:-45s}"
+    volumes:
+      - uploads:/data/uploads:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8081/readyz', timeout=3)"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    stop_grace_period: 30s
+    <<: *default-hardening
+    deploy:
+      resources:
+        limits:
+          cpus: "0.75"
+          memory: 320M
+    logging: *default-logging
+
+  ai-vision:
+    image: "${IMAGE_PREFIX:-shelfops}/ai-vision:${IMAGE_TAG:-latest}"
+    build:
+      context: ../services/ai-vision
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      VISION_APP_ENV: production
+      VISION_LOG_LEVEL: "${LOG_LEVEL:-info}"
+      VISION_GRPC_HOST: "0.0.0.0"
+      VISION_GRPC_PORT: "${VISION_GRPC_PORT:-50052}"
+      VISION_HTTP_HOST: "0.0.0.0"
+      VISION_HTTP_PORT: "${VISION_HTTP_PORT:-8082}"
+      VISION_OBJECT_STORE_ROOT: /data/uploads
+      VISION_DETECTOR: "${VISION_DETECTOR:-replay}"
+      VISION_MODEL_VERSION: "${VISION_MODEL_VERSION:-replay-yolo-placeholder-v1}"
+      VISION_MODEL_IMGSZ: "${MODEL_IMGSZ:-960}"
+      VISION_CONF_THRESHOLD: "${VISION_CONF_THRESHOLD:-0.25}"
+      VISION_LOW_CONF_THRESHOLD: "${VISION_LOW_CONF_THRESHOLD:-0.6}"
+      VISION_CONCURRENCY: "${VISION_CONCURRENCY:-1}"
+      VISION_BATCH_SIZE: "${VISION_BATCH_SIZE:-8}"
+      VISION_BATCH_WAIT_MS: "${VISION_BATCH_WAIT_MS:-25}"
+      VISION_OCR_ENGINE: "${VISION_OCR_ENGINE:-stub}"
+      VISION_MAX_IMAGE_BYTES: "${VISION_MAX_IMAGE_BYTES:-10485760}"
+      MODEL_DIR: /models
+      VLM_PROVIDER: "${VLM_PROVIDER:-off}"
+      VLM_BASE_URL: "${VLM_BASE_URL:-}"
+      VLM_API_KEY: "${VLM_API_KEY:-}"
+      VLM_MODEL: "${VLM_MODEL:-}"
+    volumes:
+      - uploads:/data/uploads:ro
+      - models:/models:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8082/healthz', timeout=3)"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    read_only: true
+    tmpfs:
+      - /tmp:size=256m,mode=1777
+    stop_grace_period: 30s
+    <<: *default-hardening
+    deploy:
+      resources:
+        limits:
+          cpus: "1.00"
+          memory: 448M
+    logging: *default-logging
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER:-shelfops}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?POSTGRES_PASSWORD wajib diisi}"
+      POSTGRES_DB: "${POSTGRES_DB:-shelfops}"
+      PGDATA: /var/lib/postgresql/data/pgdata
+    command:
+      - postgres
+      - -c
+      - shared_buffers=96MB
+      - -c
+      - effective_cache_size=256MB
+      - -c
+      - work_mem=4MB
+      - -c
+      - maintenance_work_mem=32MB
+      - -c
+      - max_connections=40
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    stop_grace_period: 60s
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          cpus: "1.00"
+          memory: 384M
+    logging: *default-logging
+
+networks:
+  default:
+    name: shelfops_backend
+    driver: bridge
+
+volumes:
+  pgdata:
+    name: shelfops_pgdata
+  uploads:
+    name: shelfops_uploads
+  models:
+    name: shelfops_models
+  caddy_data:
+    name: shelfops_caddy_data
+  caddy_config:
+    name: shelfops_caddy_config

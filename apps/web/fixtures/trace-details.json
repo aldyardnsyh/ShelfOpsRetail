@@ -1,0 +1,602 @@
+{
+  "req-bf437895-2": {
+    "request_id": "req-bf437895-2",
+    "created_at": "2026-10-26T03:36:42.011901+07:00",
+    "query": "Insiden apa yang paling sering minggu ini?",
+    "latency_ms": 426,
+    "steps": [
+      {
+        "stage": "rewrite",
+        "span_id": "span-bf4378-1",
+        "parent_span": null,
+        "latency_ms": 28,
+        "tokens_in": 24,
+        "tokens_out": 4,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "rewrite query"
+        },
+        "started_at": "2026-10-26T03:36:12.011901+07:00"
+      },
+      {
+        "stage": "llm",
+        "span_id": "span-bf4378-2",
+        "parent_span": "span-bf4378-1",
+        "latency_ms": 212,
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0.000031,
+        "model": "glm-5-flash",
+        "provider": "zhipu",
+        "status": "ok",
+        "meta": {
+          "note": "qra LLM call"
+        },
+        "started_at": "2026-10-26T03:36:12.039901+07:00"
+      },
+      {
+        "stage": "tool",
+        "span_id": "span-bf4378-3",
+        "parent_span": "span-bf4378-2",
+        "latency_ms": 96,
+        "tokens_in": 80,
+        "tokens_out": 0,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "tool invoke"
+        },
+        "started_at": "2026-10-26T03:36:12.251901+07:00"
+      },
+      {
+        "stage": "assistant",
+        "span_id": "span-bf4378-4",
+        "parent_span": "span-bf4378-3",
+        "latency_ms": 165,
+        "tokens_in": 60,
+        "tokens_out": 12,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "Assistant shaping"
+        },
+        "started_at": "2026-10-26T03:36:12.347901+07:00"
+      }
+    ],
+    "answer": "Rak toko Bekasi hari ini: compliance 87,5% (good). Oos terbesar di air glass 1,5L — 6 dari 12 facing kosong. Alert oos saat ini 3 item, semuanya prioritas sedang. Detail lengkap: sitasi SOP dan trend 14 hari di grafik kanan.",
+    "citations": [],
+    "tools": []
+  },
+  "req-bf437895-1": {
+    "request_id": "req-bf437895-1",
+    "created_at": "2026-10-26T03:35:42.011901+07:00",
+    "query": "Insiden apa yang paling sering minggu ini?",
+    "latency_ms": 426,
+    "steps": [
+      {
+        "stage": "rewrite",
+        "span_id": "span-bf4378-1",
+        "parent_span": null,
+        "latency_ms": 28,
+        "tokens_in": 24,
+        "tokens_out": 4,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "rewrite query"
+        },
+        "started_at": "2026-10-26T03:35:12.011901+07:00"
+      },
+      {
+        "stage": "llm",
+        "span_id": "span-bf4378-2",
+        "parent_span": "span-bf4378-1",
+        "latency_ms": 212,
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0.000031,
+        "model": "glm-5-flash",
+        "provider": "zhipu",
+        "status": "ok",
+        "meta": {
+          "note": "qra LLM call"
+        },
+        "started_at": "2026-10-26T03:35:12.039901+07:00"
+      },
+      {
+        "stage": "tool",
+        "span_id": "span-bf4378-3",
+        "parent_span": "span-bf4378-2",
+        "latency_ms": 96,
+        "tokens_in": 80,
+        "tokens_out": 0,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "tool invoke"
+        },
+        "started_at": "2026-10-26T03:35:12.251901+07:00"
+      },
+      {
+        "stage": "assistant",
+        "span_id": "span-bf4378-4",
+        "parent_span": "span-bf4378-3",
+        "latency_ms": 165,
+        "tokens_in": 60,
+        "tokens_out": 12,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "Assistant shaping"
+        },
+        "started_at": "2026-10-26T03:35:12.347901+07:00"
+      }
+    ],
+    "answer": "Ringkasan kompliance mingguan: rata-rata 88,2% naik 1,4 pt dari minggu lalu. 3 toko di bawah 85% (S-003, S-011, S-017). Top penyebab: ketidakhadiran Update-to-app di rak chiller dan label harga belum diganti.",
+    "citations": [],
+    "tools": []
+  },
+  "req-4a5dda15-2": {
+    "request_id": "req-4a5dda15-2",
+    "created_at": "2026-10-24T03:36:42.011901+07:00",
+    "query": "Berapa mismatch label harga minggu ini?",
+    "latency_ms": 426,
+    "steps": [
+      {
+        "stage": "rewrite",
+        "span_id": "span-4a5dda-1",
+        "parent_span": null,
+        "latency_ms": 28,
+        "tokens_in": 24,
+        "tokens_out": 4,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "rewrite query"
+        },
+        "started_at": "2026-10-24T03:36:12.011901+07:00"
+      },
+      {
+        "stage": "llm",
+        "span_id": "span-4a5dda-2",
+        "parent_span": "span-4a5dda-1",
+        "latency_ms": 212,
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0.000031,
+        "model": "glm-5-flash",
+        "provider": "zhipu",
+        "status": "ok",
+        "meta": {
+          "note": "qra LLM call"
+        },
+        "started_at": "2026-10-24T03:36:12.039901+07:00"
+      },
+      {
+        "stage": "tool",
+        "span_id": "span-4a5dda-3",
+        "parent_span": "span-4a5dda-2",
+        "latency_ms": 96,
+        "tokens_in": 80,
+        "tokens_out": 0,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "tool invoke"
+        },
+        "started_at": "2026-10-24T03:36:12.251901+07:00"
+      },
+      {
+        "stage": "assistant",
+        "span_id": "span-4a5dda-4",
+        "parent_span": "span-4a5dda-3",
+        "latency_ms": 165,
+        "tokens_in": 60,
+        "tokens_out": 12,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "Assistant shaping"
+        },
+        "started_at": "2026-10-24T03:36:12.347901+07:00"
+      }
+    ],
+    "answer": "Rak toko Bekasi hari ini: compliance 87,5% (good). Oos terbesar di air glass 1,5L — 6 dari 12 facing kosong. Alert oos saat ini 3 item, semuanya prioritas sedang. Detail lengkap: sitasi SOP dan trend 14 hari di grafik kanan.",
+    "citations": [],
+    "tools": []
+  },
+  "req-4a5dda15-1": {
+    "request_id": "req-4a5dda15-1",
+    "created_at": "2026-10-24T03:35:42.011901+07:00",
+    "query": "Berapa mismatch label harga minggu ini?",
+    "latency_ms": 426,
+    "steps": [
+      {
+        "stage": "rewrite",
+        "span_id": "span-4a5dda-1",
+        "parent_span": null,
+        "latency_ms": 28,
+        "tokens_in": 24,
+        "tokens_out": 4,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "rewrite query"
+        },
+        "started_at": "2026-10-24T03:35:12.011901+07:00"
+      },
+      {
+        "stage": "llm",
+        "span_id": "span-4a5dda-2",
+        "parent_span": "span-4a5dda-1",
+        "latency_ms": 212,
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0.000031,
+        "model": "glm-5-flash",
+        "provider": "zhipu",
+        "status": "ok",
+        "meta": {
+          "note": "qra LLM call"
+        },
+        "started_at": "2026-10-24T03:35:12.039901+07:00"
+      },
+      {
+        "stage": "tool",
+        "span_id": "span-4a5dda-3",
+        "parent_span": "span-4a5dda-2",
+        "latency_ms": 96,
+        "tokens_in": 80,
+        "tokens_out": 0,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "tool invoke"
+        },
+        "started_at": "2026-10-24T03:35:12.251901+07:00"
+      },
+      {
+        "stage": "assistant",
+        "span_id": "span-4a5dda-4",
+        "parent_span": "span-4a5dda-3",
+        "latency_ms": 165,
+        "tokens_in": 60,
+        "tokens_out": 12,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "Assistant shaping"
+        },
+        "started_at": "2026-10-24T03:35:12.347901+07:00"
+      }
+    ],
+    "answer": "Ringkasan kompliance mingguan: rata-rata 88,2% naik 1,4 pt dari minggu lalu. 3 toko di bawah 85% (S-003, S-011, S-017). Top penyebab: ketidakhadiran Update-to-app di rak chiller dan label harga belum diganti.",
+    "citations": [],
+    "tools": []
+  },
+  "req-78855c1f-2": {
+    "request_id": "req-78855c1f-2",
+    "created_at": "2026-10-22T03:36:42.011901+07:00",
+    "query": "Berikan ringkasan kompliance mingguan semua toko",
+    "latency_ms": 426,
+    "steps": [
+      {
+        "stage": "rewrite",
+        "span_id": "span-78855c-1",
+        "parent_span": null,
+        "latency_ms": 28,
+        "tokens_in": 24,
+        "tokens_out": 4,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "rewrite query"
+        },
+        "started_at": "2026-10-22T03:36:12.011901+07:00"
+      },
+      {
+        "stage": "llm",
+        "span_id": "span-78855c-2",
+        "parent_span": "span-78855c-1",
+        "latency_ms": 212,
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0.000031,
+        "model": "glm-5-flash",
+        "provider": "zhipu",
+        "status": "ok",
+        "meta": {
+          "note": "qra LLM call"
+        },
+        "started_at": "2026-10-22T03:36:12.039901+07:00"
+      },
+      {
+        "stage": "tool",
+        "span_id": "span-78855c-3",
+        "parent_span": "span-78855c-2",
+        "latency_ms": 96,
+        "tokens_in": 80,
+        "tokens_out": 0,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "tool invoke"
+        },
+        "started_at": "2026-10-22T03:36:12.251901+07:00"
+      },
+      {
+        "stage": "assistant",
+        "span_id": "span-78855c-4",
+        "parent_span": "span-78855c-3",
+        "latency_ms": 165,
+        "tokens_in": 60,
+        "tokens_out": 12,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "Assistant shaping"
+        },
+        "started_at": "2026-10-22T03:36:12.347901+07:00"
+      }
+    ],
+    "answer": "Rak toko Bekasi hari ini: compliance 87,5% (good). Oos terbesar di air glass 1,5L — 6 dari 12 facing kosong. Alert oos saat ini 3 item, semuanya prioritas sedang. Detail lengkap: sitasi SOP dan trend 14 hari di grafik kanan.",
+    "citations": [],
+    "tools": []
+  },
+  "req-78855c1f-1": {
+    "request_id": "req-78855c1f-1",
+    "created_at": "2026-10-22T03:35:42.011901+07:00",
+    "query": "Berikan ringkasan kompliance mingguan semua toko",
+    "latency_ms": 426,
+    "steps": [
+      {
+        "stage": "rewrite",
+        "span_id": "span-78855c-1",
+        "parent_span": null,
+        "latency_ms": 28,
+        "tokens_in": 24,
+        "tokens_out": 4,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "rewrite query"
+        },
+        "started_at": "2026-10-22T03:35:12.011901+07:00"
+      },
+      {
+        "stage": "llm",
+        "span_id": "span-78855c-2",
+        "parent_span": "span-78855c-1",
+        "latency_ms": 212,
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0.000031,
+        "model": "glm-5-flash",
+        "provider": "zhipu",
+        "status": "ok",
+        "meta": {
+          "note": "qra LLM call"
+        },
+        "started_at": "2026-10-22T03:35:12.039901+07:00"
+      },
+      {
+        "stage": "tool",
+        "span_id": "span-78855c-3",
+        "parent_span": "span-78855c-2",
+        "latency_ms": 96,
+        "tokens_in": 80,
+        "tokens_out": 0,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "tool invoke"
+        },
+        "started_at": "2026-10-22T03:35:12.251901+07:00"
+      },
+      {
+        "stage": "assistant",
+        "span_id": "span-78855c-4",
+        "parent_span": "span-78855c-3",
+        "latency_ms": 165,
+        "tokens_in": 60,
+        "tokens_out": 12,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "Assistant shaping"
+        },
+        "started_at": "2026-10-22T03:35:12.347901+07:00"
+      }
+    ],
+    "answer": "Ringkasan kompliance mingguan: rata-rata 88,2% naik 1,4 pt dari minggu lalu. 3 toko di bawah 85% (S-003, S-011, S-017). Top penyebab: ketidakhadiran Update-to-app di rak chiller dan label harga belum diganti.",
+    "citations": [],
+    "tools": []
+  },
+  "req-a2e653d5-2": {
+    "request_id": "req-a2e653d5-2",
+    "created_at": "2026-10-20T03:36:42.011901+07:00",
+    "query": "Bagaimana kondisi rak toko Bekasi hari ini?",
+    "latency_ms": 426,
+    "steps": [
+      {
+        "stage": "rewrite",
+        "span_id": "span-a2e653-1",
+        "parent_span": null,
+        "latency_ms": 28,
+        "tokens_in": 24,
+        "tokens_out": 4,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "rewrite query"
+        },
+        "started_at": "2026-10-20T03:36:12.011901+07:00"
+      },
+      {
+        "stage": "llm",
+        "span_id": "span-a2e653-2",
+        "parent_span": "span-a2e653-1",
+        "latency_ms": 212,
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0.000031,
+        "model": "glm-5-flash",
+        "provider": "zhipu",
+        "status": "ok",
+        "meta": {
+          "note": "qra LLM call"
+        },
+        "started_at": "2026-10-20T03:36:12.039901+07:00"
+      },
+      {
+        "stage": "tool",
+        "span_id": "span-a2e653-3",
+        "parent_span": "span-a2e653-2",
+        "latency_ms": 96,
+        "tokens_in": 80,
+        "tokens_out": 0,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "tool invoke"
+        },
+        "started_at": "2026-10-20T03:36:12.251901+07:00"
+      },
+      {
+        "stage": "assistant",
+        "span_id": "span-a2e653-4",
+        "parent_span": "span-a2e653-3",
+        "latency_ms": 165,
+        "tokens_in": 60,
+        "tokens_out": 12,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "Assistant shaping"
+        },
+        "started_at": "2026-10-20T03:36:12.347901+07:00"
+      }
+    ],
+    "answer": "Rak toko Bekasi hari ini: compliance 87,5% (good). Oos terbesar di air glass 1,5L — 6 dari 12 facing kosong. Alert oos saat ini 3 item, semuanya prioritas sedang. Detail lengkap: sitasi SOP dan trend 14 hari di grafik kanan.",
+    "citations": [],
+    "tools": []
+  },
+  "req-a2e653d5-1": {
+    "request_id": "req-a2e653d5-1",
+    "created_at": "2026-10-20T03:35:42.011901+07:00",
+    "query": "Bagaimana kondisi rak toko Bekasi hari ini?",
+    "latency_ms": 426,
+    "steps": [
+      {
+        "stage": "rewrite",
+        "span_id": "span-a2e653-1",
+        "parent_span": null,
+        "latency_ms": 28,
+        "tokens_in": 24,
+        "tokens_out": 4,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "rewrite query"
+        },
+        "started_at": "2026-10-20T03:35:12.011901+07:00"
+      },
+      {
+        "stage": "llm",
+        "span_id": "span-a2e653-2",
+        "parent_span": "span-a2e653-1",
+        "latency_ms": 212,
+        "tokens_in": 350,
+        "tokens_out": 280,
+        "cost_usd": 0.000031,
+        "model": "glm-5-flash",
+        "provider": "zhipu",
+        "status": "ok",
+        "meta": {
+          "note": "qra LLM call"
+        },
+        "started_at": "2026-10-20T03:35:12.039901+07:00"
+      },
+      {
+        "stage": "tool",
+        "span_id": "span-a2e653-3",
+        "parent_span": "span-a2e653-2",
+        "latency_ms": 96,
+        "tokens_in": 80,
+        "tokens_out": 0,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "tool invoke"
+        },
+        "started_at": "2026-10-20T03:35:12.251901+07:00"
+      },
+      {
+        "stage": "assistant",
+        "span_id": "span-a2e653-4",
+        "parent_span": "span-a2e653-3",
+        "latency_ms": 165,
+        "tokens_in": 60,
+        "tokens_out": 12,
+        "cost_usd": 0.000031,
+        "model": null,
+        "provider": null,
+        "status": "ok",
+        "meta": {
+          "note": "Assistant shaping"
+        },
+        "started_at": "2026-10-20T03:35:12.347901+07:00"
+      }
+    ],
+    "answer": "Ringkasan kompliance mingguan: rata-rata 88,2% naik 1,4 pt dari minggu lalu. 3 toko di bawah 85% (S-003, S-011, S-017). Top penyebab: ketidakhadiran Update-to-app di rak chiller dan label harga belum diganti.",
+    "citations": [],
+    "tools": []
+  }
+}

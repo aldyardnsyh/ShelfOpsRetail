@@ -1,0 +1,112 @@
+[
+  {
+    "store_id": "4e333c94-266e-4ce6-84b0-dc3130cfaff3",
+    "store_name": "Pasar Segar Yogyakarta",
+    "region": "Jawa Barat",
+    "avg_compliance": 90.67,
+    "oos_rate": 5.36,
+    "audits": 9,
+    "last_audit_at": "2026-10-25T15:00:00+07:00",
+    "delta_compliance": 3.17,
+    "delta_oos_rate": -0.35
+  },
+  {
+    "store_id": "52bc6078-629c-48a3-9307-e091828f1961",
+    "store_name": "Gerai Nusa Tangerang",
+    "region": "Jawa Barat",
+    "avg_compliance": 89.56,
+    "oos_rate": 4.4,
+    "audits": 9,
+    "last_audit_at": "2026-10-23T15:00:00+07:00",
+    "delta_compliance": 3.45,
+    "delta_oos_rate": 0.09
+  },
+  {
+    "store_id": "67a19397-ebdd-429e-9c6e-cecd4b1b0055",
+    "store_name": "Swalayan Mitra Semarang",
+    "region": "Banten",
+    "avg_compliance": 89,
+    "oos_rate": 5.78,
+    "audits": 9,
+    "last_audit_at": "2026-10-23T15:00:00+07:00",
+    "delta_compliance": 3,
+    "delta_oos_rate": 2.59
+  },
+  {
+    "store_id": "ddee3f0e-abf8-4c5d-97f5-358e0917bd6c",
+    "store_name": "Minimarket Maju Jaya Bandung",
+    "region": "Jawa Tengah",
+    "avg_compliance": 88.89,
+    "oos_rate": 6.61,
+    "audits": 9,
+    "last_audit_at": "2026-10-25T15:00:00+07:00",
+    "delta_compliance": 1.59,
+    "delta_oos_rate": 1.96
+  },
+  {
+    "store_id": "b0a42dc6-ea1b-429f-933f-f5e48becceb5",
+    "store_name": "Swalayan Mitra Bogor",
+    "region": "Jawa Barat",
+    "avg_compliance": 88.44,
+    "oos_rate": 6.16,
+    "audits": 9,
+    "last_audit_at": "2026-10-25T15:00:00+07:00",
+    "delta_compliance": 1.84,
+    "delta_oos_rate": 2.51
+  },
+  {
+    "store_id": "301b5326-e3ba-42d6-bf20-cf3d7168ce99",
+    "store_name": "Swalayan Mitra Semarang",
+    "region": "Jawa Tengah",
+    "avg_compliance": 88.44,
+    "oos_rate": 4.94,
+    "audits": 9,
+    "last_audit_at": "2026-10-23T15:00:00+07:00",
+    "delta_compliance": -0.34,
+    "delta_oos_rate": 2.3
+  },
+  {
+    "store_id": "30badaa5-6ad0-4eef-8d1a-a2f3ea754706",
+    "store_name": "Pasar Segar Yogyakarta",
+    "region": "Jawa Timur",
+    "avg_compliance": 88.33,
+    "oos_rate": 5,
+    "audits": 9,
+    "last_audit_at": "2026-10-25T15:00:00+07:00",
+    "delta_compliance": 2.23,
+    "delta_oos_rate": -0.61
+  },
+  {
+    "store_id": "435fa180-da06-485e-bfa2-2c69d64b574d",
+    "store_name": "Toko Sejahtera Cikarang",
+    "region": "Banten",
+    "avg_compliance": 87.89,
+    "oos_rate": 3.33,
+    "audits": 9,
+    "last_audit_at": "2026-10-23T15:00:00+07:00",
+    "delta_compliance": 2.11,
+    "delta_oos_rate": -1.95
+  },
+  {
+    "store_id": "aa9fa1a4-14a7-46ad-bae6-905438ab4c44",
+    "store_name": "Gerai Nusa Malang",
+    "region": "Jawa Tengah",
+    "avg_compliance": 87.78,
+    "oos_rate": 3.5,
+    "audits": 9,
+    "last_audit_at": "2026-10-24T15:00:00+07:00",
+    "delta_compliance": -2.82,
+    "delta_oos_rate": -1.5
+  },
+  {
+    "store_id": "629416f1-45fe-47ac-b5ba-a3cf507b7f56",
+    "store_name": "Swalayan Mitra Bogor",
+    "region": "Jawa Timur",
+    "avg_compliance": 87.78,
+    "oos_rate": 3.79,
+    "audits": 9,
+    "last_audit_at": "2026-10-25T15:00:00+07:00",
+    "delta_compliance": -1.32,
+    "delta_oos_rate": -1.72
+  }
+]

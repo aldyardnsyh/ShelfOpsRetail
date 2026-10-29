@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package shelfops.v1;
+
+option go_package = "github.com/aldyardnsyh/ShelfOpsRetail/services/gateway/gen/shelfops/v1;shelfopsv1";
+
+// Kontrak gateway/worker <-> ai-vision (PRD §11.2).
+// Catatan: nama pesan mengikuti buf lint STANDARD (D-016); field identik dengan PRD.
+service VisionService {
+  rpc Detect(DetectRequest) returns (DetectResponse);
+  rpc DetectBatch(stream DetectBatchRequest) returns (stream DetectBatchResponse);
+  rpc Health(HealthRequest) returns (VisionServiceHealthResponse);
+}
+
+message DetectRequest {
+  string request_id = 1;         // trace-id end-to-end
+  string image_uri = 2;          // object key di ObjectStore (bukan path lokal)
+  int32 imgsz = 3;               // 0 = default (MODEL_IMGSZ)
+  float conf_threshold = 4;      // 0 = default
+  bool run_ocr = 5;
+  bool run_classify = 6;
+  repeated string candidate_labels = 7;
+  string workspace_id = 8;
+  // harga referensi per label untuk perbandingan OCR (JSON: {"label": 12500})
+  string reference_prices_json = 9;
+  reserved 10 to 20;
+}
+
+message DetectBatchRequest {
+  repeated DetectRequest requests = 1;
+  string batch_id = 2;
+}
+
+message Box {
+  float x1 = 1;
+  float y1 = 2;
+  float x2 = 3;
+  float y2 = 4;
+  float confidence = 5;
+  string label = 6;
+  float label_score = 7;
+  int32 class_id = 8;
+}
+
+message PriceTag {
+  Box box = 1;
+  string raw_text = 2;
+  int64 price_idr = 3;          // 0 = tidak terbaca
+  float ocr_confidence = 4;
+  string matched_label = 5;
+  int64 reference_price_idr = 6;
+  bool mismatch = 7;
+}
+
+message DetectResponse {
+  string request_id = 1;
+  repeated Box boxes = 2;
+  repeated PriceTag price_tags = 3;
+  int32 width = 4;
+  int32 height = 5;
+  string model_version = 6;
+  int32 latency_ms = 7;
+  bool low_confidence = 8;      // sinyal untuk cloud-assist
+  string error = 9;             // kosong bila sukses
+  reserved 10 to 20;
+}
+
+message DetectBatchResponse {
+  repeated DetectResponse responses = 1;
+  string batch_id = 2;
+  int32 batch_latency_ms = 3;
+}
+
+message HealthRequest {}
+
+message VisionServiceHealthResponse {
+  bool ready = 1;
+  string version = 2;
+  string model_version = 3;
+  int32 queue_depth = 4;
+  int32 concurrency = 5;
+  string degradation = 6;       // L0/L2
+}

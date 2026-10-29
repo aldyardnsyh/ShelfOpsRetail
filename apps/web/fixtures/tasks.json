@@ -1,0 +1,527 @@
+{
+  "items": [
+    {
+      "id": "f201c255-d8c7-4d0e-ab78-6e79da186258",
+      "title": "Pindahkan Stok dari Backroom",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "053b6aa7-22ed-4f44-b27e-25ab5c33d7bf",
+      "store_name": "Minimarket Maju Jaya Bekasi",
+      "assignee": "Rina",
+      "status": "open",
+      "priority": "normal",
+      "due_at": "2026-10-26T21:34:33.861682+07:00",
+      "created_at": "2026-10-26T00:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": false,
+          "text": "Cek rak sekarang"
+        },
+        {
+          "done": false,
+          "text": "Restock dari gudang bila kosong"
+        },
+        {
+          "done": false,
+          "text": "Foto ulang ke app"
+        }
+      ]
+    },
+    {
+      "id": "74d0d3b9-e302-4616-8682-27cadc905d80",
+      "title": "Perbaiki Label Harga",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "118e917e-f403-47a4-a9ff-95cdb97078f4",
+      "store_name": "Pasar Segar Depok",
+      "assignee": "Sari",
+      "status": "done",
+      "priority": "normal",
+      "due_at": "2026-10-27T03:34:33.861682+07:00",
+      "created_at": "2026-10-25T21:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": true,
+          "text": "Cek rak sekarang"
+        },
+        {
+          "done": false,
+          "text": "Restock dari gudang bila kosong"
+        },
+        {
+          "done": false,
+          "text": "Foto ulang ke app"
+        }
+      ]
+    },
+    {
+      "id": "5632fb9f-e317-4eb1-a7cc-d1e1eeb000db",
+      "title": "Foto Ulang Rak",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "2f2c174e-0c25-43a4-a93e-c6c02df0ae14",
+      "store_name": "Toko Sejahtera Surabaya",
+      "assignee": "Budi",
+      "status": "open",
+      "priority": "low",
+      "due_at": "2026-10-27T09:34:33.861682+07:00",
+      "created_at": "2026-10-25T18:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": false,
+          "text": "Cek kondisi rak dan catat temuan"
+        },
+        {
+          "done": false,
+          "text": "Tindak lanjuti sesuai SOP toko"
+        },
+        {
+          "done": false,
+          "text": "Unggah bukti foto setelah selesai"
+        }
+      ]
+    },
+    {
+      "id": "a083b1c4-7283-4f77-9263-2d1642bdfa12",
+      "title": "Cek Toleransi Harga",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "301b5326-e3ba-42d6-bf20-cf3d7168ce99",
+      "store_name": "Swalayan Mitra Semarang",
+      "assignee": "Rina",
+      "status": "open",
+      "priority": "normal",
+      "due_at": "2026-10-27T15:34:33.861682+07:00",
+      "created_at": "2026-10-25T15:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": false,
+          "text": "Cek rak sekarang"
+        },
+        {
+          "done": false,
+          "text": "Restock dari gudang bila kosong"
+        },
+        {
+          "done": false,
+          "text": "Foto ulang ke app"
+        }
+      ]
+    },
+    {
+      "id": "1de8b9d8-1225-421e-97a7-7751d23b32f5",
+      "title": "Ganti Poster Promosi",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "30badaa5-6ad0-4eef-8d1a-a2f3ea754706",
+      "store_name": "Pasar Segar Yogyakarta",
+      "assignee": "Sari",
+      "status": "in_progress",
+      "priority": "normal",
+      "due_at": "2026-10-27T21:34:33.861682+07:00",
+      "created_at": "2026-10-25T12:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": false,
+          "text": "Cek rak sekarang"
+        },
+        {
+          "done": false,
+          "text": "Restock dari gudang bila kosong"
+        },
+        {
+          "done": false,
+          "text": "Foto ulang ke app"
+        }
+      ]
+    },
+    {
+      "id": "ba34ff80-c2ae-4563-bfda-cc4106777eb9",
+      "title": "Restock rak minuman dingin",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "435fa180-da06-485e-bfa2-2c69d64b574d",
+      "store_name": "Toko Sejahtera Cikarang",
+      "assignee": "Budi",
+      "status": "done",
+      "priority": "high",
+      "due_at": "2026-10-25T21:34:33.861682+07:00",
+      "created_at": "2026-10-25T09:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": true,
+          "text": "Cek rak sekarang"
+        },
+        {
+          "done": false,
+          "text": "Restock dari gudang bila kosong"
+        },
+        {
+          "done": false,
+          "text": "Foto ulang ke app"
+        }
+      ]
+    },
+    {
+      "id": "84380079-8a0a-4e41-9272-0ee9f1a261a9",
+      "title": "Pindahkan Stok dari Backroom",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "4e333c94-266e-4ce6-84b0-dc3130cfaff3",
+      "store_name": "Pasar Segar Yogyakarta",
+      "assignee": "Rina",
+      "status": "open",
+      "priority": "normal",
+      "due_at": "2026-10-28T09:34:33.861682+07:00",
+      "created_at": "2026-10-25T06:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": false,
+          "text": "Cek kondisi rak dan catat temuan"
+        },
+        {
+          "done": false,
+          "text": "Tindak lanjuti sesuai SOP toko"
+        },
+        {
+          "done": false,
+          "text": "Unggah bukti foto setelah selesai"
+        }
+      ]
+    },
+    {
+      "id": "ae299b0f-b558-48d1-b655-0ac83db28616",
+      "title": "Perbaiki Label Harga",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "52bc6078-629c-48a3-9307-e091828f1961",
+      "store_name": "Gerai Nusa Tangerang",
+      "assignee": "Sari",
+      "status": "open",
+      "priority": "normal",
+      "due_at": "2026-10-28T15:34:33.861682+07:00",
+      "created_at": "2026-10-25T03:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": false,
+          "text": "Cek rak sekarang"
+        },
+        {
+          "done": false,
+          "text": "Restock dari gudang bila kosong"
+        },
+        {
+          "done": false,
+          "text": "Foto ulang ke app"
+        }
+      ]
+    },
+    {
+      "id": "bd016f06-ed83-4853-b354-2afc21c8bbcc",
+      "title": "Foto Ulang Rak",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "591d0fe5-a567-4d59-afcd-ce6d16ae7196",
+      "store_name": "Gerai Nusa Malang",
+      "assignee": "Budi",
+      "status": "in_progress",
+      "priority": "low",
+      "due_at": "2026-10-28T21:34:33.861682+07:00",
+      "created_at": "2026-10-25T00:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": false,
+          "text": "Cek rak sekarang"
+        },
+        {
+          "done": false,
+          "text": "Restock dari gudang bila kosong"
+        },
+        {
+          "done": false,
+          "text": "Foto ulang ke app"
+        }
+      ]
+    },
+    {
+      "id": "97941bb5-41b3-48fa-b0c3-8c74ac02035e",
+      "title": "Cek Toleransi Harga",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "629416f1-45fe-47ac-b5ba-a3cf507b7f56",
+      "store_name": "Swalayan Mitra Bogor",
+      "assignee": "Rina",
+      "status": "done",
+      "priority": "normal",
+      "due_at": "2026-10-29T03:34:33.861682+07:00",
+      "created_at": "2026-10-24T21:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": true,
+          "text": "Cek rak sekarang"
+        },
+        {
+          "done": false,
+          "text": "Restock dari gudang bila kosong"
+        },
+        {
+          "done": false,
+          "text": "Foto ulang ke app"
+        }
+      ]
+    },
+    {
+      "id": "0c8e878f-b7b1-4446-9487-5f50abeb65f0",
+      "title": "Ganti Poster Promosi",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "67a19397-ebdd-429e-9c6e-cecd4b1b0055",
+      "store_name": "Swalayan Mitra Semarang",
+      "assignee": "Sari",
+      "status": "open",
+      "priority": "normal",
+      "due_at": "2026-10-29T09:34:33.861682+07:00",
+      "created_at": "2026-10-24T18:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": false,
+          "text": "Cek kondisi rak dan catat temuan"
+        },
+        {
+          "done": false,
+          "text": "Tindak lanjuti sesuai SOP toko"
+        },
+        {
+          "done": false,
+          "text": "Unggah bukti foto setelah selesai"
+        }
+      ]
+    },
+    {
+      "id": "ef67638f-2a32-467f-9549-1947fb6cd311",
+      "title": "Restock rak minuman dingin",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "6ab40bd0-801f-4d64-af02-de432b306370",
+      "store_name": "Gerai Nusa Tangerang",
+      "assignee": "Budi",
+      "status": "overdue",
+      "priority": "high",
+      "due_at": "2026-10-25T21:34:33.861682+07:00",
+      "created_at": "2026-10-24T15:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": false,
+          "text": "Cek rak sekarang"
+        },
+        {
+          "done": false,
+          "text": "Restock dari gudang bila kosong"
+        },
+        {
+          "done": false,
+          "text": "Foto ulang ke app"
+        }
+      ]
+    },
+    {
+      "id": "2ceb8078-d281-48b7-872b-05d236854225",
+      "title": "Pindahkan Stok dari Backroom",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "6f4081ea-67e1-4732-ad88-ee430cce1f21",
+      "store_name": "Toko Sejahtera Cikarang",
+      "assignee": "Rina",
+      "status": "in_progress",
+      "priority": "normal",
+      "due_at": "2026-10-29T21:34:33.861682+07:00",
+      "created_at": "2026-10-24T12:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": false,
+          "text": "Cek rak sekarang"
+        },
+        {
+          "done": false,
+          "text": "Restock dari gudang bila kosong"
+        },
+        {
+          "done": false,
+          "text": "Foto ulang ke app"
+        }
+      ]
+    },
+    {
+      "id": "ef661a24-d09d-4185-bf99-b15ee23db46e",
+      "title": "Perbaiki Label Harga",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "7e7f75fa-e115-47ec-bcc5-2d7c53fb99ca",
+      "store_name": "Toko Sejahtera Surabaya",
+      "assignee": "Sari",
+      "status": "done",
+      "priority": "normal",
+      "due_at": "2026-10-30T03:34:33.861682+07:00",
+      "created_at": "2026-10-24T09:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": true,
+          "text": "Cek rak sekarang"
+        },
+        {
+          "done": false,
+          "text": "Restock dari gudang bila kosong"
+        },
+        {
+          "done": false,
+          "text": "Foto ulang ke app"
+        }
+      ]
+    },
+    {
+      "id": "eb1387f4-5e15-4c12-ac26-3dfaac47e1f5",
+      "title": "Foto Ulang Rak",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "9817d730-331e-4db8-beef-3e2a61e535ba",
+      "store_name": "Minimarket Maju Jaya Bekasi",
+      "assignee": "Budi",
+      "status": "open",
+      "priority": "low",
+      "due_at": "2026-10-30T09:34:33.861682+07:00",
+      "created_at": "2026-10-24T06:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": false,
+          "text": "Cek kondisi rak dan catat temuan"
+        },
+        {
+          "done": false,
+          "text": "Tindak lanjuti sesuai SOP toko"
+        },
+        {
+          "done": false,
+          "text": "Unggah bukti foto setelah selesai"
+        }
+      ]
+    },
+    {
+      "id": "1789292a-49d4-4f07-b7c9-7a6b2b1c4f20",
+      "title": "Cek Toleransi Harga",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "aa9fa1a4-14a7-46ad-bae6-905438ab4c44",
+      "store_name": "Gerai Nusa Malang",
+      "assignee": "Rina",
+      "status": "open",
+      "priority": "normal",
+      "due_at": "2026-10-30T15:34:33.861682+07:00",
+      "created_at": "2026-10-24T03:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": false,
+          "text": "Cek rak sekarang"
+        },
+        {
+          "done": false,
+          "text": "Restock dari gudang bila kosong"
+        },
+        {
+          "done": false,
+          "text": "Foto ulang ke app"
+        }
+      ]
+    },
+    {
+      "id": "98492c6f-e13f-4c57-bf6b-a5df287c1ccb",
+      "title": "Ganti Poster Promosi",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "b0a42dc6-ea1b-429f-933f-f5e48becceb5",
+      "store_name": "Swalayan Mitra Bogor",
+      "assignee": "Sari",
+      "status": "in_progress",
+      "priority": "normal",
+      "due_at": "2026-10-30T21:34:33.861682+07:00",
+      "created_at": "2026-10-24T00:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": false,
+          "text": "Cek rak sekarang"
+        },
+        {
+          "done": false,
+          "text": "Restock dari gudang bila kosong"
+        },
+        {
+          "done": false,
+          "text": "Foto ulang ke app"
+        }
+      ]
+    },
+    {
+      "id": "f358622e-21aa-4e8e-96ae-92eaf3dda9f9",
+      "title": "Restock rak minuman dingin",
+      "detail": "Ditugaskan otomatis dari alert — cek rak, foto ulang, sinkronkan metric.",
+      "alert_id": null,
+      "alert_type": null,
+      "severity": "medium",
+      "store_id": "ddee3f0e-abf8-4c5d-97f5-358e0917bd6c",
+      "store_name": "Minimarket Maju Jaya Bandung",
+      "assignee": "Budi",
+      "status": "done",
+      "priority": "high",
+      "due_at": "2026-10-25T21:34:33.861682+07:00",
+      "created_at": "2026-10-23T21:34:33.861682+07:00",
+      "checklist": [
+        {
+          "done": true,
+          "text": "Cek rak sekarang"
+        },
+        {
+          "done": false,
+          "text": "Restock dari gudang bila kosong"
+        },
+        {
+          "done": false,
+          "text": "Foto ulang ke app"
+        }
+      ]
+    }
+  ],
+  "next_cursor": null
+}

@@ -1,0 +1,385 @@
+{
+  "store": "Gerai Nusa Malang",
+  "store_id": "aa9fa1a4-14a7-46ad-bae6-905438ab4c44",
+  "visitors_now": 765,
+  "footfall_today": 97,
+  "footfall_delta": -67.7,
+  "avg_dwell_seconds": 284,
+  "dwell_delta": 7.2,
+  "empty_facings": 0,
+  "queue_seconds": 0,
+  "cameras_online": 4,
+  "cameras_total": 4,
+  "hourly": [
+    {
+      "hour": 5,
+      "visitors": 11
+    },
+    {
+      "hour": 6,
+      "visitors": 7
+    },
+    {
+      "hour": 7,
+      "visitors": 0
+    },
+    {
+      "hour": 8,
+      "visitors": 0
+    },
+    {
+      "hour": 9,
+      "visitors": 0
+    },
+    {
+      "hour": 10,
+      "visitors": 0
+    },
+    {
+      "hour": 11,
+      "visitors": 0
+    },
+    {
+      "hour": 12,
+      "visitors": 0
+    },
+    {
+      "hour": 13,
+      "visitors": 0
+    },
+    {
+      "hour": 14,
+      "visitors": 0
+    },
+    {
+      "hour": 15,
+      "visitors": 0
+    },
+    {
+      "hour": 16,
+      "visitors": 0
+    }
+  ],
+  "zones": [
+    {
+      "id": "231219c7-e31a-54bb-7045-95a38bc40031",
+      "name": "Entrance",
+      "footfall": 25,
+      "dwell_seconds": 115,
+      "share": 0.41999998688697815
+    },
+    {
+      "id": "394a58f4-11d4-9cac-6648-3929aee6ef12",
+      "name": "Rak Dapur",
+      "footfall": 24,
+      "dwell_seconds": 210,
+      "share": 0.2199999988079071
+    },
+    {
+      "id": "d283a181-4b4c-e9f0-f905-5280ede5c064",
+      "name": "Chiller",
+      "footfall": 23,
+      "dwell_seconds": 148,
+      "share": 0.20999999344348907
+    },
+    {
+      "id": "a6366153-8df2-5fd8-ed66-6012c79551ed",
+      "name": "Kasir",
+      "footfall": 25,
+      "dwell_seconds": 90,
+      "share": 0.15000000596046448
+    }
+  ],
+  "cameras": [
+    {
+      "id": "1255c888-077d-4865-b179-9bf5cb97e714",
+      "name": "CAM-01",
+      "zone": "Entrance",
+      "status": "online",
+      "fps": 25
+    },
+    {
+      "id": "87db1595-daad-4a9d-a361-0d0abdff3293",
+      "name": "CAM-02",
+      "zone": "Rak Dapur",
+      "status": "online",
+      "fps": 25
+    },
+    {
+      "id": "ccb98c5f-d0fa-407d-a4eb-2ab99c881e64",
+      "name": "CAM-03",
+      "zone": "Chiller",
+      "status": "online",
+      "fps": 25
+    },
+    {
+      "id": "7cc4a5bd-a3b2-4b1f-9be0-3d91e06fc607",
+      "name": "CAM-04",
+      "zone": "Kasir",
+      "status": "online",
+      "fps": 25
+    }
+  ],
+  "visitors": [
+    {
+      "id": "a1832c9a-93de-70d4-2147-492ee55303f1",
+      "entered_at": "2026-10-28T13:28:00+07:00",
+      "dwell_seconds": 151,
+      "zone": "Rak Dapur",
+      "status": "checked_out"
+    },
+    {
+      "id": "c9327af6-b7ac-bff1-cd54-7149bf7a7d62",
+      "entered_at": "2026-10-28T13:24:00+07:00",
+      "dwell_seconds": 138,
+      "zone": "Kasir",
+      "status": "checked_out"
+    },
+    {
+      "id": "91d86d12-7474-16df-48ab-6614760285aa",
+      "entered_at": "2026-10-28T13:20:00+07:00",
+      "dwell_seconds": 125,
+      "zone": "Entrance",
+      "status": "in_store"
+    },
+    {
+      "id": "5617905c-222c-3dd4-9be8-333999f7e649",
+      "entered_at": "2026-10-28T13:16:00+07:00",
+      "dwell_seconds": 112,
+      "zone": "Chiller",
+      "status": "checked_out"
+    },
+    {
+      "id": "a850454b-a0f4-1341-8fd2-f3159d8e8e73",
+      "entered_at": "2026-10-28T13:12:00+07:00",
+      "dwell_seconds": 99,
+      "zone": "Rak Dapur",
+      "status": "checked_out"
+    },
+    {
+      "id": "1f1ddbb7-4c76-4190-4297-30401e001a17",
+      "entered_at": "2026-10-28T13:08:00+07:00",
+      "dwell_seconds": 86,
+      "zone": "Kasir",
+      "status": "checked_out"
+    },
+    {
+      "id": "7f557898-a6a3-b01d-4dee-24b2b9cae998",
+      "entered_at": "2026-10-28T13:04:00+07:00",
+      "dwell_seconds": 73,
+      "zone": "Entrance",
+      "status": "checked_out"
+    },
+    {
+      "id": "c48e2de8-ab5b-7eb9-5fb3-e16fb697c02b",
+      "entered_at": "2026-10-28T12:44:00+07:00",
+      "dwell_seconds": 240,
+      "zone": "Kasir",
+      "status": "checked_out"
+    },
+    {
+      "id": "ba8796e1-b7f7-79c0-042d-79590aa89592",
+      "entered_at": "2026-10-28T12:40:00+07:00",
+      "dwell_seconds": 227,
+      "zone": "Entrance",
+      "status": "in_store"
+    },
+    {
+      "id": "125a6197-12a9-679d-0987-12ff9f8908a4",
+      "entered_at": "2026-10-28T12:36:00+07:00",
+      "dwell_seconds": 214,
+      "zone": "Chiller",
+      "status": "checked_out"
+    },
+    {
+      "id": "b5610247-ac63-2913-ac60-d603cd7af0d9",
+      "entered_at": "2026-10-28T12:32:00+07:00",
+      "dwell_seconds": 201,
+      "zone": "Rak Dapur",
+      "status": "checked_out"
+    },
+    {
+      "id": "340af69d-ec73-90ca-2563-aaa979671a24",
+      "entered_at": "2026-10-28T12:28:00+07:00",
+      "dwell_seconds": 188,
+      "zone": "Kasir",
+      "status": "checked_out"
+    },
+    {
+      "id": "268b8215-1f97-18bc-577a-b5aad9278176",
+      "entered_at": "2026-10-28T12:24:00+07:00",
+      "dwell_seconds": 175,
+      "zone": "Entrance",
+      "status": "checked_out"
+    },
+    {
+      "id": "f8c2e0ed-59ce-454a-4a47-bbfec5322fc2",
+      "entered_at": "2026-10-28T12:20:00+07:00",
+      "dwell_seconds": 162,
+      "zone": "Chiller",
+      "status": "in_store"
+    },
+    {
+      "id": "0af838e5-9435-e08a-1001-954dea723eb1",
+      "entered_at": "2026-10-28T12:16:00+07:00",
+      "dwell_seconds": 149,
+      "zone": "Rak Dapur",
+      "status": "checked_out"
+    },
+    {
+      "id": "cfbba2c7-89e7-84e0-2deb-08a902570cad",
+      "entered_at": "2026-10-28T12:12:00+07:00",
+      "dwell_seconds": 136,
+      "zone": "Kasir",
+      "status": "checked_out"
+    },
+    {
+      "id": "d18764e7-8ac1-36f8-cb9c-ce149f286d97",
+      "entered_at": "2026-10-28T12:08:00+07:00",
+      "dwell_seconds": 123,
+      "zone": "Entrance",
+      "status": "checked_out"
+    },
+    {
+      "id": "7e3c123f-c72d-95c8-684c-b0b45939e775",
+      "entered_at": "2026-10-28T12:04:00+07:00",
+      "dwell_seconds": 110,
+      "zone": "Chiller",
+      "status": "checked_out"
+    },
+    {
+      "id": "56e8b201-7c48-86c1-d898-614a873fb1f7",
+      "entered_at": "2026-10-28T11:56:00+07:00",
+      "dwell_seconds": 316,
+      "zone": "Chiller",
+      "status": "checked_out"
+    },
+    {
+      "id": "8842dda4-e81a-4e7c-6a18-b32ef666b426",
+      "entered_at": "2026-10-28T11:52:00+07:00",
+      "dwell_seconds": 303,
+      "zone": "Rak Dapur",
+      "status": "checked_out"
+    },
+    {
+      "id": "e62d8369-7321-6961-94c7-94ff6686097a",
+      "entered_at": "2026-10-28T11:48:00+07:00",
+      "dwell_seconds": 290,
+      "zone": "Kasir",
+      "status": "checked_out"
+    },
+    {
+      "id": "249cef31-164e-1056-8bbb-755edb83bf14",
+      "entered_at": "2026-10-28T11:44:00+07:00",
+      "dwell_seconds": 277,
+      "zone": "Entrance",
+      "status": "checked_out"
+    },
+    {
+      "id": "643d8509-19ec-9762-443c-129938d60b97",
+      "entered_at": "2026-10-28T11:40:00+07:00",
+      "dwell_seconds": 264,
+      "zone": "Chiller",
+      "status": "in_store"
+    },
+    {
+      "id": "e1b35f9b-a29e-2a1b-18e1-c6feceeadf93",
+      "entered_at": "2026-10-28T11:36:00+07:00",
+      "dwell_seconds": 251,
+      "zone": "Rak Dapur",
+      "status": "checked_out"
+    },
+    {
+      "id": "a197fe90-f76f-5582-3189-6afb52113eac",
+      "entered_at": "2026-10-28T11:32:00+07:00",
+      "dwell_seconds": 238,
+      "zone": "Kasir",
+      "status": "checked_out"
+    },
+    {
+      "id": "8c33dd7c-7b0c-c401-829b-817d4c2f8afd",
+      "entered_at": "2026-10-28T11:28:00+07:00",
+      "dwell_seconds": 225,
+      "zone": "Entrance",
+      "status": "checked_out"
+    },
+    {
+      "id": "3f041620-7510-6151-3e9d-26254db73cab",
+      "entered_at": "2026-10-28T11:24:00+07:00",
+      "dwell_seconds": 212,
+      "zone": "Chiller",
+      "status": "checked_out"
+    },
+    {
+      "id": "4fba8def-9f66-2039-ad5f-3db0da4a8c4d",
+      "entered_at": "2026-10-28T11:20:00+07:00",
+      "dwell_seconds": 199,
+      "zone": "Rak Dapur",
+      "status": "in_store"
+    },
+    {
+      "id": "e020ae87-e4f4-4f24-3f71-4a441f49523b",
+      "entered_at": "2026-10-28T11:16:00+07:00",
+      "dwell_seconds": 186,
+      "zone": "Kasir",
+      "status": "checked_out"
+    },
+    {
+      "id": "93754c6e-321e-5ed9-ea20-f1901426ddbf",
+      "entered_at": "2026-10-28T11:12:00+07:00",
+      "dwell_seconds": 173,
+      "zone": "Entrance",
+      "status": "checked_out"
+    }
+  ],
+  "hourly_dwell": [
+    {
+      "hour": 5,
+      "dwell_seconds": 175
+    },
+    {
+      "hour": 6,
+      "dwell_seconds": 112
+    },
+    {
+      "hour": 7,
+      "dwell_seconds": 0
+    },
+    {
+      "hour": 8,
+      "dwell_seconds": 0
+    },
+    {
+      "hour": 9,
+      "dwell_seconds": 0
+    },
+    {
+      "hour": 10,
+      "dwell_seconds": 0
+    },
+    {
+      "hour": 11,
+      "dwell_seconds": 0
+    },
+    {
+      "hour": 12,
+      "dwell_seconds": 0
+    },
+    {
+      "hour": 13,
+      "dwell_seconds": 0
+    },
+    {
+      "hour": 14,
+      "dwell_seconds": 0
+    },
+    {
+      "hour": 15,
+      "dwell_seconds": 0
+    },
+    {
+      "hour": 16,
+      "dwell_seconds": 0
+    }
+  ]
+}

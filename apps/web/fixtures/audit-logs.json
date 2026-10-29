@@ -1,0 +1,608 @@
+[
+  {
+    "id": "92c89a5a-ef6b-4f4f-a0d3-0928c9bc5503",
+    "actor_id": "01a18348-c9b3-7777-87f3-37e33db04272",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a18348-c9b3-7777-87f3-37e33db04272",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T23:12:28.122631+07:00"
+  },
+  {
+    "id": "5dfb442b-a3ac-416b-8674-82006954e993",
+    "actor_id": "01a18309-2dc9-77f5-8fb2-035c619f5b40",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a18309-2dc9-77f5-8fb2-035c619f5b40",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T22:02:59.36216+07:00"
+  },
+  {
+    "id": "161f9dae-78ca-4519-abc9-a7fb83a77f79",
+    "actor_id": "01a18308-bfb9-703a-9d2c-b2feb841c825",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a18308-bfb9-703a-9d2c-b2feb841c825",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T22:02:31.129149+07:00"
+  },
+  {
+    "id": "bc9227cf-0be4-4ecb-be36-f2d23f8e9f30",
+    "actor_id": "01a182fd-b9b7-799c-9472-956e1beee2d4",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a182fd-b9b7-799c-9472-956e1beee2d4",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T21:50:28.692179+07:00"
+  },
+  {
+    "id": "5ed10737-74ea-4361-a6a3-739af5603f7a",
+    "actor_id": "01a182f2-80a3-7337-9ef0-79956dfaebf9",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a182f2-80a3-7337-9ef0-79956dfaebf9",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T21:38:13.21052+07:00"
+  },
+  {
+    "id": "943d7e89-edbe-4ffb-b0c0-f49141e876b1",
+    "actor_id": "01a18126-c1df-7b7d-bc0f-9a645229b3ab",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a18126-c1df-7b7d-bc0f-9a645229b3ab",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T13:16:03.330619+07:00"
+  },
+  {
+    "id": "9efad6c2-cb5a-483f-b72b-76328e21056d",
+    "actor_id": "01a1811e-c42f-7896-a9c2-8ac018c5fca6",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a1811e-c42f-7896-a9c2-8ac018c5fca6",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T13:07:19.630249+07:00"
+  },
+  {
+    "id": "08cd9e0e-098e-48cd-9fba-3b78dd639c51",
+    "actor_id": "01a1810e-6c30-7874-b7f5-888db157b5f3",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a1810e-6c30-7874-b7f5-888db157b5f3",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T12:49:28.550401+07:00"
+  },
+  {
+    "id": "65f1bd2d-c4da-474c-b73f-698e1b882ea7",
+    "actor_id": "01a18100-8f77-795f-8fe9-31481441b11b",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a18100-8f77-795f-8fe9-31481441b11b",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T12:34:20.048111+07:00"
+  },
+  {
+    "id": "9f25f1fc-0b43-4040-8d7c-023ae72d7c37",
+    "actor_id": "01a180fe-26ea-7128-b36e-5104d9874c2a",
+    "actor_name": "Pengunjung Demo",
+    "action": "document.upload",
+    "entity": "documents",
+    "entity_id": "01a180fe-2774-7d00-944e-1d92bb2f3991",
+    "detail": {
+      "mime": "text/plain",
+      "size_bytes": 265,
+      "title": "SOP Uji Lokal 2"
+    },
+    "at": "2026-10-28T12:31:42.321501+07:00"
+  },
+  {
+    "id": "a6f68ce8-6b41-4a16-9e73-7f4adeb8aeba",
+    "actor_id": "01a180fe-26ea-7128-b36e-5104d9874c2a",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a180fe-26ea-7128-b36e-5104d9874c2a",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T12:31:42.218069+07:00"
+  },
+  {
+    "id": "b78a4510-5008-49f9-a6d6-d70b6650fcf3",
+    "actor_id": "01a180fd-1737-7860-aa07-64703e8a1982",
+    "actor_name": "Pengunjung Demo",
+    "action": "document.upload",
+    "entity": "documents",
+    "entity_id": "01a180fd-17cf-7289-a07e-aeefd830469f",
+    "detail": {
+      "mime": "text/plain",
+      "size_bytes": 265,
+      "title": "SOP Uji Lokal"
+    },
+    "at": "2026-10-28T12:30:32.779861+07:00"
+  },
+  {
+    "id": "c84c6069-8514-438d-a07e-22a72ac9ad59",
+    "actor_id": "01a180fd-1737-7860-aa07-64703e8a1982",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a180fd-1737-7860-aa07-64703e8a1982",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T12:30:32.670418+07:00"
+  },
+  {
+    "id": "4f0cceb5-1d9b-4ed1-9c7e-6272e889a42a",
+    "actor_id": "01a180ed-f49f-7b46-a68d-4e9d930d93e6",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a180ed-f49f-7b46-a68d-4e9d930d93e6",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T12:14:00.77108+07:00"
+  },
+  {
+    "id": "4c5291b1-ca1d-42b0-a6da-96b38a3bbe4d",
+    "actor_id": "01a180df-f895-73a3-b409-d79e5c111243",
+    "actor_name": "Pengunjung Demo",
+    "action": "document.upload",
+    "entity": "documents",
+    "entity_id": "01a180df-f985-7c71-9b76-5e2eab910329",
+    "detail": {
+      "mime": "text/plain",
+      "size_bytes": 265,
+      "title": "SOP Uji Coba"
+    },
+    "at": "2026-10-28T11:58:44.481603+07:00"
+  },
+  {
+    "id": "85d5c872-e29a-492b-9253-ca9b182265fc",
+    "actor_id": "01a180df-f895-73a3-b409-d79e5c111243",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a180df-f895-73a3-b409-d79e5c111243",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T11:58:44.312304+07:00"
+  },
+  {
+    "id": "ce880f6b-adfd-4853-bd04-5f707cf35d94",
+    "actor_id": "00000000-0000-7000-8000-000000000101",
+    "actor_name": "Seed Bot",
+    "action": "document.delete",
+    "entity": "documents",
+    "entity_id": "01a180ba-1131-7e14-a82b-99f5841a0bff",
+    "detail": {},
+    "at": "2026-10-28T11:17:20.246646+07:00"
+  },
+  {
+    "id": "4f9f79a8-a821-4cd3-a743-4735feac973b",
+    "actor_id": "00000000-0000-7000-8000-000000000101",
+    "actor_name": "Seed Bot",
+    "action": "document.upload",
+    "entity": "documents",
+    "entity_id": "01a180ba-1131-7e14-a82b-99f5841a0bff",
+    "detail": {
+      "mime": "image/png",
+      "size_bytes": 70,
+      "title": "SOP Uji"
+    },
+    "at": "2026-10-28T11:17:20.16823+07:00"
+  },
+  {
+    "id": "771f52b6-3139-4fd0-8d28-414f93911b17",
+    "actor_id": "01a18096-3390-78fe-9661-2497c92816fe",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a18096-3390-78fe-9661-2497c92816fe",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T10:38:09.704216+07:00"
+  },
+  {
+    "id": "01b9ae12-b8d3-4c96-8c69-6f3c835ee391",
+    "actor_id": "01a18096-0f66-7e44-bcee-3684567b7a80",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a18096-0f66-7e44-bcee-3684567b7a80",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T10:38:00.45008+07:00"
+  },
+  {
+    "id": "a723b8e1-0a98-44e1-b730-ca6d17c11e8b",
+    "actor_id": "01a18092-3e12-71df-8ea1-d95d306986fa",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a18092-3e12-71df-8ea1-d95d306986fa",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T10:33:50.260045+07:00"
+  },
+  {
+    "id": "a96403e3-370a-43ab-8f84-dc3cb469e13b",
+    "actor_id": "01a1808f-ae13-7204-8bbd-e74abfb87644",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a1808f-ae13-7204-8bbd-e74abfb87644",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T10:31:02.330531+07:00"
+  },
+  {
+    "id": "ea74d106-68a8-41f7-9078-012105e1fcac",
+    "actor_id": "01a18071-b954-7da2-96f1-770d61191251",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a18071-b954-7da2-96f1-770d61191251",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T09:58:19.161727+07:00"
+  },
+  {
+    "id": "fed52052-c777-4f1b-b55d-ccd2340da524",
+    "actor_id": "01a1804f-04f3-768f-a422-84a99b78ff5b",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a1804f-04f3-768f-a422-84a99b78ff5b",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T09:20:24.713951+07:00"
+  },
+  {
+    "id": "c2f85358-b016-4e1a-89fb-5b912cc86f8f",
+    "actor_id": "01a18035-6ea3-73e8-8682-9406657bd991",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a18035-6ea3-73e8-8682-9406657bd991",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T08:52:27.884388+07:00"
+  },
+  {
+    "id": "b04c5a2a-1918-4407-9bd0-a1a88f1e4fae",
+    "actor_id": "01a17f7c-7782-77ff-9022-c5d3743bbcb5",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a17f7c-7782-77ff-9022-c5d3743bbcb5",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T05:30:25.939516+07:00"
+  },
+  {
+    "id": "11ba44e2-3953-4101-aa20-f0c22deca722",
+    "actor_id": "01a17f7c-6d98-7187-978a-1a50dca26fe3",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a17f7c-6d98-7187-978a-1a50dca26fe3",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T05:30:23.404298+07:00"
+  },
+  {
+    "id": "c19a8bf6-fa4b-457c-b11d-c014a3eb21a7",
+    "actor_id": "01a17f7c-5ff5-7add-a1c0-256b137cb48b",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a17f7c-5ff5-7add-a1c0-256b137cb48b",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T05:30:19.909305+07:00"
+  },
+  {
+    "id": "7ac2bac3-8867-430a-87a8-d48feed4eb91",
+    "actor_id": "01a17f7c-4972-7510-ac7a-24b25721aeea",
+    "actor_name": "Pengunjung Demo",
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a17f7c-4972-7510-ac7a-24b25721aeea",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-28T05:30:14.190678+07:00"
+  },
+  {
+    "id": "ba811d8d-591a-4342-aca7-03a4cf88c4a2",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a174ac-eff5-7f23-a19b-11d895e6bdab",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T03:07:33.130435+07:00"
+  },
+  {
+    "id": "5bc71356-c427-4c45-8895-087138d46a7c",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a174ac-e18f-77e0-87e9-c2581fda94de",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T03:07:29.447973+07:00"
+  },
+  {
+    "id": "77f32618-10bb-417a-b190-25564afdb6e1",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a174ac-b1c4-737d-b74f-fb8c755bc9f8",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T03:07:17.213195+07:00"
+  },
+  {
+    "id": "521d8f42-cf24-4193-a5cb-c06a0e661315",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a174a5-4427-7e09-8784-09e3732271de",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:59:10.393344+07:00"
+  },
+  {
+    "id": "237219eb-42e6-49ee-a7f5-df57f6c48341",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a174a5-228c-7926-a1e3-d9efae97681a",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:59:01.794021+07:00"
+  },
+  {
+    "id": "683e2c41-bb24-4615-8c2a-2065e3387cd1",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a174a5-19dc-7831-b807-f94ad8e482e3",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:58:59.574263+07:00"
+  },
+  {
+    "id": "b2eb4605-6688-46e3-9e44-0580b2a901b4",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a174a5-081c-77fb-adf8-c1c009f7c099",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:58:55.038844+07:00"
+  },
+  {
+    "id": "c8431ea8-3bb0-4503-9c40-73c3a8ce3e70",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a174a4-fdb9-7b3d-9aed-2143240b12de",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:58:52.36354+07:00"
+  },
+  {
+    "id": "d20be5a6-26d8-437b-ae72-89d1d1c4032e",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a174a4-ea8b-743d-b8ca-842d23468e24",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:58:47.477247+07:00"
+  },
+  {
+    "id": "b3ac047b-f893-4232-bd3b-e1998a0d428a",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a17490-c053-79e0-964c-a88dfd6aedfd",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:36:45.921655+07:00"
+  },
+  {
+    "id": "4681bfc8-366a-4372-b0ec-e9dcd2942b60",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a17490-9c1d-7a98-8fb4-0a038932131b",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:36:36.667615+07:00"
+  },
+  {
+    "id": "499870d2-fa16-4141-af04-3699410b7f91",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a17490-7b06-77f3-8e70-51823a45ea07",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:36:28.18114+07:00"
+  },
+  {
+    "id": "eac0407e-f5de-4cfb-b14a-163840a7ea6c",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a17490-5cb7-7274-8f34-ef9202cc534b",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:36:20.429337+07:00"
+  },
+  {
+    "id": "3191aa44-a3e0-4948-b424-35a3a9159eb5",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a17490-24bd-75ec-a679-d834cebe0393",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:36:06.100069+07:00"
+  },
+  {
+    "id": "a6b0264f-2455-4ccb-a534-322a2ec8012e",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a1748f-d8d6-7380-85bb-e2c1481fa84e",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:35:46.663318+07:00"
+  },
+  {
+    "id": "c084df6d-4f37-411e-a483-a4728350951d",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a1748f-a74d-74a6-bc95-1892e48ca7c6",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:35:33.98444+07:00"
+  },
+  {
+    "id": "e1f2fd31-4a52-4734-8647-a9dbd0a57d37",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a1748e-2e6e-7938-a32c-bdb8e714e9c1",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:33:57.504168+07:00"
+  },
+  {
+    "id": "265b17b2-78f1-4d0e-9b44-9d22e3851534",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a1748e-10f1-7caa-992a-7c338eeb207b",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:33:49.962319+07:00"
+  },
+  {
+    "id": "7201f0d3-e8c4-421b-8ae4-fc1bdb95de6a",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a1748d-f2a3-739a-95ee-e05e49bd5b9e",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:33:42.194949+07:00"
+  },
+  {
+    "id": "fce82601-ee58-4d9b-8af1-256b41dbdefc",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a1748d-d94c-7c08-a58e-d19e076c3cb0",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:33:35.715732+07:00"
+  },
+  {
+    "id": "5a5cb2bd-be69-4d58-a26a-c751d285f9db",
+    "actor_id": null,
+    "actor_name": null,
+    "action": "auth.demo.start",
+    "entity": "users",
+    "entity_id": "01a1748d-8db2-7618-afa1-a6d5ebb82496",
+    "detail": {
+      "ip": "::1"
+    },
+    "at": "2026-10-26T02:33:16.362834+07:00"
+  }
+]

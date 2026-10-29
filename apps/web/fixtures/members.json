@@ -1,0 +1,252 @@
+[
+  {
+    "id": "00000000-0000-7000-8000-000000000201",
+    "user": {
+      "id": "00000000-0000-7000-8000-000000000101",
+      "email": "seed@shelfops.local",
+      "name": "Seed Bot"
+    },
+    "role": "admin",
+    "created_at": "2026-10-20 08:53:39.424483+00"
+  },
+  {
+    "id": "01a17f7c-498c-75d3-909a-00c7bace7a77",
+    "user": {
+      "id": "01a17f7c-4972-7510-ac7a-24b25721aeea",
+      "email": "demo-aceac0737959@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-27 22:30:14.133259+00"
+  },
+  {
+    "id": "01a17f7c-5ffc-7624-a476-2a148657a796",
+    "user": {
+      "id": "01a17f7c-5ff5-7add-a1c0-256b137cb48b",
+      "email": "demo-0ef42063bbfc@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-27 22:30:19.893934+00"
+  },
+  {
+    "id": "01a17f7c-6da0-7242-bf91-e7cab5ff38b2",
+    "user": {
+      "id": "01a17f7c-6d98-7187-978a-1a50dca26fe3",
+      "email": "demo-e35091ccad30@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-27 22:30:23.386823+00"
+  },
+  {
+    "id": "01a17f7c-7787-7f0b-9483-9952ca95a00a",
+    "user": {
+      "id": "01a17f7c-7782-77ff-9022-c5d3743bbcb5",
+      "email": "demo-513dff2951ea@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-27 22:30:25.923229+00"
+  },
+  {
+    "id": "01a18035-6ebe-77e9-acd0-e415469e2794",
+    "user": {
+      "id": "01a18035-6ea3-73e8-8682-9406657bd991",
+      "email": "demo-68882b1bc1f7@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 01:52:27.81326+00"
+  },
+  {
+    "id": "01a1804f-04f9-7cce-8408-ee574cb43126",
+    "user": {
+      "id": "01a1804f-04f3-768f-a422-84a99b78ff5b",
+      "email": "demo-fe0740c98522@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 02:20:24.69187+00"
+  },
+  {
+    "id": "01a18071-b973-75a1-99d1-4f5e616cf230",
+    "user": {
+      "id": "01a18071-b954-7da2-96f1-770d61191251",
+      "email": "demo-56d7f56ce451@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 02:58:19.092742+00"
+  },
+  {
+    "id": "01a1808f-ae24-74b2-b90e-32973b53dd57",
+    "user": {
+      "id": "01a1808f-ae13-7204-8bbd-e74abfb87644",
+      "email": "demo-6788fe820b6e@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 03:31:02.292965+00"
+  },
+  {
+    "id": "01a18092-3e21-7daf-a9a1-bc58c73b0862",
+    "user": {
+      "id": "01a18092-3e12-71df-8ea1-d95d306986fa",
+      "email": "demo-4e0f57c2c430@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 03:33:50.224273+00"
+  },
+  {
+    "id": "01a18096-0f6e-790e-8668-debc2bf7a839",
+    "user": {
+      "id": "01a18096-0f66-7e44-bcee-3684567b7a80",
+      "email": "demo-e1563ff1300b@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 03:38:00.424331+00"
+  },
+  {
+    "id": "01a18096-3397-7e7e-8684-f55325152417",
+    "user": {
+      "id": "01a18096-3390-78fe-9661-2497c92816fe",
+      "email": "demo-aac0dc68d38e@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 03:38:09.683448+00"
+  },
+  {
+    "id": "01a180df-f8ae-7537-8772-7140d566c280",
+    "user": {
+      "id": "01a180df-f895-73a3-b409-d79e5c111243",
+      "email": "demo-932ae94e54f0@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 04:58:44.248443+00"
+  },
+  {
+    "id": "01a180ed-f4a9-7801-ac56-82ee205dfc23",
+    "user": {
+      "id": "01a180ed-f49f-7b46-a68d-4e9d930d93e6",
+      "email": "demo-2ef793d76756@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 05:14:00.73668+00"
+  },
+  {
+    "id": "01a180fd-1748-7018-82da-963101bff514",
+    "user": {
+      "id": "01a180fd-1737-7860-aa07-64703e8a1982",
+      "email": "demo-e5482181d5c2@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 05:30:32.632621+00"
+  },
+  {
+    "id": "01a180fe-26f8-741a-82bd-c7744c7b8d12",
+    "user": {
+      "id": "01a180fe-26ea-7128-b36e-5104d9874c2a",
+      "email": "demo-3d871b4abea0@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 05:31:42.18798+00"
+  },
+  {
+    "id": "01a18100-8f7f-7226-b2b3-4c07fecd938e",
+    "user": {
+      "id": "01a18100-8f77-795f-8fe9-31481441b11b",
+      "email": "demo-136cc39c3235@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 05:34:20.023271+00"
+  },
+  {
+    "id": "01a1810e-6c40-7581-a7b4-4fa3e6739a41",
+    "user": {
+      "id": "01a1810e-6c30-7874-b7f5-888db157b5f3",
+      "email": "demo-ef6b6fc08c4a@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 05:49:28.501726+00"
+  },
+  {
+    "id": "01a1811e-c43a-7958-93a5-447c6b2382fe",
+    "user": {
+      "id": "01a1811e-c42f-7896-a9c2-8ac018c5fca6",
+      "email": "demo-4753be837d46@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 06:07:19.599253+00"
+  },
+  {
+    "id": "01a18126-c1ee-70b9-959f-8b92bdfa5bc6",
+    "user": {
+      "id": "01a18126-c1df-7b7d-bc0f-9a645229b3ab",
+      "email": "demo-24b0da90b735@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 06:16:03.297143+00"
+  },
+  {
+    "id": "01a182f2-80bb-7210-b8dc-15325f34733e",
+    "user": {
+      "id": "01a182f2-80a3-7337-9ef0-79956dfaebf9",
+      "email": "demo-f29f6f393c10@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 14:38:13.15841+00"
+  },
+  {
+    "id": "01a182fd-b9c1-71b4-a1ef-533744334ce2",
+    "user": {
+      "id": "01a182fd-b9b7-799c-9472-956e1beee2d4",
+      "email": "demo-ef4a7c3907be@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 14:50:28.6641+00"
+  },
+  {
+    "id": "01a18308-bfc1-7b21-8a0c-e12837df568a",
+    "user": {
+      "id": "01a18308-bfb9-703a-9d2c-b2feb841c825",
+      "email": "demo-216870bd3d3f@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 15:02:31.09753+00"
+  },
+  {
+    "id": "01a18309-2dd6-7b5e-89da-a67c6e588606",
+    "user": {
+      "id": "01a18309-2dc9-77f5-8fb2-035c619f5b40",
+      "email": "demo-1035185f278d@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 15:02:59.275949+00"
+  },
+  {
+    "id": "01a18348-c9e6-7d7d-afbe-98f62f6bdfa9",
+    "user": {
+      "id": "01a18348-c9b3-7777-87f3-37e33db04272",
+      "email": "demo-b587b1cbb601@demo.local",
+      "name": "Pengunjung Demo"
+    },
+    "role": "analyst",
+    "created_at": "2026-10-28 16:12:27.95609+00"
+  }
+]

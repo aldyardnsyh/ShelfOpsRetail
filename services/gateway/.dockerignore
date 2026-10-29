@@ -1,0 +1,8 @@
+.git
+.gitignore
+bin/
+*.exe
+*.log
+coverage.out
+Dockerfile
+.dockerignore

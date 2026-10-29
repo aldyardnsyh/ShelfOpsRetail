@@ -1,0 +1,86 @@
+{
+  "datasets": [
+    {
+      "id": "45f96efe-0c93-5947-eef3-f6ad15782b36",
+      "name": "SOP Knowledge",
+      "region": "",
+      "cases": 10,
+      "version": "v1",
+      "status": "aktif",
+      "updated_at": "2026-10-26T03:35:09.849532+07:00",
+      "description": "Benchmark dataset internal aktif 1"
+    },
+    {
+      "id": "66004616-794a-55a4-9c0c-94e5827b07aa",
+      "name": "Retransaktur customer",
+      "region": "",
+      "cases": 10,
+      "version": "v1",
+      "status": "aktif",
+      "updated_at": "2026-10-26T03:35:09.849532+07:00",
+      "description": "Benchmark dataset internal aktif 2"
+    },
+    {
+      "id": "ea0ec759-7989-1d13-711a-d92e23cb20fb",
+      "name": "Kuisioner EOF kedua",
+      "region": "",
+      "cases": 10,
+      "version": "v1",
+      "status": "aktif",
+      "updated_at": "2026-10-26T03:35:09.849532+07:00",
+      "description": "Benchmark dataset internal aktif 3"
+    },
+    {
+      "id": "eda36e68-0c07-6ee7-d506-21471d8c0094",
+      "name": "Kuisioner Shelf Test",
+      "region": "",
+      "cases": 10,
+      "version": "v1",
+      "status": "aktif",
+      "updated_at": "2026-10-26T03:35:09.849532+07:00",
+      "description": "Benchmark dataset internal aktif 4"
+    }
+  ],
+  "runs": [
+    {
+      "id": "fcfa8955-55e7-e1dd-5f74-2e2726dfa970",
+      "label": "Run fcfa89",
+      "model": "glm-5-flash",
+      "retrieval": "bm25+vector",
+      "dataset_id": "45f96efe-0c93-5947-eef3-f6ad15782b36",
+      "created_at": "2026-10-25T03:35:09.869867+07:00",
+      "metrics": {
+        "faithfulness": 0.88,
+        "context_recall": 0.81,
+        "p95_latency_ms": 640,
+        "answer_relevance": 0.86,
+        "refusal_accuracy": 0.94,
+        "context_precision": 0.79
+      }
+    },
+    {
+      "id": "83672389-9b4d-4efa-4a42-806f55af5a91",
+      "label": "Run 836723",
+      "model": "glm-5-flash",
+      "retrieval": "bm25+vector",
+      "dataset_id": "45f96efe-0c93-5947-eef3-f6ad15782b36",
+      "created_at": "2026-10-24T03:35:09.869867+07:00",
+      "metrics": {
+        "faithfulness": 0.91,
+        "context_recall": 0.82,
+        "p95_latency_ms": 520,
+        "answer_relevance": 0.89,
+        "refusal_accuracy": 0.95,
+        "context_precision": 0.84
+      }
+    }
+  ],
+  "metric_labels": {
+    "answer_relevance": "Relevansi Jawaban",
+    "context_precision": "Presisi Konteks",
+    "context_recall": "Recall Konteks",
+    "faithfulness": "Kesetiaan Jawaban",
+    "p95_latency_ms": "P95 Latensi (ms)",
+    "refusal_accuracy": "Akurasi Menolak"
+  }
+}

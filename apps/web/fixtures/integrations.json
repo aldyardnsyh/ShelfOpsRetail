@@ -1,0 +1,535 @@
+{
+  "summary": {
+    "active": 5,
+    "total": 6,
+    "last_sync": "2026-10-28T17:51:58.862958+07:00",
+    "events_24h": 9,
+    "failures_24h": 1,
+    "pending": 1
+  },
+  "connectors": [
+    {
+      "id": "430cb64f-bcb5-56d7-2ef3-77bdd0c223a8",
+      "name": "Kompressor CV",
+      "kind": "pos",
+      "status": "connected",
+      "store_scope": "Jawa Barat",
+      "last_sync": "2026-10-25T22:34:33.861682+07:00",
+      "records": 1820,
+      "latency_ms": 345,
+      "note": ""
+    },
+    {
+      "id": "c7f03bef-55d9-0d83-e0e7-b4be15cfd703",
+      "name": "Logistik Nusa",
+      "kind": "cv",
+      "status": "connected",
+      "store_scope": "all",
+      "last_sync": "2026-10-25T23:34:33.861682+07:00",
+      "records": 1480,
+      "latency_ms": 312,
+      "note": ""
+    },
+    {
+      "id": "300f7efc-3208-1a8a-5d4b-bc6b97238bef",
+      "name": "Marketplace A",
+      "kind": "logistics",
+      "status": "error",
+      "store_scope": "Jawa Barat",
+      "last_sync": null,
+      "records": 1140,
+      "latency_ms": 279,
+      "note": "Autentikasi supplier kedaluwarsa"
+    },
+    {
+      "id": "328496ff-d311-0f03-ba72-b1bb536e2d7d",
+      "name": "POS Budaya",
+      "kind": "supplier",
+      "status": "connected",
+      "store_scope": "Jawa Barat",
+      "last_sync": "2026-10-26T02:34:33.861682+07:00",
+      "records": 460,
+      "latency_ms": 213,
+      "note": ""
+    },
+    {
+      "id": "af2d586b-1d5d-446a-2c95-fcae06e72b53",
+      "name": "POS Mitra",
+      "kind": "supplier",
+      "status": "connected",
+      "store_scope": "all",
+      "last_sync": "2026-10-26T03:34:33.861682+07:00",
+      "records": 2160,
+      "latency_ms": 378,
+      "note": ""
+    },
+    {
+      "id": "95338fe2-8c87-638a-2dea-918621132f5d",
+      "name": "Supplier Sehati",
+      "kind": "ecommerce",
+      "status": "connected",
+      "store_scope": "all",
+      "last_sync": "2026-10-26T01:34:33.861682+07:00",
+      "records": 800,
+      "latency_ms": 246,
+      "note": ""
+    }
+  ],
+  "sync_runs": [
+    {
+      "id": "a1707f21-4991-ec07-e87c-f7a52b04c10f",
+      "connector": "Supplier Sehati",
+      "kind": "pull",
+      "started_at": "2026-10-28T17:51:58.862958+07:00",
+      "duration_s": 15,
+      "status": "success",
+      "records": 77,
+      "message": ""
+    },
+    {
+      "id": "bf6e334e-ec8b-0a57-a615-657e51c7fed6",
+      "connector": "Kompressor CV",
+      "kind": "pull",
+      "started_at": "2026-10-28T17:51:58.862958+07:00",
+      "duration_s": 15,
+      "status": "success",
+      "records": 77,
+      "message": ""
+    },
+    {
+      "id": "2efd1ca3-d4e6-f9af-c069-e4d77ab0614a",
+      "connector": "POS Budaya",
+      "kind": "pull",
+      "started_at": "2026-10-28T17:51:58.862958+07:00",
+      "duration_s": 15,
+      "status": "success",
+      "records": 77,
+      "message": ""
+    },
+    {
+      "id": "b8f2fddc-1f38-ead0-6b86-77b470b9a626",
+      "connector": "Logistik Nusa",
+      "kind": "pull",
+      "started_at": "2026-10-28T17:51:58.862958+07:00",
+      "duration_s": 15,
+      "status": "success",
+      "records": 77,
+      "message": ""
+    },
+    {
+      "id": "3cfa56df-9cbd-cd62-c9bd-2239df1aa26d",
+      "connector": "POS Mitra",
+      "kind": "pull",
+      "started_at": "2026-10-28T17:51:58.862958+07:00",
+      "duration_s": 15,
+      "status": "success",
+      "records": 77,
+      "message": ""
+    },
+    {
+      "id": "713b41f2-c68b-c2aa-1853-dfddb8aeaae1",
+      "connector": "POS Budaya",
+      "kind": "webhook",
+      "started_at": "2026-10-28T13:40:58.862958+07:00",
+      "duration_s": 22,
+      "status": "success",
+      "records": 114,
+      "message": ""
+    },
+    {
+      "id": "6606a827-1c69-c35e-bb3e-f252654f17bf",
+      "connector": "Kompressor CV",
+      "kind": "webhook",
+      "started_at": "2026-10-28T13:40:58.862958+07:00",
+      "duration_s": 22,
+      "status": "success",
+      "records": 114,
+      "message": ""
+    },
+    {
+      "id": "b5792e49-d42c-96e8-6a7c-a6c33a4a1251",
+      "connector": "Logistik Nusa",
+      "kind": "webhook",
+      "started_at": "2026-10-28T13:40:58.862958+07:00",
+      "duration_s": 22,
+      "status": "success",
+      "records": 114,
+      "message": ""
+    },
+    {
+      "id": "af2cfaf7-bcc6-e5d7-97eb-b04eb2bdbf40",
+      "connector": "POS Mitra",
+      "kind": "webhook",
+      "started_at": "2026-10-28T13:40:58.862958+07:00",
+      "duration_s": 22,
+      "status": "success",
+      "records": 114,
+      "message": ""
+    },
+    {
+      "id": "5e80f50a-0052-b9d8-81f1-678405fbb85f",
+      "connector": "Supplier Sehati",
+      "kind": "webhook",
+      "started_at": "2026-10-28T13:40:58.862958+07:00",
+      "duration_s": 22,
+      "status": "success",
+      "records": 114,
+      "message": ""
+    },
+    {
+      "id": "ae0e5d6e-787e-5d31-08b0-b29f15d5435b",
+      "connector": "Supplier Sehati",
+      "kind": "push",
+      "started_at": "2026-10-28T09:29:58.862958+07:00",
+      "duration_s": 29,
+      "status": "failed",
+      "records": 151,
+      "message": "timeout saat handshake"
+    },
+    {
+      "id": "5d0339a2-e8cb-cd22-c777-d534ce84383d",
+      "connector": "Logistik Nusa",
+      "kind": "push",
+      "started_at": "2026-10-28T09:29:58.862958+07:00",
+      "duration_s": 29,
+      "status": "failed",
+      "records": 151,
+      "message": "timeout saat handshake"
+    },
+    {
+      "id": "290bae16-b294-f45f-7897-f17668dfa9f2",
+      "connector": "POS Mitra",
+      "kind": "push",
+      "started_at": "2026-10-28T09:29:58.862958+07:00",
+      "duration_s": 29,
+      "status": "failed",
+      "records": 151,
+      "message": "timeout saat handshake"
+    },
+    {
+      "id": "f3219dd2-245b-d687-ad67-6658fd086aa8",
+      "connector": "POS Budaya",
+      "kind": "push",
+      "started_at": "2026-10-28T09:29:58.862958+07:00",
+      "duration_s": 29,
+      "status": "failed",
+      "records": 151,
+      "message": "timeout saat handshake"
+    },
+    {
+      "id": "ad4d4c94-65c5-4440-29b8-6fd2ebf7e893",
+      "connector": "Kompressor CV",
+      "kind": "push",
+      "started_at": "2026-10-28T09:29:58.862958+07:00",
+      "duration_s": 29,
+      "status": "failed",
+      "records": 151,
+      "message": "timeout saat handshake"
+    },
+    {
+      "id": "09d16893-e253-c05c-ddda-bc7d8638d4f2",
+      "connector": "Kompressor CV",
+      "kind": "pull",
+      "started_at": "2026-10-28T05:18:58.862958+07:00",
+      "duration_s": 36,
+      "status": "success",
+      "records": 188,
+      "message": ""
+    },
+    {
+      "id": "52a08ed5-d0ad-0a28-4fee-92151049a419",
+      "connector": "POS Budaya",
+      "kind": "pull",
+      "started_at": "2026-10-28T05:18:58.862958+07:00",
+      "duration_s": 36,
+      "status": "success",
+      "records": 188,
+      "message": ""
+    },
+    {
+      "id": "d6b0f534-752f-47e4-3c73-3870dfe75f6f",
+      "connector": "Supplier Sehati",
+      "kind": "pull",
+      "started_at": "2026-10-28T05:18:58.862958+07:00",
+      "duration_s": 36,
+      "status": "success",
+      "records": 188,
+      "message": ""
+    },
+    {
+      "id": "677de4f3-9efd-b3dd-01f9-cfa56249801c",
+      "connector": "POS Mitra",
+      "kind": "pull",
+      "started_at": "2026-10-28T05:18:58.862958+07:00",
+      "duration_s": 36,
+      "status": "success",
+      "records": 188,
+      "message": ""
+    },
+    {
+      "id": "eb8c51ac-fe79-2e9e-b35f-51372f919fa8",
+      "connector": "Logistik Nusa",
+      "kind": "pull",
+      "started_at": "2026-10-28T05:18:58.862958+07:00",
+      "duration_s": 36,
+      "status": "success",
+      "records": 188,
+      "message": ""
+    },
+    {
+      "id": "c1047eb6-e5be-4c76-832f-2c155f36a4fc",
+      "connector": "Marketplace A",
+      "kind": "push",
+      "started_at": "2026-10-26T01:34:33.861682+07:00",
+      "duration_s": 15,
+      "status": "success",
+      "records": 170,
+      "message": ""
+    },
+    {
+      "id": "2a2dd8e4-2bd2-4d8d-b80f-87fecb557b06",
+      "connector": "POS Budaya",
+      "kind": "push",
+      "started_at": "2026-10-26T01:34:33.861682+07:00",
+      "duration_s": 15,
+      "status": "success",
+      "records": 170,
+      "message": ""
+    },
+    {
+      "id": "067fee46-a878-4faa-b19d-11cdd44a32ef",
+      "connector": "POS Mitra",
+      "kind": "push",
+      "started_at": "2026-10-26T01:34:33.861682+07:00",
+      "duration_s": 15,
+      "status": "success",
+      "records": 170,
+      "message": ""
+    },
+    {
+      "id": "e8f49204-538e-4371-b4ff-3740d6ee83f9",
+      "connector": "Kompressor CV",
+      "kind": "push",
+      "started_at": "2026-10-26T01:34:33.861682+07:00",
+      "duration_s": 15,
+      "status": "success",
+      "records": 170,
+      "message": ""
+    },
+    {
+      "id": "8f18b5e0-a63e-4780-8435-f986973bab7e",
+      "connector": "Supplier Sehati",
+      "kind": "push",
+      "started_at": "2026-10-26T01:34:33.861682+07:00",
+      "duration_s": 15,
+      "status": "success",
+      "records": 170,
+      "message": ""
+    },
+    {
+      "id": "e921001f-33e2-4419-9883-ec5eb308884e",
+      "connector": "Logistik Nusa",
+      "kind": "push",
+      "started_at": "2026-10-26T01:34:33.861682+07:00",
+      "duration_s": 15,
+      "status": "success",
+      "records": 170,
+      "message": ""
+    },
+    {
+      "id": "b7a96744-d0e1-482e-b5e6-2e04f3d3bd50",
+      "connector": "POS Budaya",
+      "kind": "webhook",
+      "started_at": "2026-10-25T23:34:33.861682+07:00",
+      "duration_s": 22,
+      "status": "success",
+      "records": 300,
+      "message": ""
+    },
+    {
+      "id": "96b73c8a-d3f9-435e-926f-34d9881ff173",
+      "connector": "POS Mitra",
+      "kind": "webhook",
+      "started_at": "2026-10-25T23:34:33.861682+07:00",
+      "duration_s": 22,
+      "status": "success",
+      "records": 300,
+      "message": ""
+    },
+    {
+      "id": "03ecce6a-e352-47ab-90e8-e4058951b527",
+      "connector": "Kompressor CV",
+      "kind": "webhook",
+      "started_at": "2026-10-25T23:34:33.861682+07:00",
+      "duration_s": 22,
+      "status": "success",
+      "records": 300,
+      "message": ""
+    },
+    {
+      "id": "6f6c6a7c-430a-4309-b914-de3f467b691c",
+      "connector": "Logistik Nusa",
+      "kind": "webhook",
+      "started_at": "2026-10-25T23:34:33.861682+07:00",
+      "duration_s": 22,
+      "status": "success",
+      "records": 300,
+      "message": ""
+    }
+  ],
+  "api_keys": [
+    {
+      "id": "c13e917f-e305-48db-b5d3-36ca6bb60668",
+      "name": "API Gateway POS",
+      "prefix": "sk_pos_",
+      "masked": "sk_****-****001",
+      "scope": "pos:read",
+      "created_at": "2026-10-17T03:34:33.861682+07:00",
+      "last_used": "2026-10-25T20:34:33.861682+07:00",
+      "status": "active"
+    },
+    {
+      "id": "13652d70-ffee-4758-9647-e40003ff8003",
+      "name": "Integration Sehati",
+      "prefix": "sk_sup_",
+      "masked": "sk_****-****002",
+      "scope": "supplier:sync",
+      "created_at": "2026-10-08T03:34:33.861682+07:00",
+      "last_used": "2026-10-25T13:34:33.861682+07:00",
+      "status": "active"
+    },
+    {
+      "id": "be8411be-5d79-4d57-930a-25913b9d405f",
+      "name": "Webhook Manual",
+      "prefix": "sk_web_",
+      "masked": "sk_****-****003",
+      "scope": "webhook:write",
+      "created_at": "2026-09-29T03:34:33.861682+07:00",
+      "last_used": "2026-10-25T06:34:33.861682+07:00",
+      "status": "active"
+    }
+  ],
+  "webhook_events": [
+    {
+      "id": "9d8ebdb3-b1b8-0fc3-77e6-d1ef7fe9e5c7",
+      "event": "audit.finished",
+      "endpoint": "https://ops.internal/webhooks/audit",
+      "status": "ok",
+      "attempts": 2,
+      "at": "2026-10-28T20:13:58.862958+07:00"
+    },
+    {
+      "id": "15316394-9a52-e724-d935-e9f8abd88a67",
+      "event": "stock.low",
+      "endpoint": "https://ops.internal/webhooks/stock",
+      "status": "ok",
+      "attempts": 2,
+      "at": "2026-10-28T18:55:58.862958+07:00"
+    },
+    {
+      "id": "9d314271-c20a-0ffe-aeca-53d554e89c67",
+      "event": "po.received",
+      "endpoint": "https://ops.internal/webhooks/po",
+      "status": "ok",
+      "attempts": 3,
+      "at": "2026-10-28T17:06:58.862958+07:00"
+    },
+    {
+      "id": "c578bde7-832e-06b2-e40b-bfcad23a3cbd",
+      "event": "audit.finished",
+      "endpoint": "https://ops.internal/webhooks/audit",
+      "status": "ok",
+      "attempts": 3,
+      "at": "2026-10-28T15:48:58.862958+07:00"
+    },
+    {
+      "id": "dd29958f-7766-d182-7ae1-4e0708bfd3f6",
+      "event": "task.created",
+      "endpoint": "https://ops.internal/webhooks/task",
+      "status": "ok",
+      "attempts": 1,
+      "at": "2026-10-28T14:59:58.862958+07:00"
+    },
+    {
+      "id": "7dc2c4ff-f51b-a27f-6920-321c5761d460",
+      "event": "po.received",
+      "endpoint": "https://ops.internal/webhooks/po",
+      "status": "ok",
+      "attempts": 1,
+      "at": "2026-10-28T12:41:58.862958+07:00"
+    },
+    {
+      "id": "a1dcca86-6d06-9b17-2790-6c8982bd189a",
+      "event": "task.created",
+      "endpoint": "https://ops.internal/webhooks/task",
+      "status": "failed",
+      "attempts": 2,
+      "at": "2026-10-28T09:34:58.862958+07:00"
+    },
+    {
+      "id": "f253c3ed-6551-a443-6eae-c4b3c4f1207e",
+      "event": "price.changed",
+      "endpoint": "https://ops.internal/webhooks/price",
+      "status": "ok",
+      "attempts": 3,
+      "at": "2026-10-28T06:27:58.862958+07:00"
+    },
+    {
+      "id": "b56bab8d-8a54-ec30-c19f-7028ec60bc06",
+      "event": "stock.low",
+      "endpoint": "https://ops.internal/webhooks/stock",
+      "status": "ok",
+      "attempts": 1,
+      "at": "2026-10-28T03:20:58.862958+07:00"
+    },
+    {
+      "id": "0c198812-889d-414a-974f-7dd94276d99a",
+      "event": "price.changed",
+      "endpoint": "https://ops.internal/webhooks/price-changed",
+      "status": "ok",
+      "attempts": 1,
+      "at": "2026-10-26T01:34:33.861682+07:00"
+    },
+    {
+      "id": "03822a4a-df9e-46cd-82d1-d0acae525d27",
+      "event": "po.received",
+      "endpoint": "https://ops.internal/webhooks/po-received",
+      "status": "ok",
+      "attempts": 1,
+      "at": "2026-10-25T23:34:33.861682+07:00"
+    },
+    {
+      "id": "54e8ec82-1b28-433d-ac63-bec4139b7be1",
+      "event": "stock.updated",
+      "endpoint": "https://ops.internal/webhooks/stock-updated",
+      "status": "retrying",
+      "attempts": 3,
+      "at": "2026-10-25T21:34:33.861682+07:00"
+    },
+    {
+      "id": "b92efb36-445c-485b-b806-4b8344ca3a73",
+      "event": "price.changed",
+      "endpoint": "https://ops.internal/webhooks/price-changed",
+      "status": "ok",
+      "attempts": 1,
+      "at": "2026-10-25T19:34:33.861682+07:00"
+    },
+    {
+      "id": "5a095ad0-347c-4718-8d15-7b4a3e85f2e5",
+      "event": "po.received",
+      "endpoint": "https://ops.internal/webhooks/po-received",
+      "status": "ok",
+      "attempts": 1,
+      "at": "2026-10-25T17:34:33.861682+07:00"
+    },
+    {
+      "id": "425d2750-7e8a-452b-bf96-320f9940cae6",
+      "event": "stock.updated",
+      "endpoint": "https://ops.internal/webhooks/stock-updated",
+      "status": "retrying",
+      "attempts": 3,
+      "at": "2026-10-25T15:34:33.861682+07:00"
+    }
+  ],
+  "notes": "Connector PO/pengiriman terhubung lewat API key; webhook error tinggal retry otomatis."
+}

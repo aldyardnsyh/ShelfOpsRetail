@@ -1,0 +1,1475 @@
+openapi: 3.1.0
+info:
+  title: ShelfOps Gateway API
+  version: 0.1.0
+  description: |
+    REST API untuk web ShelfOps (PRD §11.1). Semua endpoint ber-prefix `/api/v1`.
+    Error mengikuti RFC 9457 (problem+json) dan selalu membawa `trace_id`.
+    Semua endpoint kecuali auth/health membutuhkan session cookie dan difilter `workspace_id`.
+  contact:
+    name: ShelfOps
+    url: https://github.com/aldyardnsyh/ShelfOpsRetail
+servers:
+  - url: http://localhost:8080
+    description: dev
+  - url: https://shelfops-api.aldyardnsyh.my.id
+    description: produksi
+tags:
+  - name: health
+  - name: auth
+  - name: workspace
+  - name: documents
+  - name: chat
+  - name: audits
+  - name: insights
+  - name: eval
+  - name: observability
+  - name: benchmarks
+
+security:
+  - sessionCookie: []
+
+paths:
+  /healthz:
+    get:
+      tags: [health]
+      security: []
+      operationId: getHealth
+      summary: Liveness/readiness (dipakai web untuk deteksi L3)
+      responses:
+        "200":
+          description: sehat
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Health" }
+  /readyz:
+    get:
+      tags: [health]
+      security: []
+      operationId: getReady
+      summary: Readiness (DB + dependency cek)
+      responses:
+        "200":
+          description: siap
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Health" }
+        "503":
+          description: belum siap
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /api/v1/system/quota:
+    get:
+      tags: [observability]
+      operationId: getQuota
+      summary: Kuota AI harian + status provider (admin)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/QuotaStatus" }
+        "403": { $ref: "#/components/responses/Forbidden" }
+
+  /api/v1/auth/login:
+    post:
+      tags: [auth]
+      security: []
+      operationId: login
+      summary: Login email/password (argon2id)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/LoginRequest" }
+      responses:
+        "200":
+          description: sesi dibuat (Set-Cookie access+refresh)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MeResponse" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+        "429": { $ref: "#/components/responses/TooManyRequests" }
+  /api/v1/auth/demo:
+    post:
+      tags: [auth]
+      security: []
+      operationId: startDemo
+      summary: Mulai sesi demo (tanpa signup)
+      responses:
+        "200":
+          description: workspace demo baru + sesi
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MeResponse" }
+        "429": { $ref: "#/components/responses/TooManyRequests" }
+  /api/v1/auth/refresh:
+    post:
+      tags: [auth]
+      operationId: refresh
+      summary: Rotasi refresh token
+      responses:
+        "200": { description: token baru, content: { application/json: { schema: { $ref: "#/components/schemas/MeResponse" } } } }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+  /api/v1/auth/logout:
+    post:
+      tags: [auth]
+      operationId: logout
+      summary: Cabut refresh token + hapus cookie
+      responses:
+        "204": { description: OK }
+  /api/v1/auth/google/start:
+    get:
+      tags: [auth]
+      security: []
+      operationId: googleStart
+      summary: Redirect ke Google (503 bila belum dikonfigurasi)
+      responses:
+        "302": { description: redirect }
+        "503": { description: OAuth belum dikonfigurasi, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /api/v1/me:
+    get:
+      tags: [auth]
+      operationId: getMe
+      summary: Profil + workspace + role
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MeResponse" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+
+  /api/v1/workspace:
+    get:
+      tags: [workspace]
+      operationId: getWorkspace
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/Workspace" } } } }
+    patch:
+      tags: [workspace]
+      operationId: updateWorkspace
+      summary: Ubah nama/locale (admin)
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/WorkspaceUpdate" } } }
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/Workspace" } } } }
+        "403": { $ref: "#/components/responses/Forbidden" }
+  /api/v1/workspace/members:
+    get:
+      tags: [workspace]
+      operationId: listMembers
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/Member" } } } } }
+    post:
+      tags: [workspace]
+      operationId: addMember
+      summary: Tambah anggota by email (admin)
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/MemberCreate" } } }
+      responses:
+        "201": { description: dibuat, content: { application/json: { schema: { $ref: "#/components/schemas/Member" } } } }
+        "403": { $ref: "#/components/responses/Forbidden" }
+  /api/v1/workspace/members/{id}:
+    patch:
+      tags: [workspace]
+      operationId: updateMemberRole
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/MemberRoleUpdate" } } }
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/Member" } } } }
+    delete:
+      tags: [workspace]
+      operationId: removeMember
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "204": { description: OK }
+  /api/v1/stores:
+    get:
+      tags: [workspace]
+      operationId: listStores
+      parameters:
+        - { name: region, in: query, schema: { type: string } }
+        - { name: q, in: query, schema: { type: string } }
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/Store" } } } } }
+    post:
+      tags: [workspace]
+      operationId: createStore
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/StoreCreate" } } }
+      responses:
+        "201": { description: dibuat, content: { application/json: { schema: { $ref: "#/components/schemas/Store" } } } }
+  /api/v1/planograms:
+    get:
+      tags: [workspace]
+      operationId: listPlanograms
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/Planogram" } } } } }
+    post:
+      tags: [workspace]
+      operationId: createPlanogram
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/PlanogramCreate" } } }
+      responses:
+        "201": { description: dibuat, content: { application/json: { schema: { $ref: "#/components/schemas/Planogram" } } } }
+
+  /api/v1/documents/upload-url:
+    post:
+      tags: [documents]
+      operationId: createDocumentUploadUrl
+      summary: Slot upload (LocalFS/S3 lewat ObjectStore)
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/DocumentUploadUrlRequest" } } }
+      responses:
+        "200":
+          description: slot upload
+          content: { application/json: { schema: { $ref: "#/components/schemas/UploadSlot" } } }
+        "415":
+          description: tipe tidak didukung
+          content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } }
+  /api/v1/documents:
+    post:
+      tags: [documents]
+      operationId: createDocument
+      summary: Finalisasi upload + enqueue ingestion (butuh Idempotency-Key)
+      parameters: [{ $ref: "#/components/parameters/IdempotencyKey" }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/DocumentCreate" } } }
+      responses:
+        "201": { description: antre, content: { application/json: { schema: { $ref: "#/components/schemas/Document" } } } }
+        "422": { $ref: "#/components/responses/ValidationError" }
+    get:
+      tags: [documents]
+      operationId: listDocuments
+      parameters:
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/Limit"
+        - { name: status, in: query, schema: { type: string, enum: [uploaded, queued, parsing, chunking, embedding, ready, failed] } }
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/DocumentPage" } } } }
+  /api/v1/documents/{id}:
+    get:
+      tags: [documents]
+      operationId: getDocument
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/Document" } } } }
+        "404": { $ref: "#/components/responses/NotFound" }
+    delete:
+      tags: [documents]
+      operationId: deleteDocument
+      summary: Hapus dokumen + chunk + embedding + file
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "204": { description: OK }
+  /api/v1/documents/{id}/reindex:
+    post:
+      tags: [documents]
+      operationId: reindexDocument
+      parameters: [{ $ref: "#/components/parameters/PathId" }, { $ref: "#/components/parameters/IdempotencyKey" }]
+      responses:
+        "202": { description: job dibuat, content: { application/json: { schema: { $ref: "#/components/schemas/JobQueued" } } } }
+  /api/v1/documents/{id}/chunks:
+    get:
+      tags: [documents]
+      operationId: listDocumentChunks
+      parameters:
+        - { $ref: "#/components/parameters/PathId" }
+        - { name: q, in: query, schema: { type: string } }
+        - { name: page, in: query, schema: { type: integer, minimum: 1 } }
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/Chunk" } } } } }
+  /api/v1/documents/{id}/events:
+    get:
+      tags: [documents]
+      operationId: documentEvents
+      summary: SSE status ingestion
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "200":
+          description: event stream (progress, state, done, error)
+          content: { text/event-stream: { schema: { $ref: "#/components/schemas/JobEvent" } } }
+
+  /api/v1/conversations:
+    get:
+      tags: [chat]
+      operationId: listConversations
+      parameters: [{ $ref: "#/components/parameters/Cursor" }, { $ref: "#/components/parameters/Limit" }]
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/ConversationPage" } } } }
+    post:
+      tags: [chat]
+      operationId: createConversation
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/ConversationCreate" } } }
+      responses:
+        "201": { description: dibuat, content: { application/json: { schema: { $ref: "#/components/schemas/Conversation" } } } }
+  /api/v1/conversations/{id}:
+    get:
+      tags: [chat]
+      operationId: getConversation
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/ConversationDetail" } } } }
+    patch:
+      tags: [chat]
+      operationId: renameConversation
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      requestBody: { required: true, content: { application/json: { schema: { type: object, properties: { title: { type: string, maxLength: 120 } }, required: [title] } } } }
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/Conversation" } } } }
+    delete:
+      tags: [chat]
+      operationId: deleteConversation
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "204": { description: OK }
+  /api/v1/conversations/{id}/export:
+    get:
+      tags: [chat]
+      operationId: exportConversation
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "200": { description: Markdown, content: { text/markdown: { schema: { type: string } } } }
+  /api/v1/conversations/{id}/messages:
+    post:
+      tags: [chat]
+      operationId: sendMessage
+      summary: Kirim pesan; respons SSE (token, citation, tool_start, tool_end, confirm_required, done, error)
+      parameters: [{ $ref: "#/components/parameters/PathId" }, { $ref: "#/components/parameters/IdempotencyKey" }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/SendMessageRequest" } } }
+      responses:
+        "200":
+          description: SSE stream
+          content: { text/event-stream: { schema: { $ref: "#/components/schemas/ChatEvent" } } }
+        "429": { $ref: "#/components/responses/TooManyRequests" }
+  /api/v1/messages/{id}/feedback:
+    post:
+      tags: [chat]
+      operationId: submitFeedback
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/FeedbackRequest" } } }
+      responses:
+        "201": { description: OK }
+  /api/v1/tool-calls/{id}/confirm:
+    post:
+      tags: [chat]
+      operationId: confirmToolCall
+      summary: Konfirmasi aksi tulis agent (BR-05)
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { type: object, properties: { decision: { type: string, enum: [confirm, reject] } }, required: [decision] } } }
+      responses:
+        "200": { description: hasil eksekusi/penolakan, content: { application/json: { schema: { $ref: "#/components/schemas/ToolCall" } } } }
+
+  /api/v1/audits:
+    get:
+      tags: [audits]
+      operationId: listAudits
+      parameters:
+        - { name: store_id, in: query, schema: { type: string, format: uuid } }
+        - { name: from, in: query, schema: { type: string, format: date } }
+        - { name: to, in: query, schema: { type: string, format: date } }
+        - { name: min_score, in: query, schema: { type: integer } }
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/AuditPage" } } } }
+    post:
+      tags: [audits]
+      operationId: createAudit
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/AuditCreate" } } }
+      responses:
+        "201": { description: dibuat, content: { application/json: { schema: { $ref: "#/components/schemas/AuditSession" } } } }
+  /api/v1/audits/{id}:
+    get:
+      tags: [audits]
+      operationId: getAudit
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/AuditDetail" } } } }
+  /api/v1/audits/{id}/images/upload-urls:
+    post:
+      tags: [audits]
+      operationId: createAuditImageUploadUrls
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/AuditImagesUploadRequest" } } }
+      responses:
+        "200": { description: slot per file, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/UploadSlot" } } } } }
+        "422": { $ref: "#/components/responses/ValidationError" }
+  /api/v1/audits/{id}/start:
+    post:
+      tags: [audits]
+      operationId: startAudit
+      summary: Enqueue satu job per gambar (partial failure diizinkan)
+      parameters: [{ $ref: "#/components/parameters/PathId" }, { $ref: "#/components/parameters/IdempotencyKey" }]
+      responses:
+        "202": { description: job dibuat, content: { application/json: { schema: { $ref: "#/components/schemas/JobQueued" } } } }
+        "409": { description: status tidak valid, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /api/v1/audits/{id}/events:
+    get:
+      tags: [audits]
+      operationId: auditEvents
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "200": { description: SSE progress per gambar, content: { text/event-stream: { schema: { $ref: "#/components/schemas/JobEvent" } } } }
+  /api/v1/audits/{id}/recompute:
+    post:
+      tags: [audits]
+      operationId: recomputeAudit
+      summary: Hitung ulang metrik setelah koreksi (BR-03)
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/AuditMetrics" } } } }
+  /api/v1/audits/{id}/report:
+    get:
+      tags: [audits]
+      operationId: getAuditReport
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/AuditReport" } } } }
+  /api/v1/audits/{id}/export:
+    get:
+      tags: [audits]
+      operationId: exportAudit
+      parameters:
+        - { $ref: "#/components/parameters/PathId" }
+        - { name: format, in: query, required: true, schema: { type: string, enum: [pdf, csv] } }
+      responses:
+        "200": { description: file, content: { application/octet-stream: { schema: { type: string, format: binary } } } }
+  /api/v1/audits/{id}/finalize:
+    post:
+      tags: [audits]
+      operationId: finalizeAudit
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/AuditSession" } } } }
+  /api/v1/detections/{id}:
+    patch:
+      tags: [audits]
+      operationId: updateDetection
+      summary: Koreksi manual bbox (human-in-the-loop)
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/DetectionPatch" } } } }
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/Detection" } } } }
+    delete:
+      tags: [audits]
+      operationId: deleteDetection
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "204": { description: OK }
+  /api/v1/audits/{id}/detections:
+    post:
+      tags: [audits]
+      operationId: createManualDetection
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/DetectionCreate" } } } }
+      responses:
+        "201": { description: dibuat, content: { application/json: { schema: { $ref: "#/components/schemas/Detection" } } } }
+  /api/v1/images/{id}/content:
+    get:
+      tags: [audits]
+      operationId: getImageContent
+      summary: Stream gambar (auth + workspace filter)
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "200": { description: bytes, content: { image/jpeg: { schema: { type: string, format: binary } } } }
+
+  /api/v1/insights/kpis:
+    get:
+      tags: [insights]
+      operationId: getKpis
+      parameters:
+        - { name: from, in: query, schema: { type: string, format: date } }
+        - { name: to, in: query, schema: { type: string, format: date } }
+        - { name: region, in: query, schema: { type: string } }
+        - { name: category, in: query, schema: { type: string } }
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/Kpis" } } } }
+  /api/v1/insights/trend:
+    get:
+      tags: [insights]
+      operationId: getTrend
+      parameters:
+        - { name: from, in: query, schema: { type: string, format: date } }
+        - { name: to, in: query, schema: { type: string, format: date } }
+        - { name: region, in: query, schema: { type: string } }
+        - { name: granularity, in: query, schema: { type: string, enum: [day, week], default: day } }
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/TrendPoint" } } } } }
+  /api/v1/insights/ranking:
+    get:
+      tags: [insights]
+      operationId: getRanking
+      parameters:
+        - { name: from, in: query, schema: { type: string, format: date } }
+        - { name: to, in: query, schema: { type: string, format: date } }
+        - { name: region, in: query, schema: { type: string } }
+        - { name: limit, in: query, schema: { type: integer, default: 10, maximum: 50 } }
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/StoreRank" } } } } }
+  /api/v1/alerts:
+    get:
+      tags: [insights]
+      operationId: listAlerts
+      parameters:
+        - { name: status, in: query, schema: { type: string, enum: [open, acknowledged, resolved] } }
+        - { name: severity, in: query, schema: { type: string, enum: [low, medium, high] } }
+        - { name: store_id, in: query, schema: { type: string, format: uuid } }
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/Alert" } } } } }
+  /api/v1/alerts/{id}:
+    patch:
+      tags: [insights]
+      operationId: updateAlert
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      requestBody: { required: true, content: { application/json: { schema: { type: object, properties: { status: { type: string, enum: [open, acknowledged, resolved] } }, required: [status] } } } }
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/Alert" } } } }
+
+  /api/v1/eval/datasets:
+    get:
+      tags: [eval]
+      operationId: listEvalDatasets
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/EvalDataset" } } } } }
+    post:
+      tags: [eval]
+      operationId: createEvalDataset
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/EvalDatasetCreate" } } } }
+      responses:
+        "201": { description: dibuat, content: { application/json: { schema: { $ref: "#/components/schemas/EvalDataset" } } } }
+  /api/v1/eval/datasets/{id}:
+    get:
+      tags: [eval]
+      operationId: getEvalDataset
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/EvalDatasetDetail" } } } }
+    delete:
+      tags: [eval]
+      operationId: deleteEvalDataset
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "204": { description: OK }
+  /api/v1/eval/datasets/{id}/cases:
+    post:
+      tags: [eval]
+      operationId: createEvalCase
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/EvalCaseCreate" } } } }
+      responses:
+        "201": { description: dibuat, content: { application/json: { schema: { $ref: "#/components/schemas/EvalCase" } } } }
+  /api/v1/eval/cases/{id}:
+    patch:
+      tags: [eval]
+      operationId: updateEvalCase
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/EvalCaseCreate" } } } }
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/EvalCase" } } } }
+    delete:
+      tags: [eval]
+      operationId: deleteEvalCase
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "204": { description: OK }
+  /api/v1/eval/runs:
+    get:
+      tags: [eval]
+      operationId: listEvalRuns
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/EvalRun" } } } } }
+    post:
+      tags: [eval]
+      operationId: createEvalRun
+      summary: Eval run async (RAG/agent/CV)
+      parameters: [{ $ref: "#/components/parameters/IdempotencyKey" }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/EvalRunCreate" } } } }
+      responses:
+        "202": { description: antre, content: { application/json: { schema: { $ref: "#/components/schemas/EvalRun" } } } }
+  /api/v1/eval/runs/{id}:
+    get:
+      tags: [eval]
+      operationId: getEvalRun
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/EvalRunDetail" } } } }
+  /api/v1/eval/compare:
+    get:
+      tags: [eval]
+      operationId: compareEvalRuns
+      parameters:
+        - { name: a, in: query, required: true, schema: { type: string, format: uuid } }
+        - { name: b, in: query, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/EvalCompare" } } } }
+  /api/v1/eval/failures:
+    get:
+      tags: [eval]
+      operationId: listFailures
+      parameters:
+        - { name: source, in: query, schema: { type: string, enum: [feedback, low_confidence, error] } }
+        - { name: promoted, in: query, schema: { type: boolean } }
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/FailureCase" } } } } }
+  /api/v1/eval/failures/{id}/promote:
+    post:
+      tags: [eval]
+      operationId: promoteFailure
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      requestBody: { required: true, content: { application/json: { schema: { type: object, properties: { dataset_id: { type: string, format: uuid } }, required: [dataset_id] } } } }
+      responses:
+        "201": { description: promoted, content: { application/json: { schema: { $ref: "#/components/schemas/EvalCase" } } } }
+
+  /api/v1/traces:
+    get:
+      tags: [observability]
+      operationId: listTraces
+      parameters:
+        - { name: from, in: query, schema: { type: string, format: date-time } }
+        - { name: to, in: query, schema: { type: string, format: date-time } }
+        - { name: stage, in: query, schema: { type: string } }
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/TraceSummary" } } } } }
+  /api/v1/traces/{request_id}:
+    get:
+      tags: [observability]
+      operationId: getTrace
+      parameters: [{ name: request_id, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/TraceDetail" } } } }
+        "404": { $ref: "#/components/responses/NotFound" }
+  /api/v1/system/metrics:
+    get:
+      tags: [observability]
+      operationId: getSystemMetrics
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/SystemMetrics" } } } }
+
+  /api/v1/benchmarks:
+    get:
+      tags: [benchmarks]
+      operationId: listBenchmarks
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/BenchmarkRun" } } } } }
+    post:
+      tags: [benchmarks]
+      operationId: createBenchmark
+      summary: Antre benchmark (dimatikan di produksi sesuai PRD §16.3)
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/BenchmarkCreate" } } } }
+      responses:
+        "202": { description: antre, content: { application/json: { schema: { $ref: "#/components/schemas/BenchmarkRun" } } } }
+        "403": { $ref: "#/components/responses/Forbidden" }
+  /api/v1/benchmarks/{id}:
+    get:
+      tags: [benchmarks]
+      operationId: getBenchmark
+      parameters: [{ $ref: "#/components/parameters/PathId" }]
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/BenchmarkRun" } } } }
+  /api/v1/benchmarks/cost-calc:
+    post:
+      tags: [benchmarks]
+      operationId: costCalculator
+      summary: Kalkulator biaya edge vs cloud (tarif dapat dikonfigurasi)
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/CostCalcRequest" } } } }
+      responses:
+        "200": { description: OK, content: { application/json: { schema: { $ref: "#/components/schemas/CostCalcResponse" } } } }
+
+components:
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: shelfops_access
+  parameters:
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+    Cursor:
+      name: cursor
+      in: query
+      schema: { type: string }
+    Limit:
+      name: limit
+      in: query
+      schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: false
+      schema: { type: string, maxLength: 128 }
+  responses:
+    Unauthorized:
+      description: tidak terautentikasi
+      content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } }
+    Forbidden:
+      description: tidak punya izin untuk role ini
+      content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } }
+    NotFound:
+      description: tidak ditemukan (atau milik workspace lain — sengaja 404)
+      content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } }
+    ValidationError:
+      description: validasi gagal
+      content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } }
+    TooManyRequests:
+      description: rate limit / kuota
+      content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } }
+
+  schemas:
+    Problem:
+      type: object
+      description: RFC 9457 problem+json
+      properties:
+        type: { type: string, format: uri-reference, default: "about:blank" }
+        title: { type: string }
+        status: { type: integer }
+        detail: { type: string }
+        instance: { type: string }
+        trace_id: { type: string }
+        retry_after_seconds: { type: integer }
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field: { type: string }
+              message: { type: string }
+      required: [title, status, trace_id]
+
+    Health:
+      type: object
+      properties:
+        status: { type: string, enum: [ok, degraded, down] }
+        version: { type: string }
+        commit: { type: string }
+        uptime_s: { type: integer }
+        db: { type: string, enum: [ok, down, skipped] }
+        queue_depth: { type: integer }
+        degradation: { type: string, enum: [L0, L1, L2, L3], description: ADR-010 }
+        time: { type: string, format: date-time }
+      required: [status, version, commit]
+
+    QuotaStatus:
+      type: object
+      properties:
+        day: { type: string, format: date }
+        requests_today: { type: integer }
+        limit_per_day: { type: integer }
+        cost_usd_today: { type: number }
+        budget_usd_day: { type: number }
+        providers:
+          type: array
+          items:
+            type: object
+            properties:
+              name: { type: string }
+              state: { type: string, enum: [closed, open, half_open] }
+              failures: { type: integer }
+              last_error: { type: [string, "null"] }
+
+    LoginRequest:
+      type: object
+      properties:
+        email: { type: string, format: email }
+        password: { type: string, minLength: 8, maxLength: 200 }
+      required: [email, password]
+
+    MeResponse:
+      type: object
+      properties:
+        user: { $ref: "#/components/schemas/User" }
+        workspace: { $ref: "#/components/schemas/Workspace" }
+        role: { $ref: "#/components/schemas/Role" }
+        permissions: { type: array, items: { type: string } }
+        demo: { type: boolean }
+      required: [user, workspace, role]
+
+    Role:
+      type: string
+      enum: [admin, analyst, auditor, viewer]
+    User:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        email: { type: string }
+        name: { type: string }
+        locale: { type: string, enum: [id, en] }
+        created_at: { type: string, format: date-time }
+      required: [id, email, name]
+    Workspace:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        is_demo: { type: boolean }
+        demo_expires_at: { type: [string, "null"], format: date-time }
+        locale: { type: string, enum: [id, en] }
+        retention_note: { type: string }
+      required: [id, name, is_demo]
+    WorkspaceUpdate:
+      type: object
+      properties:
+        name: { type: string, minLength: 2, maxLength: 80 }
+        locale: { type: string, enum: [id, en] }
+    Member:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        user: { $ref: "#/components/schemas/User" }
+        role: { $ref: "#/components/schemas/Role" }
+        created_at: { type: string, format: date-time }
+      required: [id, user, role]
+    MemberCreate:
+      type: object
+      properties:
+        email: { type: string, format: email }
+        role: { $ref: "#/components/schemas/Role" }
+      required: [email, role]
+    MemberRoleUpdate:
+      type: object
+      properties:
+        role: { $ref: "#/components/schemas/Role" }
+      required: [role]
+
+    Store:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        code: { type: string }
+        name: { type: string }
+        region: { type: string }
+        channel: { type: string, enum: [modern, traditional, minimarket, supermarket] }
+      required: [id, code, name]
+    StoreCreate:
+      type: object
+      properties:
+        code: { type: string, maxLength: 32 }
+        name: { type: string, maxLength: 120 }
+        region: { type: string }
+        channel: { type: string }
+      required: [code, name]
+    Planogram:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        config: { type: object, additionalProperties: true }
+      required: [id, name]
+    PlanogramCreate:
+      type: object
+      properties:
+        name: { type: string, maxLength: 120 }
+        config: { type: object, additionalProperties: true }
+      required: [name, config]
+
+    UploadSlot:
+      type: object
+      properties:
+        object_key: { type: string }
+        upload_url: { type: string }
+        expires_at: { type: string, format: date-time }
+        method: { type: string, default: PUT }
+        headers: { type: object, additionalProperties: { type: string } }
+        max_bytes: { type: integer }
+        token: { type: string, description: "token sekali pakai untuk LocalFS (header X-Upload-Token)" }
+      required: [object_key, upload_url, expires_at, max_bytes]
+    DocumentUploadUrlRequest:
+      type: object
+      properties:
+        filename: { type: string, maxLength: 255 }
+        mime: { type: string }
+        bytes: { type: integer, minimum: 1 }
+      required: [filename, mime, bytes]
+    DocumentCreate:
+      type: object
+      properties:
+        title: { type: string, minLength: 1, maxLength: 200 }
+        object_key: { type: string }
+        mime: { type: string }
+        language: { type: string, enum: [id, en] }
+        replace_document_id: { type: [string, "null"], format: uuid, description: FR-KB-04 versioning }
+      required: [title, object_key, mime]
+    Document:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        title: { type: string }
+        mime: { type: string }
+        language: { type: string, enum: [id, en] }
+        source_uri: { type: [string, "null"] }
+        status: { type: string, enum: [uploaded, queued, parsing, chunking, embedding, ready, failed] }
+        current_version: { type: integer }
+        size_bytes: { type: integer }
+        chunk_count: { type: integer }
+        error: { type: [string, "null"] }
+        last_indexed_at: { type: [string, "null"], format: date-time }
+        versions:
+          type: array
+          items: { $ref: "#/components/schemas/DocumentVersion" }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+      required: [id, title, status]
+    DocumentVersion:
+      type: object
+      properties:
+        version: { type: integer }
+        status: { type: string, enum: [pending, active, superseded, failed] }
+        size_bytes: { type: integer }
+        created_at: { type: string, format: date-time }
+      required: [version, status]
+    DocumentPage:
+      type: object
+      properties:
+        items: { type: array, items: { $ref: "#/components/schemas/Document" } }
+        next_cursor: { type: [string, "null"] }
+      required: [items]
+    Chunk:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        document_id: { type: string, format: uuid }
+        version: { type: integer }
+        ordinal: { type: integer }
+        page: { type: integer }
+        heading_path: { type: string }
+        content: { type: string }
+        token_count: { type: integer }
+      required: [id, ordinal, content]
+    JobQueued:
+      type: object
+      properties:
+        job_id: { type: string }
+        state: { type: string, enum: [queued] }
+        queue_depth: { type: integer }
+      required: [job_id, state]
+    JobEvent:
+      type: object
+      properties:
+        type: { type: string, enum: [progress, state, done, error] }
+        entity_id: { type: string }
+        state: { type: string }
+        progress: { type: number, minimum: 0, maximum: 1 }
+        message: { type: string }
+        trace_id: { type: string }
+        at: { type: string, format: date-time }
+
+    Conversation:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        title: { type: string }
+        message_count: { type: integer }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+      required: [id, title]
+    ConversationCreate:
+      type: object
+      properties:
+        title: { type: string, maxLength: 120 }
+    ConversationPage:
+      type: object
+      properties:
+        items: { type: array, items: { $ref: "#/components/schemas/Conversation" } }
+        next_cursor: { type: [string, "null"] }
+    ChatMessage:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        role: { type: string, enum: [user, assistant, tool] }
+        content: { type: string }
+        model: { type: [string, "null"] }
+        tokens_in: { type: integer }
+        tokens_out: { type: integer }
+        cost_usd: { type: number }
+        latency_ms: { type: integer }
+        citations: { type: array, items: { $ref: "#/components/schemas/Citation" } }
+        tool_calls: { type: array, items: { $ref: "#/components/schemas/ToolCall" } }
+        refused: { type: boolean }
+        replay: { type: boolean, description: "jawaban dari mode Replay (ADR-010 L1)" }
+        created_at: { type: string, format: date-time }
+      required: [id, role, content]
+    ConversationDetail:
+      type: object
+      properties:
+        conversation: { $ref: "#/components/schemas/Conversation" }
+        messages: { type: array, items: { $ref: "#/components/schemas/ChatMessage" } }
+      required: [conversation, messages]
+    Citation:
+      type: object
+      properties:
+        ordinal: { type: integer }
+        document_id: { type: string, format: uuid }
+        document_title: { type: string }
+        chunk_id: { type: string, format: uuid }
+        page: { type: integer }
+        heading_path: { type: string }
+        score: { type: number }
+        snippet: { type: string }
+      required: [ordinal, chunk_id, score]
+    SendMessageRequest:
+      type: object
+      properties:
+        content: { type: string, minLength: 1, maxLength: 4000 }
+        model: { type: string, description: "nama model/provider yang diminta (FR-CHAT-08)" }
+        filters: { type: object, additionalProperties: true }
+      required: [content]
+    ChatEvent:
+      type: object
+      properties:
+        type: { type: string, enum: [token, citation, tool_start, tool_end, confirm_required, done, error] }
+        message_id: { type: string, format: uuid }
+        text: { type: string }
+        citation: { $ref: "#/components/schemas/Citation" }
+        tool_call: { $ref: "#/components/schemas/ToolCall" }
+        step: { type: integer }
+        usage: { $ref: "#/components/schemas/Usage" }
+        error: { $ref: "#/components/schemas/Problem" }
+      required: [type]
+    Usage:
+      type: object
+      properties:
+        tokens_in: { type: integer }
+        tokens_out: { type: integer }
+        cost_usd: { type: number }
+        latency_ms: { type: integer }
+        provider: { type: string }
+        model: { type: string }
+    ToolCall:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        args: { type: object, additionalProperties: true }
+        result_summary: { type: [string, "null"] }
+        duration_ms: { type: integer }
+        status: { type: string, enum: [pending, awaiting_confirmation, running, done, failed, rejected] }
+        requires_confirmation: { type: boolean }
+      required: [id, name, status]
+    FeedbackRequest:
+      type: object
+      properties:
+        value: { type: string, enum: ["up", "down"] }
+        reason: { type: string, maxLength: 500 }
+      required: [value]
+
+    AuditSession:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        store_id: { type: string, format: uuid }
+        store_name: { type: string }
+        planogram_id: { type: string, format: uuid }
+        planogram_name: { type: string }
+        status: { type: string, enum: [draft, processing, review, final, partial] }
+        score: { type: [integer, "null"] }
+        image_count: { type: integer }
+        failed_count: { type: integer }
+        started_at: { type: [string, "null"], format: date-time }
+        created_at: { type: string, format: date-time }
+      required: [id, status]
+    AuditCreate:
+      type: object
+      properties:
+        store_id: { type: string, format: uuid }
+        planogram_id: { type: string, format: uuid }
+        audit_date: { type: string, format: date }
+      required: [store_id, planogram_id]
+    AuditPage:
+      type: object
+      properties:
+        items: { type: array, items: { $ref: "#/components/schemas/AuditSession" } }
+        next_cursor: { type: [string, "null"] }
+    AuditImagesUploadRequest:
+      type: object
+      properties:
+        files:
+          type: array
+          minItems: 1
+          maxItems: 20
+          items:
+            type: object
+            properties:
+              filename: { type: string }
+              mime: { type: string }
+              bytes: { type: integer }
+            required: [filename, mime, bytes]
+      required: [files]
+    AuditImage:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        status: { type: string, enum: [uploaded, queued, processing, done, failed] }
+        error: { type: [string, "null"] }
+        width: { type: integer }
+        height: { type: integer }
+        url: { type: string }
+        attempts: { type: integer }
+      required: [id, status]
+    Detection:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        image_id: { type: string, format: uuid }
+        bbox: { type: array, items: { type: number }, minItems: 4, maxItems: 4, description: "[x1,y1,x2,y2] piksel" }
+        confidence: { type: number }
+        label: { type: [string, "null"] }
+        label_score: { type: [number, "null"] }
+        row_index: { type: [integer, "null"] }
+        source: { type: string, enum: [model, manual] }
+        corrected_by: { type: [string, "null"], format: uuid }
+      required: [id, bbox, confidence, source]
+    DetectionPatch:
+      type: object
+      properties:
+        bbox: { type: array, items: { type: number }, minItems: 4, maxItems: 4 }
+        label: { type: [string, "null"] }
+      required: [bbox]
+    DetectionCreate:
+      type: object
+      properties:
+        image_id: { type: string, format: uuid }
+        bbox: { type: array, items: { type: number }, minItems: 4, maxItems: 4 }
+        label: { type: [string, "null"] }
+      required: [image_id, bbox]
+    AuditMetrics:
+      type: object
+      properties:
+        facing_total: { type: integer }
+        oos_count: { type: integer }
+        price_mismatch: { type: integer }
+        price_read: { type: integer }
+        compliance_score: { type: [integer, "null"] }
+        breakdown:
+          type: object
+          properties:
+            availability: { type: number }
+            share_adherence: { type: number }
+            price_accuracy: { type: number }
+            weights:
+              type: object
+              properties:
+                availability: { type: number }
+                share_adherence: { type: number }
+                price_accuracy: { type: number }
+            rows:
+              type: array
+              items:
+                type: object
+                properties:
+                  row_index: { type: integer }
+                  facing: { type: integer }
+                  missing: { type: integer }
+                  share_actual: { type: number }
+                  share_target: { type: number }
+      required: [facing_total, oos_count, price_mismatch]
+    AuditDetail:
+      type: object
+      properties:
+        session: { $ref: "#/components/schemas/AuditSession" }
+        images: { type: array, items: { $ref: "#/components/schemas/AuditImage" } }
+        metrics: { $ref: "#/components/schemas/AuditMetrics" }
+        detections_by_image:
+          type: object
+          additionalProperties: { type: array, items: { $ref: "#/components/schemas/Detection" } }
+        planogram_targets: { type: object, additionalProperties: true }
+      required: [session, images, metrics]
+    AuditReport:
+      type: object
+      properties:
+        session: { $ref: "#/components/schemas/AuditSession" }
+        metrics: { $ref: "#/components/schemas/AuditMetrics" }
+        rows: { type: array, items: { $ref: "#/components/schemas/AuditMetrics" } }
+        generated_at: { type: string, format: date-time }
+      required: [session, metrics, generated_at]
+
+    Kpis:
+      type: object
+      properties:
+        audits_total: { type: integer }
+        avg_compliance: { type: [number, "null"] }
+        oos_rate: { type: [number, "null"] }
+        price_mismatch_rate: { type: [number, "null"] }
+        stores_count: { type: integer }
+        period: { type: object, properties: { from: { type: string, format: date }, to: { type: string, format: date } } }
+        deltas: { type: object, additionalProperties: { type: number }, description: "perubahan vs periode sebelumnya" }
+      required: [audits_total]
+    TrendPoint:
+      type: object
+      properties:
+        date: { type: string, format: date }
+        compliance: { type: number }
+        oos_rate: { type: number }
+        audits: { type: integer }
+      required: [date]
+    StoreRank:
+      type: object
+      properties:
+        store_id: { type: string, format: uuid }
+        store_name: { type: string }
+        region: { type: string }
+        avg_compliance: { type: number }
+        oos_rate: { type: number }
+        audits: { type: integer }
+        last_audit_at: { type: [string, "null"], format: date-time }
+      required: [store_id, store_name, avg_compliance]
+    Alert:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        store_id: { type: string, format: uuid }
+        store_name: { type: string }
+        type: { type: string, enum: [oos, price_mismatch, low_confidence] }
+        severity: { type: string, enum: [low, medium, high] }
+        status: { type: string, enum: [open, acknowledged, resolved] }
+        session_id: { type: [string, "null"], format: uuid }
+        detail: { type: string }
+        created_at: { type: string, format: date-time }
+      required: [id, type, severity, status]
+
+    EvalDataset:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        description: { type: string }
+        case_count: { type: integer }
+        languages: { type: array, items: { type: string } }
+        created_at: { type: string, format: date-time }
+      required: [id, name]
+    EvalDatasetCreate:
+      type: object
+      properties:
+        name: { type: string, maxLength: 120 }
+        description: { type: string }
+        import: { type: object, additionalProperties: true, description: "payload CSV/JSON (FR-EVAL-01)" }
+      required: [name]
+    EvalDatasetDetail:
+      type: object
+      properties:
+        dataset: { $ref: "#/components/schemas/EvalDataset" }
+        cases: { type: array, items: { $ref: "#/components/schemas/EvalCase" } }
+    EvalCase:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        dataset_id: { type: string, format: uuid }
+        question: { type: string }
+        expected_answer: { type: string }
+        expected_sources: { type: array, items: { type: string } }
+        tags: { type: array, items: { type: string } }
+        answerable: { type: boolean }
+        language: { type: string, enum: [id, en] }
+      required: [id, question, answerable]
+    EvalCaseCreate:
+      type: object
+      properties:
+        question: { type: string, minLength: 3 }
+        expected_answer: { type: string }
+        expected_sources: { type: array, items: { type: string } }
+        tags: { type: array, items: { type: string } }
+        answerable: { type: boolean }
+        language: { type: string, enum: [id, en] }
+      required: [question, answerable]
+    EvalRun:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        dataset_id: { type: string, format: uuid }
+        kind: { type: string, enum: [rag, agent, cv] }
+        status: { type: string, enum: [queued, running, completed, failed, cancelled] }
+        config_snapshot: { type: object, additionalProperties: true }
+        metrics: { type: object, additionalProperties: true }
+        baseline_of: { type: [string, "null"], format: uuid }
+        created_at: { type: string, format: date-time }
+        finished_at: { type: [string, "null"], format: date-time }
+      required: [id, status, kind]
+    EvalRunCreate:
+      type: object
+      properties:
+        dataset_id: { type: string, format: uuid }
+        kind: { type: string, enum: [rag, agent, cv], default: rag }
+        prompt_version: { type: string }
+        retrieval_config: { type: object, additionalProperties: true }
+        use_replay: { type: boolean, default: true }
+      required: [dataset_id]
+    EvalRunDetail:
+      type: object
+      properties:
+        run: { $ref: "#/components/schemas/EvalRun" }
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              case_id: { type: string, format: uuid }
+              question: { type: string }
+              answer: { type: string }
+              answerable: { type: boolean }
+              refused: { type: boolean }
+              hit_at_5: { type: [number, "null"] }
+              mrr: { type: [number, "null"] }
+              faithfulness: { type: [number, "null"] }
+              citation_precision: { type: [number, "null"] }
+              citation_recall: { type: [number, "null"] }
+              answer_correctness: { type: [number, "null"] }
+              latency_ms: { type: integer }
+              tags: { type: array, items: { type: string } }
+    EvalCompare:
+      type: object
+      properties:
+        a: { $ref: "#/components/schemas/EvalRun" }
+        b: { $ref: "#/components/schemas/EvalRun" }
+        metrics_diff: { type: object, additionalProperties: { type: number } }
+        regressions: { type: array, items: { type: string } }
+        cases:
+          type: array
+          items:
+            type: object
+            properties:
+              case_id: { type: string, format: uuid }
+              question: { type: string }
+              score_a: { type: [number, "null"] }
+              score_b: { type: [number, "null"] }
+              delta: { type: number }
+              regression: { type: boolean }
+      required: [a, b]
+    FailureCase:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        source: { type: string, enum: [feedback, low_confidence, error] }
+        question: { type: [string, "null"] }
+        answer: { type: [string, "null"] }
+        reason: { type: [string, "null"] }
+        request_id: { type: [string, "null"] }
+        promoted_case_id: { type: [string, "null"], format: uuid }
+        created_at: { type: string, format: date-time }
+      required: [id, source]
+
+    TraceSummary:
+      type: object
+      properties:
+        request_id: { type: string }
+        started_at: { type: string, format: date-time }
+        total_latency_ms: { type: integer }
+        tokens: { type: integer }
+        cost_usd: { type: number }
+        status: { type: string }
+        stages: { type: array, items: { type: string } }
+      required: [request_id]
+    TraceDetail:
+      type: object
+      properties:
+        request_id: { type: string }
+        summary: { $ref: "#/components/schemas/TraceSummary" }
+        spans:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: string, format: uuid }
+              stage: { type: string }
+              started_at: { type: string, format: date-time }
+              latency_ms: { type: integer }
+              tokens_in: { type: integer }
+              tokens_out: { type: integer }
+              cost_usd: { type: number }
+              model: { type: [string, "null"] }
+              input_hash: { type: [string, "null"] }
+              meta: { type: object, additionalProperties: true }
+      required: [request_id, spans]
+    SystemMetrics:
+      type: object
+      properties:
+        window: { type: string }
+        latency_p50_ms: { type: integer }
+        latency_p95_ms: { type: integer }
+        error_rate: { type: number }
+        queue_depth: { type: integer }
+        vision_queue_depth: { type: integer }
+        cost_usd_today: { type: number }
+        requests_today: { type: integer }
+        memory_rss_mb: { type: integer }
+        degradation: { type: string, enum: [L0, L1, L2, L3] }
+      required: [window]
+
+    BenchmarkRun:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        model_variant: { type: string, enum: [fp32, fp16, int8] }
+        hardware: { type: string }
+        imgsz: { type: integer }
+        batch: { type: integer }
+        p50_ms: { type: number }
+        p95_ms: { type: number }
+        throughput_ips: { type: number }
+        memory_mb: { type: number }
+        model_size_mb: { type: number }
+        map50: { type: [number, "null"] }
+        count_mape: { type: [number, "null"] }
+        dataset: { type: string }
+        notes: { type: string }
+        committed: { type: boolean, description: "true = hasil prakomputasi dari repo" }
+        created_at: { type: string, format: date-time }
+      required: [id, model_variant, imgsz]
+    BenchmarkCreate:
+      type: object
+      properties:
+        variants: { type: array, items: { type: string, enum: [fp32, fp16, int8] }, minItems: 1 }
+        imgsz: { type: array, items: { type: integer }, minItems: 1 }
+        batch: { type: integer, default: 1 }
+        dataset: { type: string }
+        run_local: { type: boolean, default: false, description: "false = tampilkan hasil prakomputasi" }
+      required: [variants, imgsz]
+    CostCalcRequest:
+      type: object
+      properties:
+        images_per_day: { type: integer, minimum: 1, maximum: 1000000 }
+        days: { type: integer, default: 30 }
+        edge: { $ref: "#/components/schemas/CostAssumptions" }
+        cloud: { $ref: "#/components/schemas/CostAssumptions" }
+      required: [images_per_day]
+    CostAssumptions:
+      type: object
+      properties:
+        fixed_monthly_usd: { type: number, default: 0 }
+        per_1000_images_usd: { type: number }
+        avg_latency_ms: { type: number }
+        cloud_share_pct: { type: number, description: "persentase crop yang dikirim ke cloud (mode hybrid)" }
+    CostCalcResponse:
+      type: object
+      properties:
+        edge_total_usd: { type: number }
+        cloud_total_usd: { type: number }
+        hybrid_total_usd: { type: number }
+        assumptions: { type: object, additionalProperties: true }
+        note: { type: string }
+      required: [edge_total_usd, cloud_total_usd, hybrid_total_usd]

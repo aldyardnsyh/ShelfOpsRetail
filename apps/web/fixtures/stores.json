@@ -1,0 +1,142 @@
+[
+  {
+    "id": "6f4081ea-67e1-4732-ad88-ee430cce1f21",
+    "code": "ST-001",
+    "name": "Toko Sejahtera Cikarang",
+    "region": "Jawa Tengah",
+    "channel": "supermarket"
+  },
+  {
+    "id": "629416f1-45fe-47ac-b5ba-a3cf507b7f56",
+    "code": "ST-002",
+    "name": "Swalayan Mitra Bogor",
+    "region": "Jawa Timur",
+    "channel": "traditional"
+  },
+  {
+    "id": "118e917e-f403-47a4-a9ff-95cdb97078f4",
+    "code": "ST-003",
+    "name": "Pasar Segar Depok",
+    "region": "Banten",
+    "channel": "minimarket"
+  },
+  {
+    "id": "52bc6078-629c-48a3-9307-e091828f1961",
+    "code": "ST-004",
+    "name": "Gerai Nusa Tangerang",
+    "region": "Jawa Barat",
+    "channel": "supermarket"
+  },
+  {
+    "id": "ddee3f0e-abf8-4c5d-97f5-358e0917bd6c",
+    "code": "ST-005",
+    "name": "Minimarket Maju Jaya Bandung",
+    "region": "Jawa Tengah",
+    "channel": "traditional"
+  },
+  {
+    "id": "7e7f75fa-e115-47ec-bcc5-2d7c53fb99ca",
+    "code": "ST-006",
+    "name": "Toko Sejahtera Surabaya",
+    "region": "Jawa Timur",
+    "channel": "minimarket"
+  },
+  {
+    "id": "67a19397-ebdd-429e-9c6e-cecd4b1b0055",
+    "code": "ST-007",
+    "name": "Swalayan Mitra Semarang",
+    "region": "Banten",
+    "channel": "supermarket"
+  },
+  {
+    "id": "4e333c94-266e-4ce6-84b0-dc3130cfaff3",
+    "code": "ST-008",
+    "name": "Pasar Segar Yogyakarta",
+    "region": "Jawa Barat",
+    "channel": "traditional"
+  },
+  {
+    "id": "aa9fa1a4-14a7-46ad-bae6-905438ab4c44",
+    "code": "ST-009",
+    "name": "Gerai Nusa Malang",
+    "region": "Jawa Tengah",
+    "channel": "minimarket"
+  },
+  {
+    "id": "053b6aa7-22ed-4f44-b27e-25ab5c33d7bf",
+    "code": "ST-010",
+    "name": "Minimarket Maju Jaya Bekasi",
+    "region": "Jawa Timur",
+    "channel": "supermarket"
+  },
+  {
+    "id": "435fa180-da06-485e-bfa2-2c69d64b574d",
+    "code": "ST-011",
+    "name": "Toko Sejahtera Cikarang",
+    "region": "Banten",
+    "channel": "traditional"
+  },
+  {
+    "id": "b0a42dc6-ea1b-429f-933f-f5e48becceb5",
+    "code": "ST-012",
+    "name": "Swalayan Mitra Bogor",
+    "region": "Jawa Barat",
+    "channel": "minimarket"
+  },
+  {
+    "id": "0253eabc-868b-4e5d-b67d-18e486a91ed7",
+    "code": "ST-013",
+    "name": "Pasar Segar Depok",
+    "region": "Jawa Tengah",
+    "channel": "supermarket"
+  },
+  {
+    "id": "6ab40bd0-801f-4d64-af02-de432b306370",
+    "code": "ST-014",
+    "name": "Gerai Nusa Tangerang",
+    "region": "Jawa Timur",
+    "channel": "traditional"
+  },
+  {
+    "id": "e22a61c2-1e53-4cf3-b80d-af27f7d6fa5e",
+    "code": "ST-015",
+    "name": "Minimarket Maju Jaya Bandung",
+    "region": "Banten",
+    "channel": "minimarket"
+  },
+  {
+    "id": "2f2c174e-0c25-43a4-a93e-c6c02df0ae14",
+    "code": "ST-016",
+    "name": "Toko Sejahtera Surabaya",
+    "region": "Jawa Barat",
+    "channel": "supermarket"
+  },
+  {
+    "id": "301b5326-e3ba-42d6-bf20-cf3d7168ce99",
+    "code": "ST-017",
+    "name": "Swalayan Mitra Semarang",
+    "region": "Jawa Tengah",
+    "channel": "traditional"
+  },
+  {
+    "id": "30badaa5-6ad0-4eef-8d1a-a2f3ea754706",
+    "code": "ST-018",
+    "name": "Pasar Segar Yogyakarta",
+    "region": "Jawa Timur",
+    "channel": "minimarket"
+  },
+  {
+    "id": "591d0fe5-a567-4d59-afcd-ce6d16ae7196",
+    "code": "ST-019",
+    "name": "Gerai Nusa Malang",
+    "region": "Banten",
+    "channel": "supermarket"
+  },
+  {
+    "id": "9817d730-331e-4db8-beef-3e2a61e535ba",
+    "code": "ST-020",
+    "name": "Minimarket Maju Jaya Bekasi",
+    "region": "Jawa Barat",
+    "channel": "traditional"
+  }
+]
