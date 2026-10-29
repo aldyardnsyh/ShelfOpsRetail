@@ -25,6 +25,7 @@ type SupplierRow struct {
 }
 
 type POLine struct {
+	PoLineID    string `json:"po_line_id"`
 	ProductID   string `json:"product_id"`
 	SKU         string `json:"sku"`
 	ProductName string `json:"product_name"`
@@ -117,7 +118,7 @@ func (s *Store) PurchasingOverviewAll(ctx context.Context, ws uuid.UUID) (*Purch
 		SELECT po.id::text, po.po_code, s.id::text, s.name, st.id::text, st.name, po.status, po.created_at,
 		       po.expected_date::timestamptz, po.total_idr, ''::text,
 		       (SELECT coalesce(jsonb_agg(jsonb_build_object(
-		          'product_id', p.id, 'sku', p.sku, 'product_name', p.name,
+		          'po_line_id', pl.id, 'product_id', p.id, 'sku', p.sku, 'product_name', p.name,
 		          'qty_order', pl.qty_order, 'qty_received', pl.qty_received, 'unit_cost_idr', pl.unit_cost_idr
 		       ) ORDER BY p.sku), '[]')::jsonb::text
 		        FROM po_lines pl JOIN products p ON p.id = pl.product_id

@@ -36,6 +36,7 @@ type PurchaseOrderInput struct {
 }
 
 type PurchaseOrderLineOut struct {
+	PoLineID    string `json:"po_line_id"`
 	ProductID   string `json:"product_id"`
 	SKU         string `json:"sku"`
 	ProductName string `json:"product_name"`
@@ -80,7 +81,12 @@ func (s *Store) CreatePurchaseOrder(
 		}
 
 		poID := NewV7()
-		code := fmt.Sprintf("PO-%s-%s", time.Now().UTC().Format("20060102"), strings.ToUpper(poID.String()[:6]))
+		// Kode PO harus unik per workspace. Prefix UUIDv7 adalah timestamp
+		// (48 bit), jadi request berdekatan menghasilkan prefix sama; ambil
+		// suffix acak (v7 memberi 62 bit randomness di ekor).
+		code := fmt.Sprintf("PO-%s-%s",
+			time.Now().UTC().Format("20060102"),
+			strings.ToUpper(poID.String()[19:]))
 		expected := time.Now().UTC().AddDate(0, 0, 3)
 		if strings.TrimSpace(in.ExpectedDate) != "" {
 			if parsed, err := time.Parse("2006-01-02", strings.TrimSpace(in.ExpectedDate)); err == nil {
@@ -90,10 +96,10 @@ func (s *Store) CreatePurchaseOrder(
 
 		if _, err := tx.Exec(ctx, `
 			INSERT INTO purchase_orders (
-				workspace_id, store_id, supplier_id, po_code, status,
+				id, workspace_id, store_id, supplier_id, po_code, status,
 				order_date, expected_date, total_idr, created_at, updated_at)
-			VALUES ($1,$2,$3,$4,'sent',current_date,$5,$6,now(),now())`,
-			ws, in.StoreID, in.SupplierID, code, expected, total); err != nil {
+			VALUES ($1,$2,$3,$4,$5,'sent',current_date,$6,$7,now(),now())`,
+			poID, ws, in.StoreID, in.SupplierID, code, expected, total); err != nil {
 			return fmt.Errorf("simpan purchase order: %w", err)
 		}
 
@@ -108,13 +114,16 @@ func (s *Store) CreatePurchaseOrder(
 				}
 				return err
 			}
-			if _, err := tx.Exec(ctx, `
+			var poLineID string
+			if err := tx.QueryRow(ctx, `
 				INSERT INTO po_lines (workspace_id, po_id, product_id, qty_order, qty_received, unit_cost_idr)
-				VALUES ($1,$2,$3,$4,0,$5)`,
-				ws, poID, item.ProductID, item.QtyOrder, item.UnitCostIDR); err != nil {
+				VALUES ($1,$2,$3,$4,0,$5)
+				RETURNING id::text`,
+				ws, poID, item.ProductID, item.QtyOrder, item.UnitCostIDR).Scan(&poLineID); err != nil {
 				return fmt.Errorf("simpan baris purchase order: %w", err)
 			}
 			out.Lines = append(out.Lines, PurchaseOrderLineOut{
+				PoLineID:    poLineID,
 				ProductID:   item.ProductID,
 				SKU:         sku,
 				ProductName: name,
@@ -244,7 +253,40 @@ func (s *Store) CreateGoodsReceipt(
 		}
 
 		receiptID := NewV7()
-		code := fmt.Sprintf("GR-%s-%s", time.Now().UTC().Format("20060102"), strings.ToUpper(receiptID.String()[:6]))
+		// Sama seperti po_code: pakai suffix acak UUIDv7 agar tidak bentrok
+		// untuk penerimaan yang dibuat pada detik yang sama.
+		code := fmt.Sprintf("GR-%s-%s",
+			time.Now().UTC().Format("20060102"),
+			strings.ToUpper(receiptID.String()[19:]))
+
+		// 4. Simpan header penerimaan DULUAN — goods_receipt_lines punya FK ke
+		//    goods_receipts, jadi header harus ada sebelum baris masuk.
+		var receivedBy any
+		if user != uuid.Nil {
+			receivedBy = user
+		}
+		if _, err := tx.Exec(ctx, `
+			INSERT INTO goods_receipts (
+				id, workspace_id, store_id, po_id, receipt_code, status,
+				idempotency_key, notes, received_by, received_at)
+			VALUES ($1,$2,$3,$4,$5,'received',$6,$7,$8,now())`,
+			receiptID, ws, storeID, in.POID, code, strings.TrimSpace(in.IdempotencyKey),
+			strings.TrimSpace(in.Notes), receivedBy); err != nil {
+			var pgErr *pgconn.PgError
+			if errors.As(err, &pgErr) && pgErr.Code == "23505" {
+				// Balapan idempotensi: kembalikan dokumen yang menang.
+				existing, found, loadErr := loadGoodsReceiptByKey(ctx, tx, ws, strings.TrimSpace(in.IdempotencyKey))
+				if loadErr != nil {
+					return loadErr
+				}
+				if found {
+					*out = *existing
+					out.IdempotentReplay = true
+					return nil
+				}
+			}
+			return fmt.Errorf("simpan penerimaan barang: %w", err)
+		}
 
 		for _, item := range in.Items {
 			// 4. Kunci baris po_lines; tolak melebihi qty yang dipesan.
@@ -314,35 +356,7 @@ func (s *Store) CreateGoodsReceipt(
 			out.StockUpdated++
 		}
 
-		// 7. Simpan dokumen penerimaan.
-		var receivedBy any
-		if user != uuid.Nil {
-			receivedBy = user
-		}
-		if _, err := tx.Exec(ctx, `
-			INSERT INTO goods_receipts (
-				workspace_id, store_id, po_id, receipt_code, status,
-				idempotency_key, notes, received_by, received_at)
-			VALUES ($1,$2,$3,$4,'received',$5,$6,$7,now())`,
-			ws, storeID, in.POID, code, strings.TrimSpace(in.IdempotencyKey),
-			strings.TrimSpace(in.Notes), receivedBy); err != nil {
-			var pgErr *pgconn.PgError
-			if errors.As(err, &pgErr) && pgErr.Code == "23505" {
-				// Balapan idempotensi: kembalikan dokumen yang menang.
-				existing, found, loadErr := loadGoodsReceiptByKey(ctx, tx, ws, strings.TrimSpace(in.IdempotencyKey))
-				if loadErr != nil {
-					return loadErr
-				}
-				if found {
-					*out = *existing
-					out.IdempotentReplay = true
-					return nil
-				}
-			}
-			return fmt.Errorf("simpan penerimaan barang: %w", err)
-		}
-
-		// 8. Perbarui status PO sesuai persen penerimaan.
+		// 7. Perbarui status PO sesuai persen penerimaan.
 		if err := refreshPurchaseOrderProgress(ctx, tx, ws, in.POID); err != nil {
 			return err
 		}
