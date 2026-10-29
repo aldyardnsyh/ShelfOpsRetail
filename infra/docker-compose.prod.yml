@@ -75,7 +75,11 @@ services:
       ACCESS_TOKEN_TTL: "${ACCESS_TOKEN_TTL:-15m}"
       REFRESH_TOKEN_TTL: "${REFRESH_TOKEN_TTL:-720h}"
       COOKIE_DOMAIN: "${COOKIE_DOMAIN:-}"
-      COOKIE_SECURE: "true"
+      # true untuk produksi HTTPS. Set false hanya untuk deployment lokal
+      # http:// (mis. smoke test) — cookie Secure tidak terkirim over http.
+      COOKIE_SECURE: "${COOKIE_SECURE:-true}"
+      # true hanya bila TLS di terminate di luar aplikasi atau smoke test lokal.
+      ALLOW_INSECURE_COOKIE: "${ALLOW_INSECURE_COOKIE:-false}"
       LOGIN_RATE_LIMIT_PER_MIN: "${LOGIN_RATE_LIMIT_PER_MIN:-10}"
       GOOGLE_CLIENT_ID: "${GOOGLE_CLIENT_ID:-}"
       GOOGLE_CLIENT_SECRET: "${GOOGLE_CLIENT_SECRET:-}"
@@ -88,6 +92,9 @@ services:
       UPLOAD_TTL_HOURS: "${UPLOAD_TTL_HOURS:-24}"
       UPLOAD_MAX_IMAGE_MB: "${UPLOAD_MAX_IMAGE_MB:-10}"
       UPLOAD_MAX_DOC_MB: "${UPLOAD_MAX_DOC_MB:-20}"
+      # true = izinkan provider AI tiruan (staging/demo). Produksi sungguhan
+      # harus false supaya gateway menolak boot bila provider masih tiruan.
+      ALLOW_MOCK_PROVIDERS: "${ALLOW_MOCK_PROVIDERS:-false}"
       LLM_PROVIDER: "${LLM_PROVIDER:-replay}"
       LLM_PRIMARY_BASE_URL: "${LLM_PRIMARY_BASE_URL:-}"
       LLM_PRIMARY_API_KEY: "${LLM_PRIMARY_API_KEY:-}"
