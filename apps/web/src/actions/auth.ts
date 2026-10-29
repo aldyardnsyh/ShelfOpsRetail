@@ -9,8 +9,8 @@ import {
   getSetCookies,
   readProblemBody,
 } from "@/lib/auth-cookies";
-import { API_BASE_URL, DEMO_MODE } from "@/lib/demo";
-import { getCookieHeader } from "@/lib/api";
+import { DEMO_MODE } from "@/lib/demo";
+import { getCookieHeader, SERVER_API_URL } from "@/lib/api";
 import { safeNext } from "@/lib/safe-next";
 
 export interface AuthState {
@@ -44,7 +44,7 @@ export async function loginAction(
 
   let response: Response;
   try {
-    response = await fetch(`${API_BASE_URL}/api/v1/auth/login`, {
+    response = await fetch(`${SERVER_API_URL}/api/v1/auth/login`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -78,7 +78,7 @@ export async function startDemoAction(
 
   let response: Response;
   try {
-    response = await fetch(`${API_BASE_URL}/api/v1/auth/demo`, {
+    response = await fetch(`${SERVER_API_URL}/api/v1/auth/demo`, {
       method: "POST",
       cache: "no-store",
     });
@@ -108,7 +108,7 @@ export async function logoutAction(): Promise<void> {
   if (!DEMO_MODE) {
     try {
       const cookieHeader = await getCookieHeader();
-      await fetch(`${API_BASE_URL}/api/v1/auth/logout`, {
+      await fetch(`${SERVER_API_URL}/api/v1/auth/logout`, {
         method: "POST",
         headers: cookieHeader ? { cookie: cookieHeader } : undefined,
         cache: "no-store",
