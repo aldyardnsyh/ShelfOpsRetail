@@ -5,8 +5,6 @@ ditindaklanjuti. Pengunjung dengan ID stabil, durasi per zona, rak kosong, harga
 tidak sesuai, stok dan mutasi, pengadaan, tugas, laporan, dan Copilot yang
 menjawab dari SOP serta data toko dengan sitasi.
 
-Data demo 100% fiktif. Berjalan di VPS 2 vCPU / 2 GB tanpa GPU, tanpa Redis,
-tanpa MinIO.
 
 ## Tangkapan layar
 
@@ -63,16 +61,48 @@ Semua halaman tersedia di folder [`screenshots/`](screenshots):
 | Act | Peringatan, tugas dengan SLA, laporan, Copilot |
 | Learn | Eval, trace, benchmark, model registry |
 
-## Stack
+## Tech stack
 
-| Lapisan | Pilihan |
+**Frontend**
+
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Radix UI](https://img.shields.io/badge/Radix_UI-161618?style=for-the-badge&logo=radixui&logoColor=white)
+![Recharts](https://img.shields.io/badge/Recharts-8884D8?style=for-the-badge)
+
+**Backend dan data**
+
+![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![pgvector](https://img.shields.io/badge/pgvector-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![gRPC](https://img.shields.io/badge/gRPC-244C5A?style=for-the-badge&logo=grpc&logoColor=white)
+![Protocol Buffers](https://img.shields.io/badge/Protocol_Buffers-4285F4?style=for-the-badge&logo=protobuf&logoColor=white)
+![OpenAPI](https://img.shields.io/badge/OpenAPI_3.1-6BA539?style=for-the-badge&logo=openapiinitiative&logoColor=white)
+
+**AI**
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![ONNX Runtime](https://img.shields.io/badge/ONNX_Runtime-005CED?style=for-the-badge&logo=onnx&logoColor=white)
+![RAG hybrid](https://img.shields.io/badge/RAG_hybrid-pgvector_+_tsvector-7C3AED?style=for-the-badge)
+
+**Infrastruktur**
+
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Caddy](https://img.shields.io/badge/Caddy-1F8ACB?style=for-the-badge&logo=caddy&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+
+| Lapisan | Detail |
 | --- | --- |
 | Web | Next.js App Router, React, TypeScript, Tailwind CSS, Radix UI, Recharts |
-| Gateway dan worker | Go (chi, pgx), satu binary dengan mode api/worker/all, queue Postgres |
-| AI | Python, FastAPI dan gRPC, ONNX Runtime untuk vision, RAG hybrid pgvector + tsvector |
-| Data | PostgreSQL 16 + pgvector |
+| Gateway dan worker | Go dengan chi dan pgx, satu binary mode api/worker/all, queue PostgreSQL |
+| AI | Python, FastAPI, gRPC, ONNX Runtime, RAG hybrid pgvector dan tsvector |
+| Data | PostgreSQL 16 dan pgvector |
 | Kontrak | OpenAPI 3.1 untuk REST, protobuf untuk gRPC |
-| Deploy | Docker Compose + Caddy di VPS |
+| Deploy | Docker Compose dan Caddy di VPS |
 
 ## Struktur
 
