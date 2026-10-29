@@ -305,13 +305,14 @@ export default async function LandingPage() {
         </section>
       </main>
 
-      {/* Footer satu baris */}
+      {/* Footer: identitas, copyright, dan pilihan bahasa */}
       <footer className="border-t border-border">
-        <div className="mx-auto flex w-full max-w-[1200px] flex-wrap items-center justify-between gap-3 px-4 py-5 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center gap-3">
+        <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-4 px-4 py-6 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
             <Logo compact />
             <span className="text-xs text-muted-foreground">{t.landing.footerNote}</span>
           </div>
+          <p className="text-xs text-muted-foreground">{t.landing.footerCopyright}</p>
           <LocaleToggle />
         </div>
       </footer>

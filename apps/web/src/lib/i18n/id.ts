@@ -471,6 +471,7 @@ export const id = {
     finalCta: "Buka dashboard operasional",
     otherModules: "Modul lainnya",
     footerNote: "ShelfOpsRetail. Platform operasi toko all-in-one.",
+    footerCopyright: "Hak cipta (c) 2026 PogungSoftwareHouseTeam (PSHT). Seluruh hak dilindungi.",
     footerLogin: "Masuk ke workspace",
   },
   monitor: {

@@ -472,6 +472,7 @@ export const en = {
     finalCta: "Open the operations dashboard",
     otherModules: "Other modules",
     footerNote: "ShelfOpsRetail. All-in-one store operations platform.",
+    footerCopyright: "Copyright (c) 2026 PogungSoftwareHouseTeam (PSHT). All rights reserved.",
     footerLogin: "Sign in to workspace",
   },
   monitor: {
