@@ -285,6 +285,25 @@ Step "ganti sandi: akun demo tanpa sandi -> 401" {
     Write-Host "      401 sesuai harapan (rotasi penuh butuh sesi password, diuji via E2E)"
 }
 
+Step "setup: status terbaca + apply tandai selesai" {
+    $st = Req -Path "/api/v1/system/setup"
+    # Sesi demo analyst tidak punya workspace.manage -> 403 wajar; admin -> 200.
+    $meNow2 = Json (Req -Path "/api/v1/me")
+    if ($meNow2.role -ne "admin") {
+        Assert ($st.code -eq 403) "non-admin harusnya 403, dapat $($st.code)"
+        Write-Host "      403 untuk non-admin sesuai harapan"
+    } else {
+        Assert ($st.code -eq 200) "status setup harusnya 200, dapat $($st.code)"
+        $stJson = Json $st
+        Assert ($stJson.providers.llm -ne $null) "providers.llm harus ada"
+        $apply = Req -Method POST -Path "/api/v1/system/setup" -Body '{"workspace_name":""}'
+        Assert ($apply.code -eq 200) "apply harusnya 200, dapat $($apply.code)"
+        $applyJson = Json $apply
+        Assert ($applyJson.setup_done -eq $true) "setup_done harus true setelah apply"
+        Write-Host "      status + apply OK"
+    }
+}
+
 Write-Host ""
 Write-Host "=== Ringkasan ===" -ForegroundColor Cyan
 $script:results | ForEach-Object { Write-Host $_ }

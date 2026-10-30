@@ -118,6 +118,7 @@ export function SidebarContent({
       items: [
         { href: "/docs", label: t.lab.docs, icon: BookOpen },
         { href: "/settings", label: t.nav.settings, icon: Settings },
+        { href: "/setup", label: t.setup.title, icon: Settings, adminOnly: true },
       ],
     },
   ];

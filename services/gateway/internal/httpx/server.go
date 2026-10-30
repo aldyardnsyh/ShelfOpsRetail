@@ -173,6 +173,8 @@ func (s *Server) Router() http.Handler {
 				r.With(RequirePermission(rbac.PermIntegrationManage)).Post("/api-keys/{keyId}/rotate", s.handleRotateAPIKey)
 
 				r.With(RequirePermission(rbac.PermWorkspaceManage)).Get("/system/quota", s.handleQuota)
+				r.With(RequirePermission(rbac.PermWorkspaceManage)).Get("/system/setup", s.handleSetupStatus)
+				r.With(RequirePermission(rbac.PermWorkspaceManage)).Post("/system/setup", s.handleSetupApply)
 			})
 		})
 

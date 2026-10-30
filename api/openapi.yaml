@@ -660,6 +660,34 @@ paths:
               schema: { $ref: "#/components/schemas/InvitedMember" }
         "409": { $ref: "#/components/responses/Conflict" }
 
+  /api/v1/system/setup:
+    get:
+      tags: [system]
+      operationId: setupStatus
+      summary: Status kesiapan setup produksi (admin, flag selesai, mode provider)
+      responses:
+        "200":
+          description: status setup
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SetupStatus" }
+    post:
+      tags: [system]
+      operationId: setupApply
+      summary: Terapkan pilihan wizard setup (workspace, admin, provider override)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SetupApply" }
+      responses:
+        "200":
+          description: setup tersimpan
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SetupStatus" }
+        "422": { $ref: "#/components/responses/ValidationError" }
+
   /api/v1/insights/kpis:
     get:
       tags: [insights]
@@ -1038,6 +1066,26 @@ components:
         email: { type: string, format: email }
         role: { type: string }
       required: [user_id, email, role]
+    SetupStatus:
+      type: object
+      properties:
+        workspace_name: { type: string }
+        is_demo: { type: boolean }
+        has_admin: { type: boolean }
+        setup_done: { type: boolean }
+        providers: { type: object, additionalProperties: { type: string } }
+        provider_ok: { type: boolean }
+    SetupApply:
+      type: object
+      properties:
+        workspace_name: { type: string }
+        admin_email: { type: string, format: email }
+        admin_password: { type: string, minLength: 8 }
+        admin_name: { type: string }
+        llm_provider: { type: string }
+        llm_base_url: { type: string }
+        llm_api_key: { type: string }
+        llm_model: { type: string }
     PasswordChange:
       type: object
       properties:

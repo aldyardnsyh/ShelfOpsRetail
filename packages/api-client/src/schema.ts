@@ -668,6 +668,143 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/reports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Buat laporan baru (status "ready", metrik dari audit final periode) */
+        post: operations["createReport"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/report-schedules": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Buat jadwal laporan otomatis (aktif) */
+        post: operations["createReportSchedule"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/integrations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Buat konektor integrasi baru (status "pending") */
+        post: operations["createIntegration"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/integrations/{integrationId}/test": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Uji koneksi konektor (mencatat sync run + menandai connected) */
+        post: operations["testIntegration"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/api-keys/{keyId}/rotate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Rotasi API key (cabut lama, terbitkan baru; secret tampil sekali) */
+        post: operations["rotateApiKey"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/password": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Ganti sandi sendiri (verifikasi sandi lama, cabut sesi lain) */
+        post: operations["changePassword"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/workspace/members/invite": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Undang email baru (membuat user + keanggotaan workspace) */
+        post: operations["inviteMember"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/system/setup": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Status kesiapan setup produksi (admin, flag selesai, mode provider) */
+        get: operations["setupStatus"];
+        put?: never;
+        /** Terapkan pilihan wizard setup (workspace, admin, provider override) */
+        post: operations["setupApply"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/insights/kpis": {
         parameters: {
             query?: never;
@@ -1101,6 +1238,43 @@ export interface components {
         MemberRoleUpdate: {
             role: components["schemas"]["Role"];
         };
+        MemberInvite: {
+            /** Format: email */
+            email: string;
+            role: components["schemas"]["Role"];
+        };
+        InvitedMember: {
+            /** Format: uuid */
+            user_id: string;
+            /** Format: email */
+            email: string;
+            role: string;
+        };
+        SetupStatus: {
+            workspace_name?: string;
+            is_demo?: boolean;
+            has_admin?: boolean;
+            setup_done?: boolean;
+            providers?: {
+                [key: string]: string;
+            };
+            provider_ok?: boolean;
+        };
+        SetupApply: {
+            workspace_name?: string;
+            /** Format: email */
+            admin_email?: string;
+            admin_password?: string;
+            admin_name?: string;
+            llm_provider?: string;
+            llm_base_url?: string;
+            llm_api_key?: string;
+            llm_model?: string;
+        };
+        PasswordChange: {
+            current_password: string;
+            new_password: string;
+        };
         Store: {
             /** Format: uuid */
             id: string;
@@ -1371,6 +1545,8 @@ export interface components {
         };
         PurchaseOrderLine: {
             /** Format: uuid */
+            po_line_id?: string;
+            /** Format: uuid */
             product_id?: string;
             sku?: string;
             product_name?: string;
@@ -1442,6 +1618,115 @@ export interface components {
             score?: number | null;
             alerts_created?: number;
             tasks_created?: number;
+        };
+        ReportCreate: {
+            title: string;
+            /**
+             * @default custom
+             * @enum {string}
+             */
+            kind: "weekly" | "monthly" | "incident" | "custom";
+            /** Format: date */
+            period_from: string;
+            /** Format: date */
+            period_to: string;
+            /** @default all */
+            scope: string;
+            /**
+             * @default pdf
+             * @enum {string}
+             */
+            format: "pdf" | "csv" | "xlsx";
+        };
+        Report: {
+            /** Format: uuid */
+            id?: string;
+            title?: string;
+            kind?: string;
+            /** Format: date */
+            period_from?: string;
+            /** Format: date */
+            period_to?: string;
+            scope?: string;
+            stores_count?: number;
+            status?: string;
+            /** Format: date-time */
+            generated_at?: string;
+            format?: string;
+            metrics?: {
+                [key: string]: unknown;
+            };
+        };
+        ReportScheduleCreate: {
+            name: string;
+            /** @enum {string} */
+            cadence: "weekly" | "monthly";
+            /** @default all */
+            scope: string;
+            /**
+             * @default pdf
+             * @enum {string}
+             */
+            format: "pdf" | "csv" | "xlsx";
+            recipients?: string[];
+        };
+        ReportSchedule: {
+            /** Format: uuid */
+            id?: string;
+            name?: string;
+            cadence?: string;
+            scope?: string;
+            format?: string;
+            recipients?: string[];
+            active?: boolean;
+        };
+        IntegrationCreate: {
+            name: string;
+            /** @enum {string} */
+            kind: "pos" | "supplier" | "ecommerce" | "logistics" | "cv";
+            /** @default all */
+            store_scope: string;
+            note?: string;
+        };
+        Integration: {
+            /** Format: uuid */
+            id?: string;
+            name?: string;
+            kind?: string;
+            status?: string;
+            store_scope?: string;
+            /** Format: date-time */
+            last_sync?: string | null;
+            records?: number;
+            latency_ms?: number;
+            note?: string;
+        };
+        SyncRun: {
+            /** Format: uuid */
+            id?: string;
+            connector?: string;
+            kind?: string;
+            /** Format: date-time */
+            started_at?: string;
+            duration_s?: number;
+            status?: string;
+            records?: number;
+            message?: string;
+        };
+        ApiKeyRotated: {
+            /** Format: uuid */
+            id?: string;
+            name?: string;
+            prefix?: string;
+            masked?: string;
+            scope?: string;
+            /** Format: date-time */
+            created_at?: string;
+            /** Format: date-time */
+            last_used?: string | null;
+            status?: string;
+            /** @description secret penuh, hanya tampil sekali saat rotasi */
+            secret?: string;
         };
         AuditImagesUploadRequest: {
             files: {
@@ -3141,6 +3426,220 @@ export interface operations {
             };
             404: components["responses"]["NotFound"];
             409: components["responses"]["Conflict"];
+        };
+    };
+    createReport: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReportCreate"];
+            };
+        };
+        responses: {
+            /** @description laporan dibuat */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Report"];
+                };
+            };
+            422: components["responses"]["ValidationError"];
+        };
+    };
+    createReportSchedule: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReportScheduleCreate"];
+            };
+        };
+        responses: {
+            /** @description jadwal dibuat */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReportSchedule"];
+                };
+            };
+            422: components["responses"]["ValidationError"];
+        };
+    };
+    createIntegration: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["IntegrationCreate"];
+            };
+        };
+        responses: {
+            /** @description konektor dibuat */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Integration"];
+                };
+            };
+            422: components["responses"]["ValidationError"];
+        };
+    };
+    testIntegration: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                integrationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description hasil uji koneksi */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SyncRun"];
+                };
+            };
+            404: components["responses"]["NotFound"];
+        };
+    };
+    rotateApiKey: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                keyId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description key baru diterbitkan */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiKeyRotated"];
+                };
+            };
+            404: components["responses"]["NotFound"];
+        };
+    };
+    changePassword: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PasswordChange"];
+            };
+        };
+        responses: {
+            /** @description sandi diganti */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            401: components["responses"]["Unauthorized"];
+        };
+    };
+    inviteMember: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MemberInvite"];
+            };
+        };
+        responses: {
+            /** @description undangan dibuat */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InvitedMember"];
+                };
+            };
+            409: components["responses"]["Conflict"];
+        };
+    };
+    setupStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description status setup */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SetupStatus"];
+                };
+            };
+        };
+    };
+    setupApply: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetupApply"];
+            };
+        };
+        responses: {
+            /** @description setup tersimpan */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SetupStatus"];
+                };
+            };
+            422: components["responses"]["ValidationError"];
         };
     };
     getKpis: {

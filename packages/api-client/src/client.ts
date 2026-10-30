@@ -343,6 +343,9 @@ export function createShelfopsClient(options: ShelfopsClientOptions = {}) {
 
   const system = {
     quota: () => raw.GET("/api/v1/system/quota"),
+    setupStatus: () => permissive.GET<OpsAny>("/api/v1/system/setup"),
+    setupApply: (body: Record<string, unknown>) =>
+      permissive.POST<OpsAny>("/api/v1/system/setup", { body }),
   };
 
   // Domain operasional read-only (endpoint composite besar). Schemas["OpsOverview"]
